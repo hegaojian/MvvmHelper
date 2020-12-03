@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
+            name="click"
+            type="com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity.LoginClickProxy" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp.18"
+            android:layout_marginRight="@dimen/dp.18"
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp.48"
+                android:src="@drawable/ic_login_header" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp.48"
+                android:layout_marginTop="@dimen/dp.48"
+                android:background="@drawable/shape_login_edit"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableStart="@drawable/ic_login_user"
+                    android:drawablePadding="@dimen/dp.6"
+                    android:hint="@string/login_phone"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="11"
+                    android:paddingLeft="@dimen/dp.12"
+                    android:paddingRight="@dimen/dp.12"
+                    android:text="@={viewModel.userName}"
+                    android:textColor="@color/colorBlackGry"
+                    android:textSize="@dimen/sp.15" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp.24"
+                    android:layout_height="@dimen/dp.24"
+                    android:layout_marginEnd="@dimen/dp.6"
+                    android:onClick="@{() -> click.clear()}"
+                    android:src="@drawable/ic_login_clear"
+                    android:visibility="@{viewModel.userName.length()>0?view.VISIBLE:view.GONE}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp.48"
+                android:layout_marginTop="@dimen/dp.30"
+                android:background="@drawable/shape_login_edit"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableStart="@drawable/ic_login_pwd"
+                    android:drawablePadding="@dimen/dp.6"
+                    android:hint="@string/login_password"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:paddingLeft="@dimen/dp.12"
+                    android:paddingRight="@dimen/dp.12"
+                    android:text="@={viewModel.password}"
+                    android:textColor="@color/colorBlackGry"
+                    android:textSize="@dimen/sp.15"
+                    bind:showPwd="@{viewModel.isShowPwd}" />
+
+                <CheckBox
+                    android:layout_width="@dimen/dp.24"
+                    android:layout_height="@dimen/dp.24"
+                    android:layout_marginEnd="@dimen/dp.6"
+                    android:button="@drawable/selector_login_key_visible"
+                    android:checked="false"
+                    android:visibility="@{viewModel.password.length()>0?view.VISIBLE:view.GONE}"
+                    bind:checkChange="@{click.onCheckedChangeListener}" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp.48"
+                android:layout_marginTop="@dimen/dp.30"
+                android:layout_marginBottom="@dimen/dp.12"
+                android:background="@drawable/shape_login_btn"
+                android:gravity="center"
+                android:onClick="@{() -> click.login()}"
+                android:text="@string/login_submit"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/sp.20" />
+
+            <TextView
+                android:id="@+id/downText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp.8"
+                android:text="@string/login_tips"
+                android:textColor="@color/colorBlackGry6"
+                android:textSize="@dimen/sp.13" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

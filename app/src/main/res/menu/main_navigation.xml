@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigationRead"
+        android:checked="true"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_title_read" />
+    <item
+        android:id="@+id/navigationPaper"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_title_paper" />
+    <item
+        android:id="@+id/navigationReport"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_title_report" />
+    <item
+        android:id="@+id/navigationUser"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/bottom_title_user" />
+</menu>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">嗨起来</string>
+    <string name="bottom_title_read">阅卷</string>
+    <string name="bottom_title_paper">组卷</string>
+    <string name="bottom_title_report">学业报告</string>
+    <string name="bottom_title_user">个人中心</string>
+
+
+    <string name="login_submit">登录</string>
+    <string name="login_password">密码</string>
+    <string name="login_phone">手机号</string>
+    <string name="login_register">注册</string>
+    <string name="login_tips">教师账号登录</string>
+
+    <string name="login_protocol_prompt">登录即表示你同意\n版权声明、软件使用协议、隐私政策</string>
+    <string name="statement_copyright_title">版权声明</string>
+    <string name="statement_protocol_title">软件使用协议</string>
+    <string name="statement_privacy_title">隐私政策</string>
+
+</resources>

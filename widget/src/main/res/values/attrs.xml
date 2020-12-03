@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- StateLayout -->
+    <declare-styleable name="StateLayout">
+        <attr name="sl_loadingLayoutId" format="reference" />
+        <attr name="sl_emptyLayoutId" format="reference" />
+        <attr name="sl_errorLayoutId" format="reference" />
+        <attr name="sl_emptyText" format="string" />
+        <attr name="sl_useContentBgWhenLoading" format="boolean" />
+        <attr name="sl_enableLoadingShadow" format="boolean" />
+        <attr name="sl_enableTouchWhenLoading" format="boolean" />
+        <attr name="sl_defaultShowLoading" format="boolean" />
+        <attr name="sl_noEmptyAndError" format="boolean" />
+        <attr name="sl_animDuration" format="integer" />
+    </declare-styleable>
+
+</resources>

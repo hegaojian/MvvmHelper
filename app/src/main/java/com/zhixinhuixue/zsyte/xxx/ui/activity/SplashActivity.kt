@@ -3,6 +3,7 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 import android.os.Bundle
 import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.common.base.BaseVmActivity
+import com.zhixinhuixue.library.common.base.eventViewModel
 import com.zhixinhuixue.library.common.ext.toStartActivity
 import com.zhixinhuixue.zsyte.xxx.R
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -15,11 +16,15 @@ import kotlinx.android.synthetic.main.activity_splash.*
 class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :BaseVmActivity<BaseViewModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
-        // 2秒后直接跳转首页
-        splashImage.postDelayed({
-            toStartActivity(MainActivity::class.java)
-            finish()
-        },2000)
+        jumpToMainActivity()
+    }
+
+    /**
+     * 跳转首页
+     */
+    private fun jumpToMainActivity(){
+        toStartActivity(MainActivity::class.java)
+        finish()
     }
 
     override fun showToolBar() = false

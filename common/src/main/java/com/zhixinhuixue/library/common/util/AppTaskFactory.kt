@@ -21,6 +21,7 @@ import com.zhixinhuixue.library.common.loadmore.CustomLoadMoreView
 import com.zhixinhuixue.library.common.net.NetHttpClient
 import com.zhixinhuixue.library.net.interception.LogInterceptor
 import rxhttp.wrapper.param.RxHttp
+import java.util.*
 
 /**
  * 作者　: hegaojian
@@ -33,6 +34,7 @@ object TaskCreator : TaskCreator {
             InitNetWork.TASK_ID -> InitNetWork()
             InitComm.TASK_ID -> InitComm()
             InitUtils.TASK_ID -> InitUtils()
+            InitToast.TASK_ID -> InitToast()
             InitAppLifecycle.TASK_ID -> InitAppLifecycle()
             else -> InitDefault()
         }
@@ -50,7 +52,7 @@ class InitDefault : Task(TASK_ID, true) {
 }
 
 //初始化网络
-class InitNetWork : Task(TASK_ID, false) {
+class InitNetWork : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "1"
     }
@@ -59,6 +61,8 @@ class InitNetWork : Task(TASK_ID, false) {
         RxHttp.init(NetHttpClient.getDefaultOkHttpClient().run {
             addInterceptor(LogInterceptor())//添加Log拦截器
         }.build())
+        //假装初始化某个SDK2秒
+        doJob(2000)
     }
 }
 
@@ -87,11 +91,13 @@ class InitComm : Task(TASK_ID, true) {
         }
         // 在 Application 中配置全局自定义的 LoadMoreView
         LoadMoreModuleConfig.defLoadMoreView = CustomLoadMoreView()
+        //假装初始化某个SDK3秒
+        doJob(3000)
     }
 }
 
 //初始化Utils
-class InitUtils : Task(TASK_ID, false) {
+class InitUtils : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "3"
     }
@@ -99,11 +105,23 @@ class InitUtils : Task(TASK_ID, false) {
     override fun run(name: String) {
         //初始化Log打印
         XLog.init(BuildConfig.DEBUG)
-        //初始化吐司
-        ToastUtils.init(appContext)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, px2dp(getDimensionExt(R.dimen.dp_100)))
         //初始化MMKV
         MMKV.initialize(appContext.filesDir.absolutePath + "/mmkv")
+        //假装初始化某个SDK1秒
+        doJob(1000)
+    }
+}
+
+//初始化Utils
+class InitToast : Task(TASK_ID, false) {
+    companion object {
+        const val TASK_ID = "4"
+    }
+
+    override fun run(name: String) {
+        //初始化吐司 这个吐司必须要主线程中初始化
+        ToastUtils.init(appContext)
+        ToastUtils.setGravity(Gravity.BOTTOM, 0, px2dp(getDimensionExt(R.dimen.dp_100)))
     }
 }
 
@@ -122,3 +140,18 @@ class InitAppLifecycle : Task(TASK_ID, true) {
 
 
 class AppTaskFactory : Project.TaskFactory(TaskCreator)
+
+/**
+ * 模拟初始化SDK
+ * @param millis Long
+ */
+fun doJob(millis: Long) {
+    val nowTime = System.currentTimeMillis()
+    while (System.currentTimeMillis() < nowTime + millis) {
+        //程序阻塞指定时间
+        val min = 10
+        val max = 99
+        val random = Random()
+        val num = random.nextInt(max) % (max - min + 1) + min
+    }
+}

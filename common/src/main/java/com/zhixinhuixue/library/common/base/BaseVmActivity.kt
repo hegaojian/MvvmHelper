@@ -21,9 +21,6 @@ import kotlinx.android.synthetic.main.activity_base.*
  */
 abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
 
-    //界面通信ViewModel
-    val eventViewModel: EventViewModel by lazy { getAppViewModel<EventViewModel>() }
-
     //界面状态管理者
     protected lateinit var uiStatusManger: StateLayout
 

@@ -26,8 +26,6 @@ import com.zhixinhuixue.library.widget.statuslayout.StateLayout
  */
 abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
 
-    val eventViewModel: EventViewModel by lazy { getAppViewModel<EventViewModel>() }
-
     //界面状态管理者
     lateinit var uiStatusManger: StateLayout
 

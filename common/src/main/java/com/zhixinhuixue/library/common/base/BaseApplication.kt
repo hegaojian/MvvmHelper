@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.Project
 import com.zhixinhuixue.library.common.BuildConfig
+import com.zhixinhuixue.library.common.core.viewmodel.EventViewModel
 import com.zhixinhuixue.library.common.ext.currentProcessName
 import com.zhixinhuixue.library.common.util.*
 
@@ -16,12 +17,16 @@ import com.zhixinhuixue.library.common.util.*
  * 描述　:
  */
 
+//全局上下文
 val appContext: BaseApplication by lazy { BaseApplication.instance }
+//界面通信ViewModel
+val eventViewModel: EventViewModel by lazy { BaseApplication.eventInstance }
 
 open class BaseApplication : Application(), ViewModelStoreOwner{
 
     companion object {
         lateinit var instance: BaseApplication
+        lateinit var eventInstance: EventViewModel
     }
 
     private lateinit var mAppViewModelStore: ViewModelStore
@@ -32,11 +37,12 @@ open class BaseApplication : Application(), ViewModelStoreOwner{
         super.onCreate()
         instance = this
         mAppViewModelStore = ViewModelStore()
+        eventInstance = getAppViewModelProvider().get(EventViewModel::class.java)
 
         val processName = currentProcessName
         if (processName == packageName) {
-            onMainProcessInit()
             // 主进程初始化
+            onMainProcessInit()
         } else {
             // 其他进程初始化
             processName?.let { onOtherProcessInit(it) }
@@ -50,11 +56,12 @@ open class BaseApplication : Application(), ViewModelStoreOwner{
         AnchorsManager.getInstance()
             .debuggable(BuildConfig.DEBUG)
             //设置锚点
-            .addAnchor(InitNetWork.TASK_ID,InitUtils.TASK_ID,InitComm.TASK_ID,InitAppLifecycle.TASK_ID).start(
+            .addAnchor(InitNetWork.TASK_ID,InitUtils.TASK_ID,InitComm.TASK_ID,InitAppLifecycle.TASK_ID,InitToast.TASK_ID).start(
                 Project.Builder("app", AppTaskFactory())
                     .add(InitNetWork.TASK_ID)
                     .add(InitComm.TASK_ID)
                     .add(InitUtils.TASK_ID)
+                    .add(InitToast.TASK_ID)
                     .add(InitAppLifecycle.TASK_ID)
                     .build())
     }

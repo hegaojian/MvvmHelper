@@ -12,5 +12,7 @@ object RequestMatchCode {
     const val LOGIN = "login"
     //首页文章集合
     const val LIST = "list"
+    //测试合并并行请求
+    const val MERGE = "merge"
 
 }

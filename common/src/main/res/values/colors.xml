@@ -23,6 +23,11 @@
     <color name="colorGray_30">#FFFAFBFD</color>
     <color name="colorBlack">#000</color>
     <color name="colorBlack80">#D9000000</color>
+    <color name="colorBlack33">#33000000</color>
+    <color name="colorBlack40">#40000000</color>
+    <color name="colorBlack66">#66000000</color>
+    <color name="colorBlack73">#73000000</color>
+    <color name="colorBlack50">#80000000</color>
     <color name="colorBlackGry">#333</color>
     <color name="colorBlackGry6">#666</color>
     <color name="colorGreen">#62B75D</color>

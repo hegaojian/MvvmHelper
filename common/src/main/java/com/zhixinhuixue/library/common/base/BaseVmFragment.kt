@@ -187,7 +187,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
      * 请求成功的回调放在这里面 没干啥就是取了个名字，到时候好找
      */
     override fun onRequestSuccess() {
-        uiStatusManger.showSuccess()
+
     }
 
     /**

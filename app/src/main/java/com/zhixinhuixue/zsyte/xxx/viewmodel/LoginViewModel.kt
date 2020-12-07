@@ -57,14 +57,14 @@ class LoginViewModel : BaseViewModel() {
                 //下面2个接口同时请求，最后合并值 其中有任一接口请求失败都会走错误回调
                 val listData = UserRepository.getList(0).async(this)
                 val loginData = UserRepository.login(phoneNumber, password).async(this)
-                //得到值
+                //得到合并值
                 val mergeValue = loginData.await().username+listData.await().hasMore()
                 //打印一下
                 mergeValue.logA()
             }
             loadingType = LoadingType.LOADING_DIALOG
             loadingMessage = "正在登录中....." // 选传
-            matchCode = RequestMatchCode.LOGIN // 如果要判断接口错误业务 - 必传
+            matchCode = RequestMatchCode.MERGE // 如果要判断接口错误业务 - 必传
         }
     }
 

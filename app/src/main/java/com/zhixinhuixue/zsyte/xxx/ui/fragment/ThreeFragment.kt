@@ -23,5 +23,4 @@ class ThreeFragment : BaseVmFragment<TestViewModel>() {
         ImmersionBar.with(this).titleBar(customToolbar).init()
     }
 
-
 }

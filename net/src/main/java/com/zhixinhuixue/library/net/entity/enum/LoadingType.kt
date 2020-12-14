@@ -8,7 +8,7 @@ package com.zhixinhuixue.library.net.entity.enum
 enum class LoadingType {
     //请求时不需要Loading
     LOADING_NULL,
-    //请求时弹出 弹窗Loading
+    //请求时弹出 Dialog弹窗Loading
     LOADING_DIALOG,
     //请求时 界面 Loading Error Empty
     LOADING_XML

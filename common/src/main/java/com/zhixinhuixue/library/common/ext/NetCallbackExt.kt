@@ -36,6 +36,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                         httpRequestDsl.matchCode,
                         it.msg,
                         httpRequestDsl.isRefreshRequest,
+                        httpRequestDsl.loadingType,
                         httpRequestDsl.intentData
                     )
             } else {
@@ -45,6 +46,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                         httpRequestDsl.matchCode,
                         it.msg,
                         httpRequestDsl.isRefreshRequest,
+                        httpRequestDsl.loadingType,
                         httpRequestDsl.intentData
                     )
             }

@@ -20,7 +20,7 @@
         android:text="暂时没有数据"
         android:textColor="#333333"
         android:textSize="14dp" />
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

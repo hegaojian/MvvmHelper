@@ -124,6 +124,10 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
                 onRequestEmpty(it)
             }
             showError.observeInActivity(this@BaseVmActivity) {
+                //如果请求错误 并且loading类型为 xml 那么控制界面显示为错误布局
+                if(it.loadingType==LoadingType.LOADING_XML){
+                    showErrorUi(it.errorMessage)
+                }
                 onRequestError(it)
             }
             showSuccess.observeInActivity(this@BaseVmActivity) {

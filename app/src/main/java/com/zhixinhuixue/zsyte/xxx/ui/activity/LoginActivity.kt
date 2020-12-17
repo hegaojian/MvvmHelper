@@ -6,15 +6,12 @@ import androidx.lifecycle.Observer
 import com.zhixinhuixue.library.common.base.BaseDbActivity
 import com.zhixinhuixue.library.common.ext.getStringExt
 import com.zhixinhuixue.library.common.ext.initBack
-import com.zhixinhuixue.library.common.ext.logD
 import com.zhixinhuixue.library.common.ext.showDialogMessage
-import com.zhixinhuixue.library.net.RequestMatchCode
+import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
-import com.zhixinhuixue.library.net.error.msg
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
 import com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * 作者　: hegaojian
@@ -49,7 +46,7 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
         when(loadStatus.matchCode){
-            RequestMatchCode.LOGIN ->{
+            NetUrl.LOGIN ->{
                 showDialogMessage(loadStatus.errorMessage)
             }
         }

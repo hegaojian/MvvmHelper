@@ -2,11 +2,10 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhixinhuixue.library.common.base.BaseVmActivity
 import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.library.common.util.SpaceItemDecoration
-import com.zhixinhuixue.library.net.RequestMatchCode
+import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
@@ -58,7 +57,7 @@ class ListActivity(override val layoutId: Int = R.layout.activity_list) : BaseVm
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
         when (loadStatus.matchCode) {
-            RequestMatchCode.LIST -> {
+            NetUrl.HOME_LIST -> {
                 //列表数据请求失败
                 testAdapter.loadListError(loadStatus,uiStatusManger,listSmartRefresh)
             }

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhixinhuixue.library.common.base.BaseDbFragment
 import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.library.common.util.SpaceItemDecoration
-import com.zhixinhuixue.library.net.RequestMatchCode
+import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
@@ -63,7 +63,7 @@ class TestFragment1 : BaseDbFragment<ListViewModel,ActivityListBinding>() {
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
         when (loadStatus.matchCode) {
-            RequestMatchCode.LIST -> {
+            NetUrl.HOME_LIST -> {
                 //列表数据请求失败
                 testAdapter.loadListError(loadStatus,uiStatusManger,listSmartRefresh)
             }

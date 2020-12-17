@@ -3,7 +3,6 @@ package com.zhixinhuixue.library.common.ext
 import androidx.lifecycle.rxLifeScope
 import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.net.NetConstant
-import com.zhixinhuixue.library.net.RequestMatchCode
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 import com.zhixinhuixue.library.net.entity.enum.LoadingType
@@ -27,13 +26,15 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
             loadingChange.showSuccess.value = true
         }
     }, {
+        //请求失败时将错误日志打印一下 防止错哪里了都不晓得
+        "操！请求出错了----> ${it.message}".logE()
         if (httpRequestDsl.onError == null) {
             //如果没有传递 onError参数 默认调用封装的逻辑
             if (it.code.toString() == NetConstant.EMPTY_CODE) {
                 //如果错误code 为 定义的 EMPTY_CODE（具体逻辑看 ResponseParser 的onParse方法）  说明是列表请求到了空数据
                 loadingChange.showEmpty.value =
                     LoadStatusEntity(
-                        httpRequestDsl.matchCode,
+                        httpRequestDsl.requestCode,
                         it.msg,
                         httpRequestDsl.isRefreshRequest,
                         httpRequestDsl.loadingType,
@@ -43,7 +44,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                 //请求失败
                 loadingChange.showError.value =
                     LoadStatusEntity(
-                        httpRequestDsl.matchCode,
+                        httpRequestDsl.requestCode,
                         it.msg,
                         httpRequestDsl.isRefreshRequest,
                         httpRequestDsl.loadingType,
@@ -82,7 +83,7 @@ class HttpRequestDsl {
     var onError: ((Throwable) -> Unit)? = null //错误回调，默认为null 如果你传递了他 那么就代表你请求失败的逻辑你自己处理
     var loadingMessage: String = "请求网络中..." //目前这个只有在 loadingType == LOADING_DIALOG 的时候才有用 不是的话都不用传他
     var loadingType: LoadingType = LoadingType.LOADING_NULL // 请求时loading类型
-    var matchCode: String = RequestMatchCode.DEFAULT //请求 code 请求错误时 需要根据字段去判断到底是哪个请求
+    var requestCode: String = "mmp" //请求 code 请求错误时 需要根据字段去判断到底是哪个请求 可以用URL去标记
     var isRefreshRequest: Boolean = false //是否是刷新请求 做列表分页功能使用 一般请求用不到
     var intentData: Any? = null //请求时回调给发起请求时携带的参数 示例场景：发起请求时传递一个position ,如果请求失败时，可能需要把这个position回调给 activity/fragment 根据position做错误处理
 }

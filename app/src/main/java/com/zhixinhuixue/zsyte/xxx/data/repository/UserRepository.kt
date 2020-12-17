@@ -11,7 +11,7 @@ import rxhttp.wrapper.param.toResponse
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/2
- * 描述　:
+ * 描述　: 数据仓库
  */
 object UserRepository {
 

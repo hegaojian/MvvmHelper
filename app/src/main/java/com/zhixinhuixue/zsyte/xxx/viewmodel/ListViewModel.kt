@@ -3,7 +3,7 @@ package com.zhixinhuixue.zsyte.xxx.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.common.ext.rxHttpRequest
-import com.zhixinhuixue.library.net.RequestMatchCode
+import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
 import com.zhixinhuixue.library.net.entity.enum.LoadingType
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
@@ -36,7 +36,7 @@ class ListViewModel : BaseViewModel() {
                 pageIndex++
             }
             loadingType = if (loadingXml) LoadingType.LOADING_XML else LoadingType.LOADING_NULL
-            matchCode = RequestMatchCode.LIST
+            requestCode = NetUrl.HOME_LIST
             isRefreshRequest = isRefresh
         }
     }

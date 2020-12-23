@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import com.zhixinhuixue.library.common.core.viewmodel.EventViewModel
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import com.zhixinhuixue.library.common.ext.dismissLoading
-import com.zhixinhuixue.library.common.ext.getAppViewModel
 import com.zhixinhuixue.library.common.ext.getVmClazz
+import com.zhixinhuixue.library.common.ext.logD
 import com.zhixinhuixue.library.common.ext.showLoading
-import com.zhixinhuixue.library.common.util.XLog
+import com.zhixinhuixue.library.common.state.EmptyCallback
+import com.zhixinhuixue.library.common.state.ErrorCallback
+import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.enum.LoadingType
-import com.zhixinhuixue.library.widget.statuslayout.StateLayout
-
 
 /**
  * 作者　: hegaojian
@@ -27,7 +28,7 @@ import com.zhixinhuixue.library.widget.statuslayout.StateLayout
 abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
 
     //界面状态管理者
-    lateinit var uiStatusManger: StateLayout
+    lateinit var uiStatusManger: LoadService<*>
 
     //是否第一次加载
     private var isFirst: Boolean = true
@@ -44,19 +45,18 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
         savedInstanceState: Bundle?
     ): View? {
         isFirst = true
-        XLog.d(javaClass.simpleName)
+        javaClass.simpleName.logD()
         val rootView = if (dataBindView == null) {
             inflater.inflate(layoutId, container, false)
         } else {
             dataBindView
         }
         return if(getLoadingView()==null){
-            uiStatusManger = StateLayout(mActivity).config(
-                retryAction = {
-                    onLoadRetry()
-                }).wrap(rootView)
-            container?.removeView(uiStatusManger)
-            uiStatusManger
+            uiStatusManger = LoadSir.getDefault().register(rootView){
+                onLoadRetry()
+            }
+            container?.removeView(uiStatusManger.loadLayout)
+            uiStatusManger.loadLayout
         }else{
             rootView
         }
@@ -78,11 +78,10 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
     }
 
     private fun initStatusView(view: View, savedInstanceState: Bundle?) {
-        if (getLoadingView() != null) {
-            uiStatusManger = StateLayout(mActivity).config(
-                retryAction = {
-                    onLoadRetry()
-                }).wrap(getLoadingView())
+        getLoadingView()?.let {
+            uiStatusManger = LoadSir.getDefault().register(it){
+                onLoadRetry()
+            }
         }
         view.post {
             initView(savedInstanceState)
@@ -161,6 +160,9 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
                 onRequestEmpty(it)
             }
             showError.observeInFragment(this@BaseVmFragment) {
+                if(it.loadingType==LoadingType.LOADING_XML){
+                    showErrorUi(it.errorMessage)
+                }
                 onRequestError(it)
             }
             showSuccess.observeInFragment(this@BaseVmFragment) {
@@ -206,21 +208,22 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
      * 显示 错误 状态界面
      */
     override fun showErrorUi(errMessage: String) {
-        uiStatusManger.showError(errMessage)
+        uiStatusManger.showCallback(ErrorCallback::class.java)
+    }
+
+
+    /**
+     * 显示 错误 状态界面
+     */
+    override fun showEmptyUi() {
+        uiStatusManger.showCallback(EmptyCallback::class.java)
     }
 
     /**
      * 显示 loading 状态界面
      */
     override fun showLoadingUi() {
-        uiStatusManger.showLoading()
-    }
-
-    /**
-     * 显示 错误 状态界面
-     */
-    override fun showEmptyUi() {
-        uiStatusManger.showEmpty()
+        uiStatusManger.showCallback(LoadingCallback::class.java)
     }
 
 }

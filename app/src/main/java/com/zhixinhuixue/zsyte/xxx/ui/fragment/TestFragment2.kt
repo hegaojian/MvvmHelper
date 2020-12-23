@@ -17,7 +17,6 @@ class TestFragment2 : BaseVmFragment<TestViewModel>() {
         R.layout.fragment_test
 
     override fun initView(savedInstanceState: Bundle?) {
-        uiStatusManger.showEmpty()
         "TestFragment2-initView".logD("hgj")
     }
 

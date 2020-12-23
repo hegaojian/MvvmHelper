@@ -6,6 +6,8 @@ import com.effective.android.anchors.Project
 import com.effective.android.anchors.Task
 import com.effective.android.anchors.TaskCreator
 import com.hjq.toast.ToastUtils
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -19,6 +21,9 @@ import com.zhixinhuixue.library.common.ext.px2dp
 import com.zhixinhuixue.library.common.listener.KtxActivityLifecycleCallbacks
 import com.zhixinhuixue.library.common.loadmore.CustomLoadMoreView
 import com.zhixinhuixue.library.common.net.NetHttpClient
+import com.zhixinhuixue.library.common.state.EmptyCallback
+import com.zhixinhuixue.library.common.state.ErrorCallback
+import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.interception.LogInterceptor
 import rxhttp.wrapper.param.RxHttp
 import java.util.*
@@ -89,10 +94,13 @@ class InitComm : Task(TASK_ID, true) {
                 setAccentColor(getColorExt(R.color.colorBlack))
             }
         }
-        // 在 Application 中配置全局自定义的 LoadMoreView
-        LoadMoreModuleConfig.defLoadMoreView = CustomLoadMoreView()
-        //假装初始化某个SDK3秒
-        doJob(3000)
+        //注册界面状态管理
+        LoadSir.beginBuilder()
+            .addCallback(ErrorCallback())
+            .addCallback(EmptyCallback())
+            .addCallback(LoadingCallback())
+            .setDefaultCallback(SuccessCallback::class.java)
+            .commit()
     }
 }
 
@@ -107,8 +115,6 @@ class InitUtils : Task(TASK_ID, true) {
         XLog.init(BuildConfig.DEBUG)
         //初始化MMKV
         MMKV.initialize(appContext.filesDir.absolutePath + "/mmkv")
-        //假装初始化某个SDK1秒
-        doJob(1000)
     }
 }
 

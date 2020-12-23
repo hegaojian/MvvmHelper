@@ -40,6 +40,7 @@ buildscript {
     ext.glide_version = '4.11.0'
     ext.background_version = '1.6.5'
     ext.xopou_version = '2.2.5'
+    ext.loadsir_version = '1.3.8'
 
 
     repositories {

@@ -2,7 +2,9 @@ package com.zhixinhuixue.library.common.ext
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hjq.toast.ToastUtils
+import com.kingja.loadsir.core.LoadService
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.zhixinhuixue.library.common.state.ErrorCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
 import com.zhixinhuixue.library.widget.statuslayout.StateLayout
@@ -57,12 +59,12 @@ fun <T> BaseQuickAdapter<T,*>.loadListSuccess(baseListNetEntity: ApiPagerRespons
  * @param loadStatus LoadStatusEntity
  * @param status StateLayout
  */
-fun BaseQuickAdapter<*,*>.loadListError(loadStatus: LoadStatusEntity, status:StateLayout, smartRefreshLayout: SmartRefreshLayout){
+fun BaseQuickAdapter<*,*>.loadListError(loadStatus: LoadStatusEntity, status:LoadService<*>, smartRefreshLayout: SmartRefreshLayout){
     //关闭头部刷新
     smartRefreshLayout.finishRefresh()
     if (loadStatus.isRefresh && this.data.isEmpty()) {
         //第一次请求，第一页，且没有请求到数据
-        status.showError(loadStatus.errorMessage)
+        status.showCallback(ErrorCallback::class.java)
     } else if (loadStatus.isRefresh) {
         //第一页，但是之前有数据，只给提示
         ToastUtils.show(loadStatus.errorMessage)

@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import com.zhixinhuixue.library.common.R
-import com.zhixinhuixue.library.common.core.viewmodel.EventViewModel
 import com.zhixinhuixue.library.common.ext.*
+import com.zhixinhuixue.library.common.state.EmptyCallback
+import com.zhixinhuixue.library.common.state.ErrorCallback
+import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.enum.LoadingType
 import com.zhixinhuixue.library.widget.toolbar.CustomToolBar
-import com.zhixinhuixue.library.widget.statuslayout.StateLayout
 import kotlinx.android.synthetic.main.activity_base.*
 
 /**
@@ -22,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_base.*
 abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
 
     //界面状态管理者
-    protected lateinit var uiStatusManger: StateLayout
+    protected lateinit var uiStatusManger: LoadService<*>
 
     //当前Activity绑定的 ViewModel
     lateinit var mViewModel: VM
@@ -49,13 +53,16 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
 
     private fun initStatusView(savedInstanceState: Bundle?) {
         mToolbar = baseToolBar
-        mToolbar.visibleOrGone(showToolBar())
+        mToolbar.run {
+            setBackgroundColor(getColorExt(R.color.colorBackGround))
+            //是否隐藏标题栏
+            visibleOrGone(showToolBar())
+        }
         initImmersionBar()
-        baseContentView.addView(if(dataBindView==null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
-        uiStatusManger = StateLayout(this).config(
-            retryAction = {
-                onLoadRetry()
-            }).wrap(if (getLoadingView() == null) baseContentView else getLoadingView())
+        baseContentView.addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
+        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) baseContentView else getLoadingView()!!){
+            onLoadRetry()
+        }
         baseContentView.post {
             initView(savedInstanceState)
         }
@@ -79,11 +86,12 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     }
 
     /**
-     * Activity默认有ToolBar
+     * 是否隐藏 标题栏 默认显示
      */
     open fun showToolBar(): Boolean {
         return true
     }
+
 
     /**
      * 初始化沉浸式
@@ -92,6 +100,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     protected open fun initImmersionBar() {
         //设置共同沉浸式样式
         if(showToolBar()){
+            mToolbar.setBackgroundColor(getColorExt(R.color.colorPrimary))
             setSupportActionBar(mToolbar.getBaseToolBar())
             ImmersionBar.with(this).titleBar(mToolbar).init()
         }
@@ -125,7 +134,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
             }
             showError.observeInActivity(this@BaseVmActivity) {
                 //如果请求错误 并且loading类型为 xml 那么控制界面显示为错误布局
-                if(it.loadingType==LoadingType.LOADING_XML){
+                if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
                 onRequestError(it)
@@ -171,7 +180,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
      * 显示 错误 状态界面
      */
     override fun showErrorUi(errMessage: String) {
-        uiStatusManger.showError(errMessage)
+        uiStatusManger.showCallback(ErrorCallback::class.java)
     }
 
 
@@ -179,14 +188,14 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
      * 显示 错误 状态界面
      */
     override fun showEmptyUi() {
-        uiStatusManger.showEmpty()
+        uiStatusManger.showCallback(EmptyCallback::class.java)
     }
 
     /**
      * 显示 loading 状态界面
      */
     override fun showLoadingUi() {
-        uiStatusManger.showLoading()
+        uiStatusManger.showCallback(LoadingCallback::class.java)
     }
 
     /**

@@ -13,11 +13,9 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
  */
 class TestFragment3 : BaseVmFragment<TestViewModel>() {
 
-    override val layoutId: Int =
-        R.layout.fragment_test
+    override val layoutId: Int = R.layout.fragment_test
 
     override fun initView(savedInstanceState: Bundle?) {
-        uiStatusManger.showEmpty()
         "TestFragment3-initView".logD("hgj")
     }
 

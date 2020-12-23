@@ -81,5 +81,7 @@ dependencies {
     api "com.github.bumptech.glide:glide:$glide_version"
     //XPoup
     api "com.lxj:xpopup:$xopou_version"
+    //管理界面状态
+    api "com.kingja.loadsir:loadsir:$loadsir_version"
 
 }

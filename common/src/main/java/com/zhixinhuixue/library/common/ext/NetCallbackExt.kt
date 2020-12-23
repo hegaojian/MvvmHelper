@@ -26,8 +26,6 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
             loadingChange.showSuccess.value = true
         }
     }, {
-        //请求失败时将错误日志打印一下 防止错哪里了都不晓得
-        "操！请求出错了----> ${it.message}".logE()
         if (httpRequestDsl.onError == null) {
             //如果没有传递 onError参数 默认调用封装的逻辑
             if (it.code.toString() == NetConstant.EMPTY_CODE) {
@@ -41,6 +39,8 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                         httpRequestDsl.intentData
                     )
             } else {
+                //请求失败时将错误日志打印一下 防止错哪里了都不晓得
+                "操！请求出错了----> ${it.message}".logE()
                 //请求失败
                 loadingChange.showError.value =
                     LoadStatusEntity(
@@ -52,6 +52,8 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                     )
             }
         } else {
+            //请求失败时将错误日志打印一下 防止错哪里了都不晓得
+            "操！请求出错了----> ${it.message}".logE()
             //传递了 onError 需要自己处理
             httpRequestDsl.onError?.invoke(it)
         }

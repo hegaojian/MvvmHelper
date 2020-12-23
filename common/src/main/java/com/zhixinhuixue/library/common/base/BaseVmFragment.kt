@@ -120,8 +120,10 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
      */
     private fun onVisible() {
         if (lifecycle.currentState == Lifecycle.State.STARTED && isFirst) {
-            lazyLoadData()
-            isFirst = false
+            view?.post {
+                lazyLoadData()
+                isFirst = false
+            }
         }
     }
 

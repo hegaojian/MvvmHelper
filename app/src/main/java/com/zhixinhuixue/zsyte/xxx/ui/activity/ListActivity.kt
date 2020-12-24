@@ -35,7 +35,7 @@ class ListActivity(override val layoutId: Int = R.layout.activity_list) : BaseVm
         //初始化recyclerview
         listRecyclerView
             .initVertical(testAdapter)
-            .addItemDecoration(SpaceItemDecoration(dp2px(8f), dp2px(8f)))
+            .addItemDecoration(SpaceItemDecoration(8.dp, 8.dp))
 
         //发起请求
         onLoadRetry()

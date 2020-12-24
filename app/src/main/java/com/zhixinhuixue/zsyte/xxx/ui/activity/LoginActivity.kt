@@ -57,6 +57,7 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
         fun clear() {
             mViewModel.userName.set("")
         }
+
         //登录
         fun login(){
             when {
@@ -66,8 +67,7 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
             }
         }
 
-        var onCheckedChangeListener =
-            CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        var onCheckedChangeListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
                 mViewModel.isShowPwd.set(isChecked)
             }
 

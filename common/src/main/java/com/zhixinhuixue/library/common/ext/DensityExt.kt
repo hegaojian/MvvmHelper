@@ -33,6 +33,10 @@ fun dp2px(dpValue: Float): Int {
     ).toInt()
 }
 
+val Float.dp get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,this, appContext.resources.displayMetrics)
+
+val Int.dp get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), appContext.resources.displayMetrics).toInt()
+
 /**
  * px 转成为 dp
  */

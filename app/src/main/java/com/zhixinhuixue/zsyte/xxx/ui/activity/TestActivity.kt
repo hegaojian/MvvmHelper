@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_test.*
 class TestActivity : BaseDbActivity<BaseViewModel,ActivityTestBinding>() {
 
     private val titles = arrayOf("页面1", "页面2", "页面3")
-
+    
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar.initBack("测试Fragment") {
             finish()

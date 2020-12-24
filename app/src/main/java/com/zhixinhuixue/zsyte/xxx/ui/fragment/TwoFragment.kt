@@ -24,5 +24,4 @@ class TwoFragment : BaseVmFragment<BaseViewModel>() {
         ImmersionBar.with(this).titleBar(customToolbar).init()
     }
 
-
 }

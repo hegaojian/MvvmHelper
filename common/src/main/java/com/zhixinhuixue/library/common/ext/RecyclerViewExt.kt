@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter.AnimationType
 
 
 /**
- * ×İÏòrecyclerview
+ * çºµå‘recyclerview
  * @receiver RecyclerView
  * @param baseAdapter BaseQuickAdapter<*, *>
  * @return RecyclerView
@@ -22,7 +22,7 @@ fun RecyclerView.initVertical(baseAdapter:BaseQuickAdapter<*,*>):RecyclerView{
 }
 
 /**
- * ºáÏò recyclerview
+ * æ¨ªå‘ recyclerview
  * @receiver RecyclerView
  * @param baseAdapter BaseQuickAdapter<*, *>
  * @return RecyclerView

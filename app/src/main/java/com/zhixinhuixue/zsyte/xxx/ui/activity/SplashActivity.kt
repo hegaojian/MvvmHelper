@@ -3,15 +3,13 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 import android.os.Bundle
 import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.common.base.BaseVmActivity
-import com.zhixinhuixue.library.common.base.eventViewModel
 import com.zhixinhuixue.library.common.ext.toStartActivity
 import com.zhixinhuixue.zsyte.xxx.R
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
- * ×÷Õß¡¡: hegaojian
- * Ê±¼ä¡¡: 2020/12/3
- * ÃèÊö¡¡:
+ * ä½œè€…ã€€: hegaojian
+ * æ—¶é—´ã€€: 2020/12/3
+ * æè¿°ã€€:
  */
 class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :BaseVmActivity<BaseViewModel>() {
 
@@ -19,9 +17,6 @@ class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :Bas
         jumpToMainActivity()
     }
 
-    /**
-     * Ìø×ªÊ×Ò³
-     */
     private fun jumpToMainActivity(){
         toStartActivity(MainActivity::class.java)
         finish()

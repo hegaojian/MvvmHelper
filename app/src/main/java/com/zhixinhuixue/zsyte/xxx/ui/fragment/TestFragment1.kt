@@ -35,7 +35,7 @@ class TestFragment1 : BaseDbFragment<ListViewModel,ActivityListBinding>() {
         mDataBind.listRecyclerView.run {
             layoutManager = LinearLayoutManager(mActivity)
             setHasFixedSize(true)
-            addItemDecoration(SpaceItemDecoration(dp2px(8f), dp2px(8f)))
+            addItemDecoration(SpaceItemDecoration(8.dp,8.dp))
             adapter = testAdapter
         }
     }

@@ -5,9 +5,8 @@ import com.hjq.toast.ToastUtils
 import com.kingja.loadsir.core.LoadService
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.zhixinhuixue.library.common.state.ErrorCallback
-import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
-import com.zhixinhuixue.library.widget.statuslayout.StateLayout
+import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 
 /**
  * 作者　: hegaojian

@@ -1,6 +1,6 @@
 package com.zhixinhuixue.library.net.entity.base
 
-import com.zhixinhuixue.library.net.entity.enum.LoadingType
+import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 
 /**
  * 作者　: hegaojian
@@ -8,7 +8,7 @@ import com.zhixinhuixue.library.net.entity.enum.LoadingType
  * 描述　:
  */
 data class LoadingDialogEntity(
-    var loadingType: LoadingType = LoadingType.LOADING_NULL,
+    @LoadingType var loadingType: Int = LoadingType.LOADING_NULL,
     var loadingMessage: String = "",
     var isShow: Boolean = false
 )

@@ -45,7 +45,7 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
      * @param loadStatus LoadStatusEntity
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
-        when(loadStatus.matchCode){
+        when(loadStatus.requestCode){
             NetUrl.LOGIN ->{
                 showDialogMessage(loadStatus.errorMessage)
             }

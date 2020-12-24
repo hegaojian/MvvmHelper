@@ -5,7 +5,7 @@ import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.common.ext.rxHttpRequest
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
-import com.zhixinhuixue.library.net.entity.enum.LoadingType
+import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
 
 /**

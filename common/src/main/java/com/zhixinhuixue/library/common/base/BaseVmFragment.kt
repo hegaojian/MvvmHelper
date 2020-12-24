@@ -18,7 +18,7 @@ import com.zhixinhuixue.library.common.state.EmptyCallback
 import com.zhixinhuixue.library.common.state.ErrorCallback
 import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
-import com.zhixinhuixue.library.net.entity.enum.LoadingType
+import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 
 /**
  * 作者　: hegaojian

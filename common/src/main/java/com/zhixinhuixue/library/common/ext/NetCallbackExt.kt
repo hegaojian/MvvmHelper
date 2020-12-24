@@ -5,7 +5,7 @@ import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.net.NetConstant
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
-import com.zhixinhuixue.library.net.entity.enum.LoadingType
+import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.library.net.error.code
 import com.zhixinhuixue.library.net.error.msg
 import kotlinx.coroutines.CoroutineScope
@@ -84,7 +84,7 @@ class HttpRequestDsl {
     var onRequest: suspend CoroutineScope.() -> Unit = {} //请求工作 在这里执行网络接口请求，然后回调成功数据
     var onError: ((Throwable) -> Unit)? = null //错误回调，默认为null 如果你传递了他 那么就代表你请求失败的逻辑你自己处理
     var loadingMessage: String = "请求网络中..." //目前这个只有在 loadingType == LOADING_DIALOG 的时候才有用 不是的话都不用传他
-    var loadingType: LoadingType = LoadingType.LOADING_NULL // 请求时loading类型
+    @LoadingType var loadingType = LoadingType.LOADING_NULL// 请求时loading类型
     var requestCode: String = "mmp" //请求 code 请求错误时 需要根据字段去判断到底是哪个请求 可以用URL去标记
     var isRefreshRequest: Boolean = false //是否是刷新请求 做列表分页功能使用 一般请求用不到
     var intentData: Any? = null //请求时回调给发起请求时携带的参数 示例场景：发起请求时传递一个position ,如果请求失败时，可能需要把这个position回调给 activity/fragment 根据position做错误处理

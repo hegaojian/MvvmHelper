@@ -7,7 +7,7 @@ import com.zhixinhuixue.library.common.core.databinding.StringObservableField
 import com.zhixinhuixue.library.common.ext.logA
 import com.zhixinhuixue.library.common.ext.rxHttpRequest
 import com.zhixinhuixue.library.net.api.NetUrl
-import com.zhixinhuixue.library.net.entity.enum.LoadingType
+import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
 import rxhttp.async

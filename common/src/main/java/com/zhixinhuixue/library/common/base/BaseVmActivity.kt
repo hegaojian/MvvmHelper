@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
-import com.gyf.immersionbar.ktx.immersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.zhixinhuixue.library.common.R
@@ -14,7 +13,7 @@ import com.zhixinhuixue.library.common.state.EmptyCallback
 import com.zhixinhuixue.library.common.state.ErrorCallback
 import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
-import com.zhixinhuixue.library.net.entity.enum.LoadingType
+import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.library.widget.toolbar.CustomToolBar
 import kotlinx.android.synthetic.main.activity_base.*
 

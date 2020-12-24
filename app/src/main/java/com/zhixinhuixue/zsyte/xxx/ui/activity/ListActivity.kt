@@ -56,7 +56,7 @@ class ListActivity(override val layoutId: Int = R.layout.activity_list) : BaseVm
      * @param loadStatus LoadStatusEntity
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
-        when (loadStatus.matchCode) {
+        when (loadStatus.requestCode) {
             NetUrl.HOME_LIST -> {
                 //列表数据请求失败
                 testAdapter.loadListError(loadStatus,uiStatusManger,listSmartRefresh)

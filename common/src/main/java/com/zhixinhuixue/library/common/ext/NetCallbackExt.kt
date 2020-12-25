@@ -33,6 +33,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                 loadingChange.showEmpty.value =
                     LoadStatusEntity(
                         httpRequestDsl.requestCode,
+                        it.code,
                         it.msg,
                         httpRequestDsl.isRefreshRequest,
                         httpRequestDsl.loadingType,
@@ -45,6 +46,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                 loadingChange.showError.value =
                     LoadStatusEntity(
                         httpRequestDsl.requestCode,
+                        it.code,
                         it.msg,
                         httpRequestDsl.isRefreshRequest,
                         httpRequestDsl.loadingType,

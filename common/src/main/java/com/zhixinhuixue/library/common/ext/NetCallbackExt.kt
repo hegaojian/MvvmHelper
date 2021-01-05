@@ -41,6 +41,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                     )
             } else {
                 //请求失败时将错误日志打印一下 防止错哪里了都不晓得
+                it.printStackTrace()
                 "操！请求出错了----> ${it.message}".logE()
                 //请求失败
                 loadingChange.showError.value =
@@ -55,6 +56,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
             }
         } else {
             //请求失败时将错误日志打印一下 防止错哪里了都不晓得
+            it.printStackTrace()
             "操！请求出错了----> ${it.message}".logE()
             //传递了 onError 需要自己处理
             httpRequestDsl.onError?.invoke(it)

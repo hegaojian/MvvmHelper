@@ -64,6 +64,7 @@ class InitNetWork : Task(TASK_ID, true) {
     override fun run(name: String) {
         //传入自己的OKHttpClient 并添加了自己的拦截器
         RxHttp.init(NetHttpClient.getDefaultOkHttpClient().run {
+            addInterceptor(MyHeadInterceptor())//自定义头部拦截器
             addInterceptor(LogInterceptor())//添加Log拦截器
         }.build())
         //假装初始化某个SDK2秒

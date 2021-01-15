@@ -153,10 +153,12 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     }
 
     /**
-     * 请求接口失败回调，如果界面一般有请求接口，那么此方法必须实现
+     * 请求接口失败回调，如果界面有请求接口，需要处理错误业务，请实现它 乳沟不实现那么 默认吐司错误消息
      * @param loadStatus LoadStatusEntity
      */
-    override fun onRequestError(loadStatus: LoadStatusEntity) {}
+    override fun onRequestError(loadStatus: LoadStatusEntity) {
+        loadStatus.toast()
+    }
 
     /**
      * 请求成功的回调放在这里面 没干啥就是取了个名字，到时候好找

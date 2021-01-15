@@ -9,6 +9,7 @@ import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
  */
 data class LoadStatusEntity(
     var requestCode: String,//请求码
+    var throwable: Throwable,//失败异常
     var errorCode:Int,//错误码
     var errorMessage: String,//错误消息
     var isRefresh: Boolean = false,//是否是列表切刷新请求

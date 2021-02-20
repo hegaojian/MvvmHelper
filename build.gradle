@@ -1,6 +1,6 @@
 buildscript {
     ext.gradle_version = '4.1.0'
-    ext.kotlin_version = '1.4.10'
+    ext.kotlin_version = '1.4.20'
     ext.compilesdk_version = '29'
     ext.build_version = '29.0.3'
     ext.application_id = 'com.zhixinhuixue.zsyte.xxx'
@@ -26,9 +26,9 @@ buildscript {
     ext.adapter_version = '3.0.4'
     ext.swiperefreshlayout_version = '1.1.0'
 
-    ext.rxhttp_version = '2.4.1'
+    ext.rxhttp_version = '2.5.5'
     ext.okhttp_version = '4.9.0'
-    ext.rxhttp_compiler_version = '2.4.1'
+    ext.rxhttp_compiler_version = '2.5.5'
     ext.rxlife_coroutine_version = '2.0.1'
     ext.anchors_version = '1.1.1'
     ext.mmkv_version = '1.0.22'

@@ -8,7 +8,6 @@ import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.common.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityTestBinding
 import com.zhixinhuixue.zsyte.xxx.ui.fragment.TestFragment1
-import kotlinx.android.synthetic.main.activity_test.*
 
 /**
  * 作者　: hegaojian
@@ -37,7 +36,7 @@ class TestActivity : BaseDbActivity<BaseViewModel,ActivityTestBinding>() {
                 return titles[position]
             }
         }
-        mDataBind.testTableLayout.setupWithViewPager(testViewPager)
+        mDataBind.testTableLayout.setupWithViewPager(mDataBind.testViewPager)
         mDataBind.testViewPager.offscreenPageLimit = titles.size
     }
 }

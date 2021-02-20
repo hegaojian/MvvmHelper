@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.zhixinhuixue.library.widget.toolbar.CustomToolBar
-        android:id="@+id/customToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/bottom_title_paper"
-        android:gravity="center"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <com.zhixinhuixue.library.widget.toolbar.CustomToolBar
+            android:id="@+id/customToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/bottom_title_paper"
+            android:gravity="center" />
+
+    </LinearLayout>
+</layout>

@@ -1,8 +1,9 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
 android {
     compileSdkVersion compilesdk_version as int
     buildToolsVersion build_version
@@ -16,10 +17,6 @@ android {
 
     buildFeatures {
         dataBinding = true
-    }
-    //使用Kotlin实验特性
-    androidExtensions {
-        experimental = true
     }
 
     kotlinOptions {

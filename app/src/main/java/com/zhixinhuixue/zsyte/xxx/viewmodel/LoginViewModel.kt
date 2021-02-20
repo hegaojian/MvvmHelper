@@ -11,6 +11,8 @@ import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
 import rxhttp.async
+import rxhttp.wrapper.param.RxHttp
+import rxhttp.wrapper.param.toResponse
 
 /**
  * 作者　: hegaojian
@@ -21,8 +23,10 @@ class LoginViewModel : BaseViewModel() {
 
     //账户名
     val userName = StringObservableField()
+
     //密码
     val password = StringObservableField()
+
     //是否显示明文密码（登录注册界面）
     var isShowPwd = BooleanObservableField()
 
@@ -37,10 +41,13 @@ class LoginViewModel : BaseViewModel() {
     fun login(phoneNumber: String, password: String) {
         rxHttpRequest {
             onRequest = {
-                //在这里可以写并行或者串行请求 默认是串行
-                loginData.value = UserRepository.login(phoneNumber, password).await()
+                loginData.value = RxHttp.postForm(NetUrl.LOGIN)
+                    .add("username", phoneNumber)
+                    .add("password", password)
+                    .toResponse<UserInfo>()
+                    .await()
             }
-            loadingType = LoadingType.LOADING_DIALOG
+            loadingType = LoadingType.LOADING_DIALOG //选传
             loadingMessage = "正在登录中....." // 选传
             requestCode = NetUrl.LOGIN // 如果要判断接口错误业务 - 必传
         }
@@ -58,7 +65,7 @@ class LoginViewModel : BaseViewModel() {
                 val listData = UserRepository.getList(0).async(this)
                 val loginData = UserRepository.login(phoneNumber, password).async(this)
                 //得到合并值
-                val mergeValue = loginData.await().username+listData.await().hasMore()
+                val mergeValue = loginData.await().username + listData.await().hasMore()
                 //打印一下
                 mergeValue.logA()
             }

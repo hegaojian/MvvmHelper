@@ -145,14 +145,25 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
             loading.observeInFragment(this@BaseVmFragment) {
                 if (it.loadingType == LoadingType.LOADING_DIALOG) {
                     if (it.isShow) {
-                        showLoading(it.loadingMessage)
+                        showLoadingExt()
                     } else {
-                        dismissLoading()
+                        dismissLoadingExt()
                     }
-                } else {
+                    return@observeInFragment
+                }
+                if (it.loadingType == LoadingType.LOADING_DIALOG_CUSTOM) {
+                    if (it.isShow) {
+                        showCustomLoading()
+                    } else {
+                        dismissCustomLoading()
+                    }
+                    return@observeInFragment
+                }
+                if(it.loadingType == LoadingType.LOADING_XML){
                     if (it.isShow) {
                         showLoadingUi()
                     }
+                    return@observeInFragment
                 }
             }
             showEmpty.observeInFragment(this@BaseVmFragment) {
@@ -225,6 +236,20 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
      */
     override fun showLoadingUi() {
         uiStatusManger.showCallback(LoadingCallback::class.java)
+    }
+
+    /**
+     * 显示自定义loading弹窗dialog
+     */
+    override fun showCustomLoading() {
+        showLoadingExt()
+    }
+
+    /**
+     * 隐藏自定义loading弹窗dialog
+     */
+    override fun dismissCustomLoading() {
+        dismissLoadingExt()
     }
 
 }

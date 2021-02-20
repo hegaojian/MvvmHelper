@@ -54,5 +54,15 @@ interface BaseIView {
      */
     fun onLoadRetry()
 
+    /**
+     * 显示自定义loading弹窗dialog
+     */
+    fun showCustomLoading()
+
+    /**
+     * 隐藏自定义loading弹窗dialog
+     */
+    fun dismissCustomLoading()
+
 
 }

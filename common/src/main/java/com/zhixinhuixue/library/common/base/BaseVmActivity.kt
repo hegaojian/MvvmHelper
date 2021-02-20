@@ -3,6 +3,7 @@ package com.zhixinhuixue.library.common.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
 import com.kingja.loadsir.core.LoadService
@@ -15,7 +16,6 @@ import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.library.widget.toolbar.CustomToolBar
-import kotlinx.android.synthetic.main.activity_base.*
 
 /**
  * 作者　: hegaojian
@@ -51,18 +51,18 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     }
 
     private fun initStatusView(savedInstanceState: Bundle?) {
-        mToolbar = baseToolBar
+        mToolbar = findViewById(R.id.baseToolBar)
         mToolbar.run {
             setBackgroundColor(getColorExt(R.color.colorBackGround))
             //是否隐藏标题栏
             visibleOrGone(showToolBar())
         }
         initImmersionBar()
-        baseContentView.addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
-        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) baseContentView else getLoadingView()!!){
+        findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
+        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!){
             onLoadRetry()
         }
-        baseContentView.post {
+        findViewById<FrameLayout>(R.id.baseContentView).post {
             initView(savedInstanceState)
         }
     }
@@ -118,14 +118,25 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
             loading.observeInActivity(this@BaseVmActivity) {
                 if (it.loadingType == LoadingType.LOADING_DIALOG) {
                     if (it.isShow) {
-                        showLoading(it.loadingMessage)
+                        showLoadingExt()
                     } else {
-                        dismissLoading()
+                        dismissLoadingExt()
                     }
-                } else {
+                    return@observeInActivity
+                }
+                if (it.loadingType == LoadingType.LOADING_DIALOG_CUSTOM) {
+                    if (it.isShow) {
+                        showCustomLoading()
+                    } else {
+                        dismissCustomLoading()
+                    }
+                    return@observeInActivity
+                }
+                if(it.loadingType == LoadingType.LOADING_XML){
                     if (it.isShow) {
                         showLoadingUi()
                     }
+                    return@observeInActivity
                 }
             }
             showEmpty.observeInActivity(this@BaseVmActivity) {
@@ -206,4 +217,19 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     open fun getLoadingView(): View? {
         return null
     }
+
+    /**
+     * 显示自定义loading弹窗dialog
+     */
+    override fun showCustomLoading() {
+        showLoadingExt()
+    }
+
+    /**
+     * 隐藏自定义loading弹窗dialog
+     */
+    override fun dismissCustomLoading() {
+        dismissLoadingExt()
+    }
+
 }

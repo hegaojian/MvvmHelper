@@ -38,9 +38,7 @@ abstract class BaseDbFragment<VM : BaseViewModel,DB: ViewDataBinding> : BaseVmFr
         val method = aClass.getDeclaredMethod("inflate",LayoutInflater::class.java)
         mDataBind =  method.invoke(null,layoutInflater) as DB
         //如果重新加载，需要清空之前的view，不然会报错
-        if(dataBindView!=null){
-            (dataBindView?.parent as? ViewGroup)?.removeView(dataBindView)
-        }
+        (dataBindView?.parent as? ViewGroup)?.removeView(dataBindView)
         dataBindView = mDataBind.root
         mDataBind.lifecycleOwner = this
     }

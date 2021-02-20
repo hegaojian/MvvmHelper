@@ -11,7 +11,6 @@ import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
 import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
-import kotlinx.android.synthetic.main.activity_list.*
 
 /**
  * 作者　: hegaojian
@@ -53,7 +52,7 @@ class TestFragment1 : BaseDbFragment<ListViewModel,ActivityListBinding>() {
     override fun onRequestSuccess() {
         mViewModel.listData.observe(this, Observer {
             //请求到列表数据
-            testAdapter.loadListSuccess(it,listSmartRefresh)
+            testAdapter.loadListSuccess(it,mDataBind.listSmartRefresh)
         })
     }
 
@@ -65,7 +64,7 @@ class TestFragment1 : BaseDbFragment<ListViewModel,ActivityListBinding>() {
         when (loadStatus.requestCode) {
             NetUrl.HOME_LIST -> {
                 //列表数据请求失败
-                testAdapter.loadListError(loadStatus,uiStatusManger,listSmartRefresh)
+                testAdapter.loadListError(loadStatus,uiStatusManger,mDataBind.listSmartRefresh)
             }
         }
     }

@@ -70,7 +70,8 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                 LoadingDialogEntity(
                     httpRequestDsl.loadingType,
                     httpRequestDsl.loadingMessage,
-                    true
+                    true,
+                    httpRequestDsl.requestCode
                 )
         }
     }, {
@@ -80,7 +81,8 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
                 LoadingDialogEntity(
                     httpRequestDsl.loadingType,
                     httpRequestDsl.loadingMessage,
-                    false
+                    false,
+                    httpRequestDsl.requestCode
                 )
         }
     })

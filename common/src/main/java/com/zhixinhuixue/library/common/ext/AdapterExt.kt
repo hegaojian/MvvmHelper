@@ -42,6 +42,8 @@ fun <T> BaseQuickAdapter<T,*>.loadListSuccess(baseListNetEntity: ApiPagerRespons
     }else{
         //不是第一页，累加数据
         this.addData(baseListNetEntity.datas)
+        //刷新一下分割线
+        this.recyclerView.invalidateItemDecorations()
     }
     //乳沟还有下一页数据 那么设置 smartRefreshLayout 还可以加载更多数据
     if(baseListNetEntity.hasMore()){

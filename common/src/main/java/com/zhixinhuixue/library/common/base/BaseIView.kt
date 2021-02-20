@@ -1,6 +1,7 @@
 package com.zhixinhuixue.library.common.base
 
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
+import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 
 /**
  * 作者　: hegaojian
@@ -57,12 +58,12 @@ interface BaseIView {
     /**
      * 显示自定义loading弹窗dialog
      */
-    fun showCustomLoading()
+    fun showCustomLoading(setting:LoadingDialogEntity)
 
     /**
      * 隐藏自定义loading弹窗dialog
      */
-    fun dismissCustomLoading()
+    fun dismissCustomLoading(setting:LoadingDialogEntity)
 
 
 }

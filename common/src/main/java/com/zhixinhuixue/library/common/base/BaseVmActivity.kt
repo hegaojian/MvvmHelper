@@ -14,6 +14,7 @@ import com.zhixinhuixue.library.common.state.EmptyCallback
 import com.zhixinhuixue.library.common.state.ErrorCallback
 import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
+import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 import com.zhixinhuixue.library.widget.toolbar.CustomToolBar
 
@@ -126,9 +127,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
                 }
                 if (it.loadingType == LoadingType.LOADING_DIALOG_CUSTOM) {
                     if (it.isShow) {
-                        showCustomLoading()
+                        showCustomLoading(it)
                     } else {
-                        dismissCustomLoading()
+                        dismissCustomLoading(it)
                     }
                     return@observeInActivity
                 }
@@ -221,14 +222,14 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     /**
      * 显示自定义loading弹窗dialog
      */
-    override fun showCustomLoading() {
+    override fun showCustomLoading(setting: LoadingDialogEntity) {
         showLoadingExt()
     }
 
     /**
      * 隐藏自定义loading弹窗dialog
      */
-    override fun dismissCustomLoading() {
+    override fun dismissCustomLoading(setting:LoadingDialogEntity) {
         dismissLoadingExt()
     }
 

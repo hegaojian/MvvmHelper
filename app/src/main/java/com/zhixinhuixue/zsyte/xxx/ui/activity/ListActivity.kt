@@ -35,8 +35,15 @@ class ListActivity: BaseDbActivity<ListViewModel,ActivityListBinding>() {
         }
         //初始化recyclerview
         mDataBind.listRecyclerView.run {
-            vertical() //设置线性垂直方向
-            addItemDecoration(SpaceItemDecoration(8.dp, 8.dp))
+            grid(3)
+            divider {
+                setColor(getColorExt(R.color.colorWhite))
+                setDivider(10.dp)
+                startVisible = true
+                includeVisible = true
+                orientation = DividerOrientation.GRID
+            }
+//            addItemDecoration(SpaceItemDecoration(8.dp, 8.dp))
             adapter = testAdapter
         }
         //发起请求

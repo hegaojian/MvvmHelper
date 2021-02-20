@@ -9,6 +9,7 @@ import com.zhixinhuixue.library.common.ext.initBack
 import com.zhixinhuixue.library.common.ext.showDialogMessage
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
+import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
 import com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel
@@ -70,7 +71,18 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
         var onCheckedChangeListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
                 mViewModel.isShowPwd.set(isChecked)
             }
+    }
 
+    override fun showCustomLoading(setting: LoadingDialogEntity) {
+        if(setting.requestCode=="mmp"){
+            //可以根据不同的code 做不同的loading处理
+        }
+    }
+
+    override fun dismissCustomLoading(setting: LoadingDialogEntity) {
+        if(setting.requestCode=="mmp"){
+            //可以根据不同的code 做不同的loading处理
+        }
     }
 
 }

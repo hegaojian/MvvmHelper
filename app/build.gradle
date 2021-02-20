@@ -37,6 +37,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //在这里修改apk文件名
+                outputFileName = "cxk-v${variant.versionName}.apk"
+            }
+    }
 }
 
 dependencies {

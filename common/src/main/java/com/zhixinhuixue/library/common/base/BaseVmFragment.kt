@@ -15,6 +15,7 @@ import com.zhixinhuixue.library.common.state.EmptyCallback
 import com.zhixinhuixue.library.common.state.ErrorCallback
 import com.zhixinhuixue.library.common.state.LoadingCallback
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
+import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 import com.zhixinhuixue.library.net.entity.loadingtype.LoadingType
 
 /**
@@ -48,13 +49,13 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
         } else {
             dataBindView
         }
-        return if(getLoadingView()==null){
-            uiStatusManger = LoadSir.getDefault().register(rootView){
+        return if (getLoadingView() == null) {
+            uiStatusManger = LoadSir.getDefault().register(rootView) {
                 onLoadRetry()
             }
             container?.removeView(uiStatusManger.loadLayout)
             uiStatusManger.loadLayout
-        }else{
+        } else {
             rootView
         }
     }
@@ -76,7 +77,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
 
     private fun initStatusView(view: View, savedInstanceState: Bundle?) {
         getLoadingView()?.let {
-            uiStatusManger = LoadSir.getDefault().register(it){
+            uiStatusManger = LoadSir.getDefault().register(it) {
                 onLoadRetry()
             }
         }
@@ -151,15 +152,15 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
                     }
                     return@observeInFragment
                 }
-                if (it.loadingType == LoadingType.LOADING_DIALOG_CUSTOM) {
+                if (it.loadingType == LoadingType.LOADING_CUSTOM) {
                     if (it.isShow) {
-                        showCustomLoading()
+                        showCustomLoading(it)
                     } else {
-                        dismissCustomLoading()
+                        dismissCustomLoading(it)
                     }
                     return@observeInFragment
                 }
-                if(it.loadingType == LoadingType.LOADING_XML){
+                if (it.loadingType == LoadingType.LOADING_XML) {
                     if (it.isShow) {
                         showLoadingUi()
                     }
@@ -170,7 +171,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
                 onRequestEmpty(it)
             }
             showError.observeInFragment(this@BaseVmFragment) {
-                if(it.loadingType==LoadingType.LOADING_XML){
+                if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
                 onRequestError(it)
@@ -239,17 +240,16 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
     }
 
     /**
-     * 显示自定义loading弹窗dialog
+     * 显示自定义loading
      */
-    override fun showCustomLoading() {
-        showLoadingExt()
+    override fun showCustomLoading(setting: LoadingDialogEntity) {
+        showLoadingExt(setting.loadingMessage)
     }
 
     /**
-     * 隐藏自定义loading弹窗dialog
+     * 隐藏自定义loading
      */
-    override fun dismissCustomLoading() {
+    override fun dismissCustomLoading(setting: LoadingDialogEntity) {
         dismissLoadingExt()
     }
-
 }

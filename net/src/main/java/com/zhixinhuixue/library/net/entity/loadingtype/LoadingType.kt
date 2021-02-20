@@ -7,7 +7,7 @@ import androidx.annotation.IntDef
  * 时间　: 2020/11/3
  * 描述　:
  */
-@IntDef(LoadingType.LOADING_NULL, LoadingType.LOADING_DIALOG, LoadingType.LOADING_XML,LoadingType.LOADING_DIALOG_CUSTOM)
+@IntDef(LoadingType.LOADING_NULL, LoadingType.LOADING_DIALOG, LoadingType.LOADING_XML,LoadingType.LOADING_CUSTOM)
 @Retention(AnnotationRetention.SOURCE)
 annotation class LoadingType {
     companion object {
@@ -17,7 +17,7 @@ annotation class LoadingType {
         const val LOADING_DIALOG = 1
         //请求时 界面 Loading Error Empty
         const val LOADING_XML = 2
-        //请求时弹出 Dialog弹窗Loading-自定义 在 fragment/activity 使用时需要重写 showCustomLoading dismissCustomLoading 方法
-        const val LOADING_DIALOG_CUSTOM = 3
+        //请求时弹出 Loading-自定义 在 fragment/activity 使用时需要重写 showCustomLoading dismissCustomLoading 方法
+        const val LOADING_CUSTOM = 3
     }
 }

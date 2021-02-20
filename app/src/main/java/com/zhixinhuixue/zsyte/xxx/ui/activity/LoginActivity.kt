@@ -1,6 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.CompoundButton
 import androidx.lifecycle.Observer
 import com.zhixinhuixue.library.common.base.BaseDbActivity
@@ -74,14 +75,16 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
     }
 
     override fun showCustomLoading(setting: LoadingDialogEntity) {
-        if(setting.requestCode=="mmp"){
+        if(setting.requestCode== NetUrl.LOGIN){
             //可以根据不同的code 做不同的loading处理
+            showLoadingUi()
         }
     }
 
     override fun dismissCustomLoading(setting: LoadingDialogEntity) {
-        if(setting.requestCode=="mmp"){
+        if(setting.requestCode==NetUrl.LOGIN){
             //可以根据不同的code 做不同的loading处理
+            showSuccessUi()
         }
     }
 

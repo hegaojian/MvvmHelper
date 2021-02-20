@@ -125,7 +125,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
                     }
                     return@observeInActivity
                 }
-                if (it.loadingType == LoadingType.LOADING_DIALOG_CUSTOM) {
+                if (it.loadingType == LoadingType.LOADING_CUSTOM) {
                     if (it.isShow) {
                         showCustomLoading(it)
                     } else {
@@ -220,14 +220,14 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     }
 
     /**
-     * 显示自定义loading弹窗dialog
+     * 显示自定义loading
      */
     override fun showCustomLoading(setting: LoadingDialogEntity) {
         showLoadingExt()
     }
 
     /**
-     * 隐藏自定义loading弹窗dialog
+     * 隐藏自定义loading
      */
     override fun dismissCustomLoading(setting:LoadingDialogEntity) {
         dismissLoadingExt()

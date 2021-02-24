@@ -1,5 +1,6 @@
 package com.zhixinhuixue.library.common.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.noober.background.BackgroundLibrary
 import com.zhixinhuixue.library.common.R
 import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.library.common.state.EmptyCallback
@@ -148,6 +150,11 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
+           /*     if(it.errorCode == 999){
+                    // 示例 退出所有的activity 跳转到 loginActivity
+                    ... 老板好，
+                    return@observeInActivity
+                }*/
                 onRequestError(it)
             }
             showSuccess.observeInActivity(this@BaseVmActivity) {

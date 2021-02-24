@@ -3,6 +3,7 @@ package com.zhixinhuixue.library.common.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
+import com.noober.background.BackgroundLibrary
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -29,6 +30,7 @@ abstract class BaseDbActivity<VM : BaseViewModel,DB: ViewDataBinding> : BaseVmAc
         //利用反射 根据泛型得到 ViewDataBinding
         val superClass = javaClass.genericSuperclass
         val aClass = (superClass as ParameterizedType).actualTypeArguments[1] as Class<*>
+        BackgroundLibrary.inject(this)
         val method = aClass.getDeclaredMethod("inflate",LayoutInflater::class.java)
         mDataBind =  method.invoke(null,layoutInflater) as DB
         dataBindView = mDataBind.root

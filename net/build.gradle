@@ -34,5 +34,4 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:$okhttp_version"
     kapt "com.ljx.rxhttp:rxhttp-compiler:$rxhttp_compiler_version"
     api "com.ljx.rxlife:rxlife-coroutine:$rxlife_coroutine_version"
-    api 'com.ljx.rxlife3:rxlife-rxjava:3.0.0'
 }

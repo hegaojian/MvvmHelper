@@ -47,7 +47,7 @@ class LoginViewModel : BaseViewModel() {
                     .toResponse<UserInfo>()
                     .await()
             }
-            loadingType = LoadingType.LOADING_CUSTOM //选传
+            loadingType = LoadingType.LOADING_DIALOG //选传
             loadingMessage = "正在登录中....." // 选传
             requestCode = NetUrl.LOGIN // 如果要判断接口错误业务 - 必传
         }

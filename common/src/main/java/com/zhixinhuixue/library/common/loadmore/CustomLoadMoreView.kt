@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.chad.library.adapter.base.loadmore.BaseLoadMoreView
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.zhixinhuixue.library.common.R
-import com.zhixinhuixue.library.common.base.appContext
+import me.hgj.mvvmhelper.base.appContext
 
 /**
  * 作者　: hegaojian
@@ -16,7 +16,7 @@ import com.zhixinhuixue.library.common.base.appContext
 class CustomLoadMoreView : BaseLoadMoreView() {
 
     override fun getRootView(parent: ViewGroup): View {
-        return LayoutInflater.from(appContext).inflate(R.layout.layout_load_more, parent, false)
+        return LayoutInflater.from(me.hgj.mvvmhelper.base.appContext).inflate(R.layout.layout_load_more, parent, false)
     }
 
     /**

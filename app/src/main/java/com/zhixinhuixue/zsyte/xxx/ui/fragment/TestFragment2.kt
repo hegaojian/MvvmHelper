@@ -1,7 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
-import com.zhixinhuixue.library.common.base.BaseVmFragment
+import me.hgj.mvvmhelper.base.BaseVmFragment
 import com.zhixinhuixue.library.common.ext.logD
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
@@ -11,7 +11,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestFragment2 : BaseVmFragment<TestViewModel>() {
+class TestFragment2 : me.hgj.mvvmhelper.base.BaseVmFragment<TestViewModel>() {
 
     override val layoutId: Int =
         R.layout.fragment_test

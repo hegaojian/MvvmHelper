@@ -2,7 +2,7 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
-import com.zhixinhuixue.library.common.base.BaseDbFragment
+import me.hgj.mvvmhelper.base.BaseDbFragment
 import com.zhixinhuixue.library.common.ext.getColorExt
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentThreeBinding
@@ -13,7 +13,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
  * 时间　: 2020/11/18
  * 描述　:
  */
-class ThreeFragment : BaseDbFragment<TestViewModel,FragmentThreeBinding>() {
+class ThreeFragment : me.hgj.mvvmhelper.base.BaseDbFragment<TestViewModel, FragmentThreeBinding>() {
 
     override val layoutId: Int get() = R.layout.fragment_three
 

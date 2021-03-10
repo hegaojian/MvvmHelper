@@ -1,7 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
-import com.zhixinhuixue.library.common.base.BaseDbActivity
+import me.hgj.mvvmhelper.base.BaseDbActivity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityMainBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.MainAdapter
@@ -12,7 +12,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
  * 时间　: 2020/11/6
  * 描述　:
  */
-class MainActivity : BaseDbActivity<TestViewModel,ActivityMainBinding>() {
+class MainActivity : me.hgj.mvvmhelper.base.BaseDbActivity<TestViewModel, ActivityMainBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar.setCenterTitle(R.string.bottom_title_read)

@@ -1,14 +1,11 @@
 package com.zhixinhuixue.zsyte.xxx.viewmodel
 
 import android.net.Uri
-import androidx.lifecycle.rxLifeScope
-import com.zhixinhuixue.library.common.base.BaseViewModel
-import com.zhixinhuixue.library.common.base.appContext
+import me.hgj.mvvmhelper.base.BaseViewModel
+import me.hgj.mvvmhelper.base.appContext
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.util.Android10DownloadFactory
 import kotlinx.coroutines.Dispatchers
-import rxhttp.awaitString
-import rxhttp.toDownload
 import rxhttp.wrapper.entity.Progress
 import rxhttp.wrapper.entity.ProgressT
 import rxhttp.wrapper.param.RxHttp
@@ -19,7 +16,7 @@ import rxhttp.wrapper.param.upload
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestViewModel : BaseViewModel() {
+class TestViewModel : me.hgj.mvvmhelper.base.BaseViewModel() {
 
     /**
      * 下载
@@ -29,7 +26,7 @@ class TestViewModel : BaseViewModel() {
      */
     fun downLoad(downLoadData:(ProgressT<Uri>)->Unit = {}, downLoadSuccess:(String)->Unit, downLoadError:(Throwable)->Unit = {}){
         rxLifeScope.launch({
-            val factory = Android10DownloadFactory(appContext,"${System.currentTimeMillis()}.apk")
+            val factory = Android10DownloadFactory(me.hgj.mvvmhelper.base.appContext,"${System.currentTimeMillis()}.apk")
             val downLoadPath = RxHttp.get(NetUrl.DOWNLOAD_URL).toDownload(factory,
                 Dispatchers.Main) { progressT: ProgressT<Uri> ->
                 //下载中回调
@@ -52,7 +49,7 @@ class TestViewModel : BaseViewModel() {
     fun upload(filePath:String, uploadData:(Progress)->Unit = {}, uploadSuccess:(String)->Unit, uploadError:(Throwable)->Unit = {}){
         rxLifeScope.launch({
             val result = RxHttp.postForm(NetUrl.UPLOAD_URL)
-                .addPart(appContext, "apkFile", Uri.parse(filePath))
+                .addPart(me.hgj.mvvmhelper.base.appContext, "apkFile", Uri.parse(filePath))
                 .upload(this) {
                     //上传进度回调
                     uploadData.invoke(it)

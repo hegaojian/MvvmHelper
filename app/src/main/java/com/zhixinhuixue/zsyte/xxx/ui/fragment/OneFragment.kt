@@ -1,12 +1,9 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
-import android.view.View
 import com.gyf.immersionbar.ImmersionBar
-import com.zhixinhuixue.library.common.base.BaseDbFragment
-import com.zhixinhuixue.library.common.base.BaseVmFragment
+import me.hgj.mvvmhelper.base.BaseDbFragment
 import com.zhixinhuixue.library.common.ext.*
-import com.zhixinhuixue.library.net.error.msg
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
@@ -19,7 +16,7 @@ import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
  * 时间　: 2020/11/18
  * 描述　:
  */
-class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
+class OneFragment : me.hgj.mvvmhelper.base.BaseDbFragment<TestViewModel, FragmentOneBinding>() {
 
     var downloadApkPath = ""
 

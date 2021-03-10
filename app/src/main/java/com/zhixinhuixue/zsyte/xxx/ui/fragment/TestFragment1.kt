@@ -3,7 +3,7 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.zhixinhuixue.library.common.base.BaseDbFragment
+import me.hgj.mvvmhelper.base.BaseDbFragment
 import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.library.common.util.SpaceItemDecoration
 import com.zhixinhuixue.library.net.api.NetUrl
@@ -17,7 +17,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestFragment1 : BaseDbFragment<ListViewModel,ActivityListBinding>() {
+class TestFragment1 : me.hgj.mvvmhelper.base.BaseDbFragment<ListViewModel, ActivityListBinding>() {
 
     private val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
 

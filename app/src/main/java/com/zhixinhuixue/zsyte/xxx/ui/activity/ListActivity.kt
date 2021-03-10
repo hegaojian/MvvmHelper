@@ -2,10 +2,9 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.zhixinhuixue.library.common.base.BaseDbActivity
+import me.hgj.mvvmhelper.base.BaseDbActivity
 import com.zhixinhuixue.library.common.ext.*
-import com.zhixinhuixue.library.common.util.SpaceItemDecoration
-import com.zhixinhuixue.library.common.util.decoration.DividerOrientation
+import me.hgj.mvvmhelper.util.decoration.DividerOrientation
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.zsyte.xxx.R
@@ -18,7 +17,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
  * 时间　: 2020/11/4
  * 描述　:
  */
-class ListActivity: BaseDbActivity<ListViewModel,ActivityListBinding>() {
+class ListActivity: me.hgj.mvvmhelper.base.BaseDbActivity<ListViewModel, ActivityListBinding>() {
 
     private  val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
 

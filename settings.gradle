@@ -1,5 +1,6 @@
-rootProject.name='zxhx-xxx-android'
+rootProject.name='mvvmhelper'
 include ':app'
 include ':common'
 include ':net'
 include ':widget'
+include ':helper'

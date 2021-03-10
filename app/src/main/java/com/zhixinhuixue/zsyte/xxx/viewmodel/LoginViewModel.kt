@@ -1,9 +1,9 @@
 package com.zhixinhuixue.zsyte.xxx.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.zhixinhuixue.library.common.base.BaseViewModel
-import com.zhixinhuixue.library.common.core.databinding.BooleanObservableField
-import com.zhixinhuixue.library.common.core.databinding.StringObservableField
+import me.hgj.mvvmhelper.base.BaseViewModel
+import me.hgj.mvvmhelper.core.databinding.BooleanObservableField
+import me.hgj.mvvmhelper.core.databinding.StringObservableField
 import com.zhixinhuixue.library.common.ext.logA
 import com.zhixinhuixue.library.common.ext.rxHttpRequest
 import com.zhixinhuixue.library.net.api.NetUrl
@@ -19,7 +19,7 @@ import rxhttp.wrapper.param.toResponse
  * 时间　: 2020/11/3
  * 描述　:
  */
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel : me.hgj.mvvmhelper.base.BaseViewModel() {
 
     //账户名
     val userName = StringObservableField()

@@ -1,13 +1,10 @@
 package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import android.widget.CompoundButton
 import androidx.lifecycle.Observer
-import com.zhixinhuixue.library.common.base.BaseDbActivity
+import me.hgj.mvvmhelper.base.BaseDbActivity
 import com.zhixinhuixue.library.common.ext.getStringExt
-import com.zhixinhuixue.library.common.ext.initBack
-import com.zhixinhuixue.library.common.ext.showDialogMessage
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
@@ -20,7 +17,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel
  * 时间　: 2020/11/18
  * 描述　: 虽然在Activity代码少了，但是DataBinding 不太好用
  */
-class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
+class LoginActivity: me.hgj.mvvmhelper.base.BaseDbActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         //初始化toolbar

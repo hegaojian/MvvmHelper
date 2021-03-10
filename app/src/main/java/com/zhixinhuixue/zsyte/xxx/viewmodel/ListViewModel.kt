@@ -1,7 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.zhixinhuixue.library.common.base.BaseViewModel
+import me.hgj.mvvmhelper.base.BaseViewModel
 import com.zhixinhuixue.library.common.ext.rxHttpRequest
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
@@ -13,7 +13,7 @@ import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
  * 时间　: 2020/11/4
  * 描述　:
  */
-class ListViewModel : BaseViewModel() {
+class ListViewModel : me.hgj.mvvmhelper.base.BaseViewModel() {
 
     private var pageIndex = 1
 

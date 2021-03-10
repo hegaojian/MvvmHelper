@@ -1,7 +1,6 @@
 package com.zhixinhuixue.library.common.util
 
 import android.view.Gravity
-import com.chad.library.adapter.base.module.LoadMoreModuleConfig
 import com.effective.android.anchors.Project
 import com.effective.android.anchors.Task
 import com.effective.android.anchors.TaskCreator
@@ -14,12 +13,11 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
 import com.zhixinhuixue.library.common.BuildConfig
 import com.zhixinhuixue.library.common.R
-import com.zhixinhuixue.library.common.base.appContext
+import me.hgj.mvvmhelper.base.appContext
 import com.zhixinhuixue.library.common.ext.getColorExt
 import com.zhixinhuixue.library.common.ext.getDimensionExt
 import com.zhixinhuixue.library.common.ext.px2dp
-import com.zhixinhuixue.library.common.listener.KtxActivityLifecycleCallbacks
-import com.zhixinhuixue.library.common.loadmore.CustomLoadMoreView
+import me.hgj.mvvmhelper.util.KtxActivityLifecycleCallbacks
 import com.zhixinhuixue.library.common.net.NetHttpClient
 import com.zhixinhuixue.library.common.state.EmptyCallback
 import com.zhixinhuixue.library.common.state.ErrorCallback
@@ -113,9 +111,9 @@ class InitUtils : Task(TASK_ID, true) {
 
     override fun run(name: String) {
         //初始化Log打印
-        XLog.init(BuildConfig.DEBUG)
+        me.hgj.mvvmhelper.util.XLog.init(BuildConfig.DEBUG)
         //初始化MMKV
-        MMKV.initialize(appContext.filesDir.absolutePath + "/mmkv")
+        MMKV.initialize(me.hgj.mvvmhelper.base.appContext.filesDir.absolutePath + "/mmkv")
     }
 }
 
@@ -127,7 +125,7 @@ class InitToast : Task(TASK_ID, false) {
 
     override fun run(name: String) {
         //初始化吐司 这个吐司必须要主线程中初始化
-        ToastUtils.init(appContext)
+        ToastUtils.init(me.hgj.mvvmhelper.base.appContext)
         ToastUtils.setGravity(Gravity.BOTTOM, 0, px2dp(getDimensionExt(R.dimen.dp_100)))
     }
 }
@@ -139,7 +137,7 @@ class InitAppLifecycle : Task(TASK_ID, true) {
     }
     override fun run(name: String) {
         //注册全局的Activity生命周期管理
-        appContext.registerActivityLifecycleCallbacks(KtxActivityLifecycleCallbacks())
+        me.hgj.mvvmhelper.base.appContext.registerActivityLifecycleCallbacks(me.hgj.mvvmhelper.util.KtxActivityLifecycleCallbacks())
     }
 }
 

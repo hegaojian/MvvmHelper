@@ -10,7 +10,6 @@ import rxhttp.wrapper.parse.AbstractParser
 import rxhttp.wrapper.utils.convert
 import java.io.IOException
 import java.lang.reflect.Type
-import kotlin.jvm.Throws
 
 /**
  *
@@ -45,9 +44,19 @@ open class ResponseParser<T> : AbstractParser<T> {
     override fun onParse(response: okhttp3.Response): T {
         val type: Type = ParameterizedTypeImpl[ApiResponse::class.java, mType] //获取泛型类型
         val data: ApiResponse<T> = response.convert(type)
-        val t = data.data //获取data字段
+        var t = data.data //获取data字段
+
+        /*
+         * 考虑到有些时候服务端会返回：{"errorCode":0,"errorMsg":"关注成功"}  类似没有data的数据
+         * 此时code正确，但是data字段为空，直接返回data的话，会报空指针错误，
+         * 所以，判断泛型为 String 或者 Any 类型时，重新赋值，并确保赋值不为null
+        */
+        if (t == null && mType == String::class.java || t == null && mType == Any::class.java) {
+            t = "" as T
+        }
+
         val tData = t as? ApiPagerResponse<*>
-        if (tData !=null) {
+        if (tData != null) {
             //如果返回值值列表封装类，且是第一页并且空数据 那么给空异常 让界面显示空
             if (tData.isRefresh() && tData.isEmpty()) {
                 throw ParseException(NetConstant.EMPTY_CODE, data.errorMsg, response)

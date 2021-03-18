@@ -62,7 +62,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
         }
         initImmersionBar()
         findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
-        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!){
+        uiStatusManger = loadSirCallBackInit().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!){
             onLoadRetry()
         }
         findViewById<FrameLayout>(R.id.baseContentView).post {
@@ -119,30 +119,34 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     private fun initLoadingUiChange() {
         mViewModel.loadingChange.run {
             loading.observeInActivity(this@BaseVmActivity) {
-                if (it.loadingType == LoadingType.LOADING_DIALOG) {
-                    if (it.isShow) {
-                        showLoadingExt()
-                    } else {
-                        dismissLoadingExt()
+                //在这里接收到请求的loading回调 根据类型 做不同业务
+                when(it.loadingType){
+                    LoadingType.LOADING_DIALOG ->{
+                        //弹窗类型
+                        if (it.isShow) {
+                            showLoadingExt(it.loadingMessage)
+                        } else {
+                            dismissLoadingExt()
+                        }
                     }
-                    return@observeInActivity
-                }
-                if (it.loadingType == LoadingType.LOADING_CUSTOM) {
-                    if (it.isShow) {
-                        showCustomLoading(it)
-                    } else {
-                        dismissCustomLoading(it)
+                    LoadingType.LOADING_CUSTOM ->{
+                        //自定义 loading类型
+                        if (it.isShow) {
+                            showCustomLoading(it)
+                        } else {
+                            dismissCustomLoading(it)
+                        }
                     }
-                    return@observeInActivity
-                }
-                if(it.loadingType == LoadingType.LOADING_XML){
-                    if (it.isShow) {
-                        showLoadingUi()
+                    LoadingType.LOADING_XML ->{
+                        // 与界面绑定 空、错误、成功布局的请求类型
+                        if (it.isShow) {
+                            showLoadingUi()
+                        }
                     }
-                    return@observeInActivity
                 }
             }
             showEmpty.observeInActivity(this@BaseVmActivity) {
+                //分页列表数据请求 为空且第一页 让界面显示 空布局
                 onRequestEmpty(it)
             }
             showError.observeInActivity(this@BaseVmActivity) {
@@ -150,14 +154,10 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
-           /*     if(it.errorCode == 999){
-                    // 示例 退出所有的activity 跳转到 loginActivity
-                    ... 老板好，
-                    return@observeInActivity
-                }*/
                 onRequestError(it)
             }
             showSuccess.observeInActivity(this@BaseVmActivity) {
+                //如果请求成功 让界面显示 成功布局
                 showSuccessUi()
             }
         }
@@ -227,7 +227,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     }
 
     /**
-     * 显示自定义loading
+     * 显示自定义loading 可以根据 setting中的 requestCode 判断是哪个请求
      */
     override fun showCustomLoading(setting: LoadingDialogEntity) {
         showLoadingExt()
@@ -240,4 +240,17 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
         dismissLoadingExt()
     }
 
+
+    /**
+     * 初始化 LoadSir 可以传入该界面（Activity/Fragment）专属自定义 CallBack
+     * 如果不重写那么会使用 App全局注册的 CallBack 即 AppTaskFactory 中的注册界面状态管理
+     * 如果子类重写那么 如下调用  注意：initDefaultCallBackExt 拓展函数里面的注册的CallBack 请跟  AppTaskFactory注册的保持一致
+     * return initDefaultCallBackExt()
+     *          .addCallback(CustomCallBack())
+     *          .addCallback(XXXCallBack()).build()
+     * @return LoadSir
+     */
+    override fun loadSirCallBackInit(): LoadSir {
+        return LoadSir.getDefault()
+    }
 }

@@ -1,5 +1,6 @@
 package com.zhixinhuixue.library.common.base
 
+import com.kingja.loadsir.core.LoadSir
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 
@@ -9,8 +10,6 @@ import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
  * 描述　:
  */
 interface BaseIView {
-
-
 
     /**
      * 展示加载中界面
@@ -56,7 +55,7 @@ interface BaseIView {
     fun onLoadRetry()
 
     /**
-     * 显示自定义loading弹窗dialog
+     * 显示自定义loading弹窗dialog 可以根据 setting中的 requestCode 判断是哪个请求
      */
     fun showCustomLoading(setting:LoadingDialogEntity)
 
@@ -65,5 +64,15 @@ interface BaseIView {
      */
     fun dismissCustomLoading(setting:LoadingDialogEntity)
 
+    /**
+     * 初始化 LoadSir 可以传入该界面（Activity/Fragment）专属自定义 CallBack
+     * 如果不重写那么会使用 App全局注册的 CallBack 即 AppTaskFactory 中的注册界面状态管理
+     * 如果子类重写那么 这样调用  注意 initDefaultCallBackExt 拓展函数里面的注册的CallBack 请跟  AppTaskFactory注册的保持一致
+     * return initDefaultCallBackExt()
+     *          .addCallback(CustomCallBack())
+     *          .addCallback(XXXCallBack()).build()
+     * @return LoadSir
+     */
+    fun loadSirCallBackInit(): LoadSir
 
 }

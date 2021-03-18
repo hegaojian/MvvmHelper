@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.zhixinhuixue.library.common.base.BaseDbActivity
 import com.zhixinhuixue.library.common.ext.*
-import com.zhixinhuixue.library.common.util.SpaceItemDecoration
 import com.zhixinhuixue.library.common.util.decoration.DividerOrientation
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
@@ -43,7 +42,6 @@ class ListActivity: BaseDbActivity<ListViewModel,ActivityListBinding>() {
                 includeVisible = true
                 orientation = DividerOrientation.GRID
             }
-//            addItemDecoration(SpaceItemDecoration(8.dp, 8.dp))
             adapter = testAdapter
         }
         //发起请求
@@ -79,5 +77,4 @@ class ListActivity: BaseDbActivity<ListViewModel,ActivityListBinding>() {
     override fun onLoadRetry() {
         mViewModel.getList(isRefresh = true, loadingXml = true)
     }
-
 }

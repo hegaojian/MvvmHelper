@@ -50,7 +50,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
             dataBindView
         }
         return if (getLoadingView() == null) {
-            uiStatusManger = LoadSir.getDefault().register(rootView) {
+            uiStatusManger = loadSirCallBackInit().register(rootView) {
                 onLoadRetry()
             }
             container?.removeView(uiStatusManger.loadLayout)
@@ -77,7 +77,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
 
     private fun initStatusView(view: View, savedInstanceState: Bundle?) {
         getLoadingView()?.let {
-            uiStatusManger = LoadSir.getDefault().register(it) {
+            uiStatusManger = loadSirCallBackInit().register(it) {
                 onLoadRetry()
             }
         }
@@ -144,27 +144,30 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
     private fun initLoadingUiChange() {
         mViewModel.loadingChange.run {
             loading.observeInFragment(this@BaseVmFragment) {
-                if (it.loadingType == LoadingType.LOADING_DIALOG) {
-                    if (it.isShow) {
-                        showLoadingExt()
-                    } else {
-                        dismissLoadingExt()
+                //在这里接收到请求的loading回调 根据类型 做不同业务
+                when(it.loadingType) {
+                    LoadingType.LOADING_DIALOG -> {
+                        //弹窗类型
+                        if (it.isShow) {
+                            showLoadingExt(it.loadingMessage)
+                        } else {
+                            dismissLoadingExt()
+                        }
                     }
-                    return@observeInFragment
-                }
-                if (it.loadingType == LoadingType.LOADING_CUSTOM) {
-                    if (it.isShow) {
-                        showCustomLoading(it)
-                    } else {
-                        dismissCustomLoading(it)
+                    LoadingType.LOADING_CUSTOM -> {
+                        //自定义 loading类型
+                        if (it.isShow) {
+                            showCustomLoading(it)
+                        } else {
+                            dismissCustomLoading(it)
+                        }
                     }
-                    return@observeInFragment
-                }
-                if (it.loadingType == LoadingType.LOADING_XML) {
-                    if (it.isShow) {
-                        showLoadingUi()
+                    LoadingType.LOADING_XML -> {
+                        // 与界面绑定 空、错误、成功布局的请求类型
+                        if (it.isShow) {
+                            showLoadingUi()
+                        }
                     }
-                    return@observeInFragment
                 }
             }
             showEmpty.observeInFragment(this@BaseVmFragment) {
@@ -240,7 +243,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
     }
 
     /**
-     * 显示自定义loading
+     * 显示自定义loading 可以根据 setting中的 requestCode 判断是哪个请求
      */
     override fun showCustomLoading(setting: LoadingDialogEntity) {
         showLoadingExt(setting.loadingMessage)
@@ -251,5 +254,18 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
      */
     override fun dismissCustomLoading(setting: LoadingDialogEntity) {
         dismissLoadingExt()
+    }
+
+    /**
+     * 初始化 LoadSir 可以传入该界面（Activity/Fragment）专属自定义 CallBack
+     * 如果不重写那么会使用 App全局注册的 CallBack 即 AppTaskFactory 中的注册界面状态管理
+     * 如果子类重写那么 这样调用  注意 initDefaultCallBackExt 拓展函数里面的注册的CallBack 请跟  AppTaskFactory注册的保持一致
+     * return initDefaultCallBackExt()
+     *          .addCallback(CustomCallBack())
+     *          .addCallback(XXXCallBack()).build()
+     * @return LoadSir
+     */
+    override fun loadSirCallBackInit(): LoadSir {
+        return LoadSir.getDefault()
     }
 }

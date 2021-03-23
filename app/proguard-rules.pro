@@ -82,6 +82,8 @@
 -dontwarn com.kingja.loadsir.**
 -keep class com.kingja.loadsir.** {*;}
 
+# DataBinding反射混淆，必加，包名请换成自己的
+-keep class com.zhixinhuixue.zsyte.xxx.databinding.** { *; }
 
 -keepattributes *Annotation*
 -keep class **.*_SnakeProxy

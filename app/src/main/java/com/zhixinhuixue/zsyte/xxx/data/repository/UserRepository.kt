@@ -5,6 +5,7 @@ import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
 import rxhttp.IAwait
 import rxhttp.toDownload
+import rxhttp.wrapper.cahce.CacheMode
 import rxhttp.wrapper.param.RxHttp
 import rxhttp.wrapper.param.toResponse
 

@@ -118,10 +118,15 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
      */
     private fun onVisible() {
         if (lifecycle.currentState == Lifecycle.State.STARTED && isFirst) {
-            view?.post {
+            isFirst = false
+            //这里要等待一下 view加载完成后才能执行lazyLoadData方法，因为不等待的话 lazyLoadData懒加载方法会比initView先执行
+            view.notNull({
+                it.post {
+                    lazyLoadData()
+                }
+            },{
                 lazyLoadData()
-                isFirst = false
-            }
+            })
         }
     }
 

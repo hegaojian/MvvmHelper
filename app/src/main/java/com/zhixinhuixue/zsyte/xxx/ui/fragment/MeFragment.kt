@@ -5,7 +5,7 @@ import com.gyf.immersionbar.ImmersionBar
 import com.zhixinhuixue.library.common.base.BaseDbFragment
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentFourBinding
-import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 
 /**
  * 作者　: hegaojian

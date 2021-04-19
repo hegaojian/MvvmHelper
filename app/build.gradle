@@ -14,6 +14,7 @@ android {
         targetSdkVersion targetsdk_version as int
         versionCode version_code as int
         versionName version_name
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -54,4 +55,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common')
+
 }

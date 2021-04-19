@@ -5,7 +5,7 @@ import com.zhixinhuixue.library.common.base.BaseDbActivity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityMainBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.MainAdapter
-import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 
 /**
  * 作者　: hegaojian

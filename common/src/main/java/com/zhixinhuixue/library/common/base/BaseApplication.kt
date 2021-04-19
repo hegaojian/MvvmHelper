@@ -1,9 +1,11 @@
 package com.zhixinhuixue.library.common.base
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.multidex.MultiDex
 import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.Project
 import com.zhixinhuixue.library.common.BuildConfig
@@ -48,6 +50,11 @@ open class BaseApplication : Application(), ViewModelStoreOwner{
             // 其他进程初始化
             processName?.let { onOtherProcessInit(it) }
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     open fun onMainProcessInit() {

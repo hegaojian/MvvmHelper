@@ -6,7 +6,7 @@ import com.zhixinhuixue.library.common.base.BaseDbFragment
 import com.zhixinhuixue.library.common.ext.getColorExt
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentThreeBinding
-import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 
 /**
  * 作者　: hegaojian

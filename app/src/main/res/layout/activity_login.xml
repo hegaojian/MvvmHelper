@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel" />
+            type="com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel" />
 
         <variable
             name="view"

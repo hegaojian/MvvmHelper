@@ -1,4 +1,4 @@
-package com.zhixinhuixue.zsyte.xxx.viewmodel
+package com.zhixinhuixue.zsyte.xxx.ui.viewmodel
 
 import android.net.Uri
 import androidx.lifecycle.rxLifeScope

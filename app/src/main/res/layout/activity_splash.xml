@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/splashImage"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        tools:ignore="MissingPrefix"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/sanshang_teacher"
-        android:scaleType="fitXY"
-        />
-</LinearLayout>
+        android:layout_height="match_parent">
+        
+        <com.zhpan.bannerview.BannerViewPager
+            android:id="@+id/splash_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bvp_auto_play="false"
+            app:bvp_can_loop="false"
+            app:bvp_indicator_checked_color="@color/colorGray"
+            app:bvp_indicator_gravity="center"
+            app:bvp_indicator_normal_color="@color/colorWhite"
+            app:bvp_indicator_slide_mode="worm"
+            app:bvp_indicator_style="circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/splash_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="72dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp"
+            android:text="立即进入"
+            android:textColor="@color/colorWhite"
+            android:visibility="gone"
+            app:bl_corners_radius="8dp"
+            app:bl_solid_color="@color/colorRed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/splash_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sanshang_teacher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="fitXY" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

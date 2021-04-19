@@ -41,6 +41,7 @@ dependencies {
     api "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     api "androidx.viewpager2:viewpager2:$viewpager_version"
     api "com.google.android.material:material:$material_version"
+    api "com.android.support:multidex:$multidex_version"
     // 协程基础库
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
@@ -80,5 +81,7 @@ dependencies {
     api "com.lxj:xpopup:$xopou_version"
     //管理界面状态
     api "com.kingja.loadsir:loadsir:$loadsir_version"
+    //banner
+    api "com.github.zhpanvip:BannerViewPager:$banner_version"
 
 }

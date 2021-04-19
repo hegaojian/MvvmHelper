@@ -1,4 +1,4 @@
-package com.zhixinhuixue.zsyte.xxx.viewmodel
+package com.zhixinhuixue.zsyte.xxx.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.zhixinhuixue.library.common.base.BaseViewModel

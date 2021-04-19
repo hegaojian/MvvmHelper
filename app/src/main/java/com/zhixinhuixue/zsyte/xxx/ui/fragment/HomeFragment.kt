@@ -1,16 +1,14 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
-import android.view.View
 import com.gyf.immersionbar.ImmersionBar
 import com.zhixinhuixue.library.common.base.BaseDbFragment
-import com.zhixinhuixue.library.common.base.BaseVmFragment
 import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.library.net.error.msg
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
-import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 import com.zhixinhuixue.zsyte.xxx.ui.activity.ListActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
 

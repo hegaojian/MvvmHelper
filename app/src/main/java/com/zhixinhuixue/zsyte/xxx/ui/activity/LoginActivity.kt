@@ -10,12 +10,12 @@ import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
-import com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel
 
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/18
- * 描述　: 虽然在Activity代码少了，但是DataBinding 不太好用
+ * 描述　: 虽然在Activity代码少了，但是DataBinding 用得不太爽
  */
 class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
 

@@ -10,7 +10,7 @@ import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
-import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.ListViewModel
 
 /**
  * 作者　: hegaojian

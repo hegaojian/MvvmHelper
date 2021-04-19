@@ -15,6 +15,7 @@ import com.tencent.mmkv.MMKV
 import com.zhixinhuixue.library.common.BuildConfig
 import com.zhixinhuixue.library.common.R
 import com.zhixinhuixue.library.common.base.appContext
+import com.zhixinhuixue.library.common.ext.dp
 import com.zhixinhuixue.library.common.ext.getColorExt
 import com.zhixinhuixue.library.common.ext.getDimensionExt
 import com.zhixinhuixue.library.common.ext.px2dp
@@ -50,13 +51,15 @@ class InitDefault : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "0"
     }
-
     override fun run(name: String) {
 
     }
 }
 
-//初始化网络
+
+/**
+ * 初始化网络
+ */
 class InitNetWork : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "1"
@@ -128,7 +131,7 @@ class InitToast : Task(TASK_ID, false) {
     override fun run(name: String) {
         //初始化吐司 这个吐司必须要主线程中初始化
         ToastUtils.init(appContext)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, px2dp(getDimensionExt(R.dimen.dp_100)))
+        ToastUtils.setGravity(Gravity.BOTTOM, 0, 100.dp)
     }
 }
 

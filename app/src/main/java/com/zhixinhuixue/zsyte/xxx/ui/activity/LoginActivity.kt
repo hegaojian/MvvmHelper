@@ -1,16 +1,13 @@
 package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import android.widget.CompoundButton
-import androidx.lifecycle.Observer
 import com.zhixinhuixue.library.common.base.BaseDbActivity
 import com.zhixinhuixue.library.common.ext.getStringExt
 import com.zhixinhuixue.library.common.ext.initBack
 import com.zhixinhuixue.library.common.ext.showDialogMessage
 import com.zhixinhuixue.library.net.api.NetUrl
 import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
-import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
 import com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel
@@ -36,7 +33,7 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
      */
     override fun onRequestSuccess() {
         //监听登录结果
-        mViewModel.loginData.observe(this, Observer {
+        mViewModel.loginData.observe(this, {
             //做保存信息等操作
             finish()
         })
@@ -73,19 +70,4 @@ class LoginActivity: BaseDbActivity<LoginViewModel,ActivityLoginBinding>() {
                 mViewModel.isShowPwd.set(isChecked)
             }
     }
-
-    override fun showCustomLoading(setting: LoadingDialogEntity) {
-        if(setting.requestCode== NetUrl.LOGIN){
-            //可以根据不同的code 做不同的loading处理
-            showLoadingUi()
-        }
-    }
-
-    override fun dismissCustomLoading(setting: LoadingDialogEntity) {
-        if(setting.requestCode==NetUrl.LOGIN){
-            //可以根据不同的code 做不同的loading处理
-            showSuccessUi()
-        }
-    }
-
 }

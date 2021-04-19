@@ -16,6 +16,7 @@ class MainActivity : BaseDbActivity<TestViewModel,ActivityMainBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar.setCenterTitle(R.string.bottom_title_read)
+
         mDataBind.mainViewPager.adapter = MainAdapter(this)
         mDataBind.mainViewPager.offscreenPageLimit = mDataBind.mainViewPager.adapter!!.itemCount
         mDataBind.mainViewPager.isUserInputEnabled = false

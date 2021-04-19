@@ -19,6 +19,7 @@ import com.zhixinhuixue.library.common.util.*
 
 //全局上下文
 val appContext: BaseApplication by lazy { BaseApplication.instance }
+
 //界面通信ViewModel
 val eventViewModel: EventViewModel by lazy { BaseApplication.eventInstance }
 

@@ -17,7 +17,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestFragment1 : BaseDbFragment<ListViewModel,ActivityListBinding>() {
+class ListFragment : BaseDbFragment<ListViewModel,ActivityListBinding>() {
 
     private val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
 

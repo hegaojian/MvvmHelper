@@ -69,7 +69,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
         super.onViewCreated(view, savedInstanceState)
         mViewModel = createViewModel()
         initStatusView(view, savedInstanceState)
-        initLoadingUiChange()
+        initLoadingUiChange(mViewModel)
         initObserver()
         onRequestSuccess()
         onBindViewClick()
@@ -146,8 +146,8 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseFragment(), BaseIView {
     /**
      * 注册 UI 事件
      */
-    private fun initLoadingUiChange() {
-        mViewModel.loadingChange.run {
+    fun initLoadingUiChange(viewModel: BaseViewModel) {
+        viewModel.loadingChange.run {
             loading.observeInFragment(this@BaseVmFragment) {
                 //在这里接收到请求的loading回调 根据类型 做不同业务
                 when(it.loadingType) {

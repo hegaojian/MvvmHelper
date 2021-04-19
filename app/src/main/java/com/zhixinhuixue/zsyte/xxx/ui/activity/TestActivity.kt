@@ -7,7 +7,7 @@ import com.zhixinhuixue.library.common.base.BaseDbActivity
 import com.zhixinhuixue.library.common.base.BaseViewModel
 import com.zhixinhuixue.library.common.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityTestBinding
-import com.zhixinhuixue.zsyte.xxx.ui.fragment.TestFragment1
+import com.zhixinhuixue.zsyte.xxx.ui.fragment.ListFragment
 
 /**
  * 作者　: hegaojian
@@ -25,7 +25,7 @@ class TestActivity : BaseDbActivity<BaseViewModel,ActivityTestBinding>() {
         mDataBind.testViewPager.adapter = object :
             FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getItem(position: Int): Fragment {
-                return TestFragment1()
+                return ListFragment()
             }
 
             override fun getCount(): Int {

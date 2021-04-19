@@ -1,6 +1,5 @@
 package com.zhixinhuixue.library.common.base
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import com.noober.background.BackgroundLibrary
 import com.zhixinhuixue.library.common.R
 import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.library.common.state.EmptyCallback
@@ -44,7 +42,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
         //初始化 status View
         initStatusView(savedInstanceState)
         //注册界面响应事件
-        initLoadingUiChange()
+        initLoadingUiChange(mViewModel)
         //初始化绑定observer
         initObserver()
         //初始化请求成功方法
@@ -114,10 +112,11 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     open fun onBindViewClick() {}
 
     /**
-     * 注册 UI 事件
+     * 将传入的ViewModel注册 UI 事件
+     * @param viewModel BaseViewModel
      */
-    private fun initLoadingUiChange() {
-        mViewModel.loadingChange.run {
+    fun initLoadingUiChange(viewModel:BaseViewModel) {
+        viewModel.loadingChange.run {
             loading.observeInActivity(this@BaseVmActivity) {
                 //在这里接收到请求的loading回调 根据类型 做不同业务
                 when(it.loadingType){
@@ -239,7 +238,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity(), BaseIView {
     override fun dismissCustomLoading(setting:LoadingDialogEntity) {
         dismissLoadingExt()
     }
-
 
     /**
      * 初始化 LoadSir 可以传入该界面（Activity/Fragment）专属自定义 CallBack

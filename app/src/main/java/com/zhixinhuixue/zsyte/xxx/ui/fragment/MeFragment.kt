@@ -12,7 +12,7 @@ import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
  * 时间　: 2020/11/18
  * 描述　:
  */
-class FourFragment : BaseDbFragment<TestViewModel,FragmentFourBinding>() {
+class MeFragment : BaseDbFragment<TestViewModel,FragmentFourBinding>() {
 
     override val layoutId: Int get() = R.layout.fragment_four
 

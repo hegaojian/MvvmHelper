@@ -11,7 +11,7 @@ import com.zhixinhuixue.library.weight.R
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/17
- * 描述　: 没封装啥，就特么加了一个toolbar 然后中间放了一个文字(因为傻逼UI都要求标题放中间) 有其他的需求后期再加
+ * 描述　: 没封装啥，就特么加了一个toolbar 然后中间放了一个文字 有其他的需求后期再加
  */
 class CustomToolBar : FrameLayout {
 

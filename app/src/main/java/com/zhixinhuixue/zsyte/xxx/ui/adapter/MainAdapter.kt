@@ -3,14 +3,11 @@ package com.zhixinhuixue.zsyte.xxx.ui.adapter
 import android.util.SparseArray
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.zhixinhuixue.zsyte.xxx.ui.fragment.FourFragment
-import com.zhixinhuixue.zsyte.xxx.ui.fragment.OneFragment
-import com.zhixinhuixue.zsyte.xxx.ui.fragment.ThreeFragment
-import com.zhixinhuixue.zsyte.xxx.ui.fragment.TwoFragment
-import java.util.*
+import com.zhixinhuixue.zsyte.xxx.ui.fragment.MeFragment
+import com.zhixinhuixue.zsyte.xxx.ui.fragment.HomeFragment
+import com.zhixinhuixue.zsyte.xxx.ui.fragment.ReportFragment
+import com.zhixinhuixue.zsyte.xxx.ui.fragment.GroupFragment
 
 /**
  * @Author: cock
@@ -29,10 +26,10 @@ class MainAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     private val fragments: SparseArray<Fragment> = SparseArray()
 
     init {
-        fragments.put(PAGE_ONE, OneFragment())
-        fragments.put(PAGE_TWO, TwoFragment())
-        fragments.put(PAGE_THREE, ThreeFragment())
-        fragments.put(PAGE_FOUR, FourFragment())
+        fragments.put(PAGE_ONE, HomeFragment())
+        fragments.put(PAGE_TWO, GroupFragment())
+        fragments.put(PAGE_THREE, ReportFragment())
+        fragments.put(PAGE_FOUR, MeFragment())
     }
 
     override fun createFragment(position: Int): Fragment {

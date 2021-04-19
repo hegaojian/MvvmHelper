@@ -19,7 +19,7 @@ import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
  * 时间　: 2020/11/18
  * 描述　:
  */
-class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
+class HomeFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
 
     var downloadApkPath = ""
 

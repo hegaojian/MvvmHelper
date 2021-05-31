@@ -28,13 +28,15 @@ fun setOnclickNoRepeat(vararg views: View?, interval: Long = 500, onClick: (View
  * @param action 执行方法
  */
 var lastClickTime = 0L
+var lastViewId = Int.MAX_VALUE
 fun View.clickNoRepeat(interval: Long = 500, action: (view: View) -> Unit) {
     setOnClickListener {
         val currentTime = System.currentTimeMillis()
-        if (lastClickTime != 0L && (currentTime - lastClickTime < interval)) {
+        if (lastClickTime != 0L && (currentTime - lastClickTime < interval && it.id == lastViewId)) {
             return@setOnClickListener
         }
         lastClickTime = currentTime
+        lastViewId = it.id
         action.invoke(it)
     }
 }

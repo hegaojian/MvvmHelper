@@ -17,9 +17,14 @@ class MeFragment : BaseDbFragment<TestViewModel,FragmentFourBinding>() {
     override val layoutId: Int get() = R.layout.fragment_four
 
     override fun initView(savedInstanceState: Bundle?) {
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
         //沉浸式
         ImmersionBar.with(this).titleBar(mDataBind.userHeadImg).init()
     }
-
 
 }

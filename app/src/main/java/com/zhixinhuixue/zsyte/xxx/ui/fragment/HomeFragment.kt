@@ -19,11 +19,15 @@ import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
  */
 class HomeFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
 
-    var downloadApkPath = ""
+    private var downloadApkPath = ""
 
     override fun initView(savedInstanceState: Bundle?) {
         mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
         mDataBind.customToolbar.setBackgroundColor(getColorExt(R.color.colorPrimary))
+    }
+
+    override fun onResume() {
+        super.onResume()
         ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
     }
 

@@ -23,4 +23,8 @@ class ReportFragment : BaseDbFragment<TestViewModel,FragmentThreeBinding>() {
         ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
+    }
 }

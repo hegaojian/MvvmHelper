@@ -13,12 +13,16 @@ import com.zhixinhuixue.zsyte.xxx.databinding.FragmentTwoBinding
  * 时间　: 2020/11/18
  * 描述　:
  */
-class GroupFragment : BaseDbFragment<BaseViewModel,FragmentTwoBinding>() {
+class GroupFragment : BaseDbFragment<BaseViewModel, FragmentTwoBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_paper)
         mDataBind.customToolbar.setBackgroundColor(getColorExt(R.color.colorRed))
-        ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
+
     }
 
+    override fun onResume() {
+        super.onResume()
+        ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
+    }
 }

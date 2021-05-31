@@ -48,6 +48,8 @@ fun <T> BaseQuickAdapter<T,*>.loadListSuccess(baseListNetEntity: ApiPagerRespons
     //乳沟还有下一页数据 那么设置 smartRefreshLayout 还可以加载更多数据
     if(baseListNetEntity.hasMore()){
         smartRefreshLayout.finishLoadMore()
+        //这个代码要设置一下，不然会出现 第一次请求设置了没有更多数据，再刷新请求时，有第二页的数据时，但是无法加载更多的bug
+        smartRefreshLayout.setNoMoreData(false)
     }else{
         //乳沟没有更多数据了，设置 smartRefreshLayout 加载完毕 没有更多数据
         smartRefreshLayout.finishLoadMoreWithNoMoreData()

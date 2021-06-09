@@ -10,7 +10,6 @@ import com.kingja.loadsir.core.LoadSir
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.tencent.mmkv.MMKV
 import com.zhixinhuixue.library.common.ext.dp
 import com.zhixinhuixue.zsyte.xxx.BuildConfig
 import com.zhixinhuixue.zsyte.xxx.R
@@ -111,8 +110,6 @@ class InitUtils : Task(TASK_ID, true) {
     override fun run(name: String) {
         //初始化Log打印
         XLog.init(BuildConfig.DEBUG)
-        //初始化MMKV
-        MMKV.initialize(appContext.filesDir.absolutePath + "/mmkv")
     }
 }
 

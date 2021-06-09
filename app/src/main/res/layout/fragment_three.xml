@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <me.hgj.mvvmhelper.widget.toolbar.CustomToolBar
+        <com.zhixinhuixue.zsyte.xxx.app.widget.CustomToolBar
             android:id="@+id/customToolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -22,7 +22,7 @@
         <View
             android:id="@+id/contentView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp.200"
+            android:layout_height="@dimen/dp.100"
             android:background="@color/colorRed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

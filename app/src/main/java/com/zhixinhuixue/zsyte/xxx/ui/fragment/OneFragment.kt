@@ -2,14 +2,13 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
-import me.hgj.mvvmhelper.base.BaseDbFragment
-import com.zhixinhuixue.library.common.ext.*
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
-import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 import com.zhixinhuixue.zsyte.xxx.ui.activity.ListActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
+import me.hgj.mvvmhelper.ext.*
 
 /**
  * 作者　: hegaojian
@@ -18,11 +17,11 @@ import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
  */
 class OneFragment : me.hgj.mvvmhelper.base.BaseDbFragment<TestViewModel, FragmentOneBinding>() {
 
-    var downloadApkPath = ""
+    private var downloadApkPath = ""
 
     override fun initView(savedInstanceState: Bundle?) {
         mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
-        mDataBind.customToolbar.setBackgroundColor(getColorExt(R.color.colorPrimary))
+        mDataBind.customToolbar.setBackgroundResource(R.color.colorPrimary)
         ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
     }
 

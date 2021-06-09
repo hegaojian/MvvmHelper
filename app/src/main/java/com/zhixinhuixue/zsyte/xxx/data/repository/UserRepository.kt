@@ -1,10 +1,9 @@
 package com.zhixinhuixue.zsyte.xxx.data.repository
 
-import com.zhixinhuixue.library.net.api.NetUrl
-import com.zhixinhuixue.library.net.entity.base.ApiPagerResponse
+import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
+import com.zhixinhuixue.zsyte.xxx.data.response.ApiPagerResponse
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
 import rxhttp.IAwait
-import rxhttp.toDownload
 import rxhttp.wrapper.param.RxHttp
 import rxhttp.wrapper.param.toResponse
 

@@ -2,22 +2,24 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import me.hgj.mvvmhelper.base.BaseDbActivity
-import com.zhixinhuixue.library.common.ext.*
-import me.hgj.mvvmhelper.util.decoration.DividerOrientation
-import com.zhixinhuixue.library.net.api.NetUrl
-import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
+import com.zhixinhuixue.library.common.ext.dp
 import com.zhixinhuixue.zsyte.xxx.R
+import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
+import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
+import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
-import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.ListViewModel
+import me.hgj.mvvmhelper.ext.*
+import me.hgj.mvvmhelper.net.LoadStatusEntity
+import me.hgj.mvvmhelper.util.decoration.DividerOrientation
 
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/4
  * 描述　:
  */
-class ListActivity: me.hgj.mvvmhelper.base.BaseDbActivity<ListViewModel, ActivityListBinding>() {
+class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
 
     private  val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
 
@@ -42,7 +44,6 @@ class ListActivity: me.hgj.mvvmhelper.base.BaseDbActivity<ListViewModel, Activit
                 includeVisible = true
                 orientation = DividerOrientation.GRID
             }
-//            addItemDecoration(SpaceItemDecoration(8.dp, 8.dp))
             adapter = testAdapter
         }
         //发起请求
@@ -67,7 +68,7 @@ class ListActivity: me.hgj.mvvmhelper.base.BaseDbActivity<ListViewModel, Activit
         when (loadStatus.requestCode) {
             NetUrl.HOME_LIST -> {
                 //列表数据请求失败
-                testAdapter.loadListError(loadStatus,uiStatusManger,mDataBind.listSmartRefresh)
+                testAdapter.loadListError(loadStatus,mDataBind.listSmartRefresh)
             }
         }
     }

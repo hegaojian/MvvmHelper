@@ -5,7 +5,7 @@ import me.hgj.mvvmhelper.R
 
 /**
  * 作者　: hegaojian
- * 时间　: 2020/12/14
+ * 时间　: 2021/6/8
  * 描述　:
  */
 class BaseErrorCallback : Callback() {

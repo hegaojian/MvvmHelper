@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/helperColorBlack80"
+    app:cardCornerRadius="@dimen/helper.dp.4"
+    app:cardElevation="@dimen/helper.dp.0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/helper.dp.64"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/helper.dp.24"
+            android:layout_height="@dimen/helper.dp.24"
+            android:layout_marginStart="@dimen/helper.dp.12"
+            android:layout_marginEnd="@dimen/helper.dp.12"
+            android:indeterminateTint="@color/helperColorWhite"
+            android:indeterminateTintMode="src_atop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loading_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/helper.dp.12"
+            android:gravity="center"
+            android:text="@string/helper_loading_tip"
+            android:textColor="@color/helperColorWhite"
+            android:textSize="@dimen/helper.dp.13" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

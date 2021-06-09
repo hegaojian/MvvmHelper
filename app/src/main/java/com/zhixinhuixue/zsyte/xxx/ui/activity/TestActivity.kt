@@ -3,7 +3,8 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import me.hgj.mvvmhelper.base.BaseDbActivity
+import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
+import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
 import me.hgj.mvvmhelper.base.BaseViewModel
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityTestBinding
 import com.zhixinhuixue.zsyte.xxx.ui.fragment.TestFragment1
@@ -13,7 +14,7 @@ import com.zhixinhuixue.zsyte.xxx.ui.fragment.TestFragment1
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestActivity : me.hgj.mvvmhelper.base.BaseDbActivity<me.hgj.mvvmhelper.base.BaseViewModel, ActivityTestBinding>() {
+class TestActivity : BaseActivity<BaseViewModel, ActivityTestBinding>() {
 
     private val titles = arrayOf("页面1", "页面2", "页面3")
     

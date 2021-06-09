@@ -1,5 +1,6 @@
 package me.hgj.mvvmhelper.ext
 
+import com.hjq.toast.ToastUtils
 import me.hgj.mvvmhelper.util.XLog
 
 
@@ -26,3 +27,7 @@ fun String?.logXml(tag: String? = null) =
 
 fun String?.logJson(tag: String? = null) =
     XLog.logXmlOrJson(XLog.JSON, tag, XLog.STACK_TRACE_INDEX_7, this)
+
+fun String?.toast(){
+    ToastUtils.show(this)
+}

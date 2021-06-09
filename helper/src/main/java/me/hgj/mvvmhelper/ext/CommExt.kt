@@ -1,4 +1,4 @@
-package com.zhixinhuixue.library.common.ext
+package me.hgj.mvvmhelper.ext
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -15,9 +15,9 @@ import android.widget.EditText
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.hjq.toast.ToastUtils
 import me.hgj.mvvmhelper.base.appContext
-import com.zhixinhuixue.library.common.util.GsonUtils
 
 /**
  * 作者　: hegaojian
@@ -26,10 +26,10 @@ import com.zhixinhuixue.library.common.util.GsonUtils
  */
 
 fun Any?.toJsonStr(): String {
-    return GsonUtils.toJson(this)
+    return Gson().toJsonStr()
 }
 
-fun Any?.toast(){
+fun Any?.toast() {
     ToastUtils.show(this)
 }
 
@@ -37,7 +37,7 @@ fun Any?.toast(){
  * 关闭键盘
  */
 fun EditText.hideKeyboard() {
-    val imm = me.hgj.mvvmhelper.base.appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val imm = appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(
         this.windowToken,
         InputMethodManager.HIDE_IMPLICIT_ONLY
@@ -54,7 +54,7 @@ fun EditText.openKeyboard() {
         requestFocus()
     }
     val inputManager =
-        me.hgj.mvvmhelper.base.appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputManager.showSoftInput(this, 0)
 }
 
@@ -71,26 +71,26 @@ fun Activity.hideOffKeyboard() {
 }
 
 fun toStartActivity(@NonNull clz: Class<*>) {
-    val intent = Intent(me.hgj.mvvmhelper.base.appContext, clz)
+    val intent = Intent(appContext, clz)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-    me.hgj.mvvmhelper.base.appContext.startActivity(intent)
+    appContext.startActivity(intent)
 }
 
 fun toStartActivity(@NonNull clz: Class<*>, @NonNull bundle: Bundle) {
-    val intent = Intent(me.hgj.mvvmhelper.base.appContext, clz)
+    val intent = Intent(appContext, clz)
     intent.apply {
         putExtras(bundle)
         flags = Intent.FLAG_ACTIVITY_NEW_TASK
     }
-    me.hgj.mvvmhelper.base.appContext.startActivity(intent)
+    appContext.startActivity(intent)
 }
 
 fun toStartActivity(activity: Activity, @NonNull clz: Class<*>, code: Int, @NonNull bundle: Bundle) {
-    activity.startActivityForResult(Intent(me.hgj.mvvmhelper.base.appContext, clz).putExtras(bundle), code)
+    activity.startActivityForResult(Intent(appContext, clz).putExtras(bundle), code)
 }
 
 fun toStartActivity(fragment: Fragment, @NonNull clz: Class<*>, code: Int, @NonNull bundle: Bundle) {
-    fragment.startActivityForResult(Intent(me.hgj.mvvmhelper.base.appContext, clz).putExtras(bundle), code)
+    fragment.startActivityForResult(Intent(appContext, clz).putExtras(bundle), code)
 }
 
 fun toStartActivity(activity: Activity, @NonNull intent: Intent, code: Int) {
@@ -134,11 +134,11 @@ fun isLandscape(context: Context) =
  */
 fun gotoStore() {
     val uri =
-        Uri.parse("market://details?id=" + me.hgj.mvvmhelper.base.appContext.packageName)
+        Uri.parse("market://details?id=" + appContext.packageName)
     val goToMarket = Intent(Intent.ACTION_VIEW, uri)
     try {
         goToMarket.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        me.hgj.mvvmhelper.base.appContext.startActivity(goToMarket)
+        appContext.startActivity(goToMarket)
     } catch (ignored: ActivityNotFoundException) {
     }
 }
@@ -158,16 +158,16 @@ fun isEqualStr(value: String?, defaultValue: String?) =
  */
 fun isEqualIntExt(value: Int, defaultValue: Int) = value == defaultValue
 
-fun getDrawableExt(id: Int): Drawable? = ContextCompat.getDrawable(me.hgj.mvvmhelper.base.appContext, id)
+fun getDrawableExt(id: Int): Drawable? = ContextCompat.getDrawable(appContext, id)
 
-fun getColorExt(id: Int): Int = ContextCompat.getColor(me.hgj.mvvmhelper.base.appContext, id)
+fun getColorExt(id: Int): Int = ContextCompat.getColor(appContext, id)
 
-fun getStringExt(id: Int) = me.hgj.mvvmhelper.base.appContext.resources.getString(id)
+fun getStringExt(id: Int) = appContext.resources.getString(id)
 
-fun getStringArrayExt(id: Int): Array<String> = me.hgj.mvvmhelper.base.appContext.resources.getStringArray(id)
+fun getStringArrayExt(id: Int): Array<String> = appContext.resources.getStringArray(id)
 
-fun getIntArrayExt(id: Int) = me.hgj.mvvmhelper.base.appContext.resources.getIntArray(id)
+fun getIntArrayExt(id: Int) = appContext.resources.getIntArray(id)
 
-fun getDimensionExt(id: Int) = me.hgj.mvvmhelper.base.appContext.resources.getDimension(id)
+fun getDimensionExt(id: Int) = appContext.resources.getDimension(id)
 
 

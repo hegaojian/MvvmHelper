@@ -20,7 +20,7 @@ import me.hgj.mvvmhelper.base.appContext
 /**
  * 像素密度
  */
-fun getDisplayMetrics() = me.hgj.mvvmhelper.base.appContext.resources.displayMetrics.density
+fun getDisplayMetrics() = appContext.resources.displayMetrics.density
 
 /**
  * dp 转成为 px
@@ -29,13 +29,13 @@ fun dp2px(dpValue: Float): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         dpValue,
-        me.hgj.mvvmhelper.base.appContext.resources.displayMetrics
+        appContext.resources.displayMetrics
     ).toInt()
 }
 
-val Float.dp get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,this, me.hgj.mvvmhelper.base.appContext.resources.displayMetrics)
+val Float.dp get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,this, appContext.resources.displayMetrics)
 
-val Int.dp get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), me.hgj.mvvmhelper.base.appContext.resources.displayMetrics).toInt()
+val Int.dp get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), appContext.resources.displayMetrics).toInt()
 
 /**
  * px 转成为 dp
@@ -49,14 +49,14 @@ fun sp2px(spVal: Float): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
         spVal,
-        me.hgj.mvvmhelper.base.appContext.resources.displayMetrics
+        appContext.resources.displayMetrics
     ).toInt()
 }
 
 /**
  * px转sp
  */
-fun px2sp(pxVal: Float) = pxVal / me.hgj.mvvmhelper.base.appContext.resources.displayMetrics.scaledDensity
+fun px2sp(pxVal: Float) = pxVal / appContext.resources.displayMetrics.scaledDensity
 
 /************************************** 屏幕宽高*********************************************** */
 
@@ -65,7 +65,7 @@ fun px2sp(pxVal: Float) = pxVal / me.hgj.mvvmhelper.base.appContext.resources.di
  */
 fun getScreenWidth(): Int {
     val metric = DisplayMetrics()
-    (me.hgj.mvvmhelper.base.appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+    (appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         .getMetrics(metric)
     return metric.widthPixels
 }
@@ -75,7 +75,7 @@ fun getScreenWidth(): Int {
  */
 fun getScreenHeight(): Int {
     val metric = DisplayMetrics()
-    (me.hgj.mvvmhelper.base.appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+    (appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         .getMetrics(metric)
     return metric.heightPixels
 }
@@ -85,7 +85,7 @@ fun getScreenHeight(): Int {
  */
 fun getScreenWidth2(): Int {
     val point = Point()
-    (me.hgj.mvvmhelper.base.appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+    (appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         .getSize(point)
     return point.x
 }
@@ -95,7 +95,7 @@ fun getScreenWidth2(): Int {
  */
 fun getScreenHeight2(): Int {
     val point = Point()
-    (me.hgj.mvvmhelper.base.appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+    (appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         .getSize(point)
     return point.y
 }
@@ -105,7 +105,7 @@ fun getScreenHeight2(): Int {
  */
 fun getAllScreenHeight(): Int {
     val display =
-        (me.hgj.mvvmhelper.base.appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+        (appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
     try {
         val displayMetrics = DisplayMetrics()
         val method =
@@ -129,9 +129,9 @@ fun getAllScreenHeight(): Int {
 fun getStatusBarHeight(): Int {
     var height = 0
     val resourceId =
-        me.hgj.mvvmhelper.base.appContext.resources.getIdentifier("status_bar_height", "dimen", "android")
+        appContext.resources.getIdentifier("status_bar_height", "dimen", "android")
     if (resourceId > 0) {
-        height = me.hgj.mvvmhelper.base.appContext.resources.getDimensionPixelSize(resourceId)
+        height = appContext.resources.getDimensionPixelSize(resourceId)
     }
     return height
 }

@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import me.hgj.mvvmhelper.ext.addActivity
-import me.hgj.mvvmhelper.ext.removeActivity
+import me.hgj.mvvmhelper.ext.finishActivity
 
 /**
  * 作者　: hegaojian
@@ -21,7 +21,7 @@ class KtxActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        removeActivity(activity)
+        finishActivity(activity)
     }
 
     override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {

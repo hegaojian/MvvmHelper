@@ -3,21 +3,23 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 import android.os.Bundle
 import android.widget.CompoundButton
 import androidx.lifecycle.Observer
-import me.hgj.mvvmhelper.base.BaseDbActivity
-import com.zhixinhuixue.library.common.ext.getStringExt
-import com.zhixinhuixue.library.net.api.NetUrl
-import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
-import com.zhixinhuixue.library.net.entity.base.LoadingDialogEntity
+import me.hgj.mvvmhelper.ext.getStringExt
 import com.zhixinhuixue.zsyte.xxx.R
+import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
+import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
+import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
-import com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel
+import me.hgj.mvvmhelper.ext.showDialogMessage
+import me.hgj.mvvmhelper.net.LoadStatusEntity
+import me.hgj.mvvmhelper.net.LoadingDialogEntity
 
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/18
  * 描述　: 虽然在Activity代码少了，但是DataBinding 不太好用
  */
-class LoginActivity: me.hgj.mvvmhelper.base.BaseDbActivity<LoginViewModel, ActivityLoginBinding>() {
+class LoginActivity: BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         //初始化toolbar

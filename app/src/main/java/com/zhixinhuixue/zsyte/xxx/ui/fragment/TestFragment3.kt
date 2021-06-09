@@ -1,17 +1,17 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
-import me.hgj.mvvmhelper.base.BaseVmFragment
-import com.zhixinhuixue.library.common.ext.logD
 import com.zhixinhuixue.zsyte.xxx.R
-import com.zhixinhuixue.zsyte.xxx.viewmodel.TestViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
+import me.hgj.mvvmhelper.base.BaseVmFragment
+import me.hgj.mvvmhelper.ext.logD
 
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestFragment3 : me.hgj.mvvmhelper.base.BaseVmFragment<TestViewModel>() {
+class TestFragment3 : BaseVmFragment<TestViewModel>() {
 
     override val layoutId: Int = R.layout.fragment_test
 

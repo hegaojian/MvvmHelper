@@ -11,8 +11,7 @@ import java.lang.reflect.ParameterizedType
  * 时间　: 2020/11/18
  * 描述　:
  */
-abstract class BaseDbActivity<VM : BaseViewModel,DB: ViewDataBinding> : BaseVmActivity<VM>(),
-    BaseIView {
+abstract class BaseDbActivity<VM : BaseViewModel,DB: ViewDataBinding> : BaseVmActivity<VM>(),BaseIView {
 
     //使用了DataBinding 就不需要 layoutId了，因为 会从DB泛型 找到相关的view
     override val layoutId: Int = 0

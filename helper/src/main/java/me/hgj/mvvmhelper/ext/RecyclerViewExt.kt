@@ -12,7 +12,7 @@ import me.hgj.mvvmhelper.util.decoration.DefaultDecoration
  * @param baseAdapter BaseQuickAdapter<*, *>
  * @return RecyclerView
  */
-fun RecyclerView.vertical():RecyclerView{
+fun RecyclerView.vertical(): RecyclerView {
     layoutManager = LinearLayoutManager(this.context)
     setHasFixedSize(true)
     return this
@@ -23,7 +23,7 @@ fun RecyclerView.vertical():RecyclerView{
  * @receiver RecyclerView
  * @return RecyclerView
  */
-fun RecyclerView.horizontal():RecyclerView{
+fun RecyclerView.horizontal(): RecyclerView {
     layoutManager = LinearLayoutManager(this.context).apply {
         orientation = RecyclerView.HORIZONTAL
     }
@@ -36,8 +36,8 @@ fun RecyclerView.horizontal():RecyclerView{
  * @receiver RecyclerView
  * @return RecyclerView
  */
-fun RecyclerView.grid(count:Int):RecyclerView{
-    layoutManager = GridLayoutManager(this.context,count)
+fun RecyclerView.grid(count: Int): RecyclerView {
+    layoutManager = GridLayoutManager(this.context, count)
     setHasFixedSize(true)
     return this
 }
@@ -48,7 +48,7 @@ fun RecyclerView.grid(count:Int):RecyclerView{
  * @param block [@kotlin.ExtensionFunctionType] Function1<DefaultDecoration, Unit>
  * @return RecyclerView
  */
-fun RecyclerView.divider(block: DefaultDecoration.() ->Unit):RecyclerView{
+fun RecyclerView.divider(block: DefaultDecoration.() -> Unit): RecyclerView {
     val itemDecoration = DefaultDecoration(context).apply(block)
     addItemDecoration(itemDecoration)
     return this

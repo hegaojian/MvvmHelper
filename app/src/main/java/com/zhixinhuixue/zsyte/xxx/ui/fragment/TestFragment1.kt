@@ -3,21 +3,25 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import me.hgj.mvvmhelper.base.BaseDbFragment
 import com.zhixinhuixue.library.common.ext.*
-import com.zhixinhuixue.library.common.util.SpaceItemDecoration
-import com.zhixinhuixue.library.net.api.NetUrl
-import com.zhixinhuixue.library.net.entity.base.LoadStatusEntity
+import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
+import com.zhixinhuixue.zsyte.xxx.app.base.BaseFragment
+import com.zhixinhuixue.zsyte.xxx.app.widget.SpaceItemDecoration
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
-import com.zhixinhuixue.zsyte.xxx.viewmodel.ListViewModel
+import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.ListViewModel
+import me.hgj.mvvmhelper.ext.loadListError
+import me.hgj.mvvmhelper.ext.loadListSuccess
+import me.hgj.mvvmhelper.ext.loadMore
+import me.hgj.mvvmhelper.ext.refresh
+import me.hgj.mvvmhelper.net.LoadStatusEntity
 
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/18
  * 描述　:
  */
-class TestFragment1 : me.hgj.mvvmhelper.base.BaseDbFragment<ListViewModel, ActivityListBinding>() {
+class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
 
     private val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
 
@@ -64,7 +68,7 @@ class TestFragment1 : me.hgj.mvvmhelper.base.BaseDbFragment<ListViewModel, Activ
         when (loadStatus.requestCode) {
             NetUrl.HOME_LIST -> {
                 //列表数据请求失败
-                testAdapter.loadListError(loadStatus,uiStatusManger,mDataBind.listSmartRefresh)
+                testAdapter.loadListError(loadStatus,mDataBind.listSmartRefresh)
             }
         }
     }

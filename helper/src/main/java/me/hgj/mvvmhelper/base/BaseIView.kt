@@ -20,6 +20,14 @@ interface BaseIView {
     }
 
     /**
+     * 子类可传入自己的标题栏 不给默认是null
+     * @return View?
+     */
+    fun getTitleBarView(): View? {
+        return null
+    }
+
+    /**
      * 展示加载中界面
      */
     fun showEmptyUi()
@@ -63,6 +71,16 @@ interface BaseIView {
     fun onLoadRetry()
 
     /**
+     * 显示通用loading弹窗dialog
+     */
+    fun showLoading(setting: LoadingDialogEntity)
+
+    /**
+     * 隐藏通用loading弹窗dialog
+     */
+    fun dismissLoading(setting: LoadingDialogEntity)
+
+    /**
      * 显示自定义loading弹窗dialog
      */
     fun showCustomLoading(setting: LoadingDialogEntity)
@@ -70,7 +88,7 @@ interface BaseIView {
     /**
      * 隐藏自定义loading弹窗dialog
      */
-    fun dismissCustomLoading(setting:LoadingDialogEntity)
+    fun dismissCustomLoading(setting: LoadingDialogEntity)
 
 
 }

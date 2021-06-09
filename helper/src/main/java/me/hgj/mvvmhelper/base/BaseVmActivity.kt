@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.zhixinhuixue.library.common.ext.*
 import me.hgj.mvvmhelper.R
+import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 import me.hgj.mvvmhelper.net.LoadingType
 import me.hgj.mvvmhelper.widget.state.BaseEmptyCallback
 import me.hgj.mvvmhelper.widget.state.BaseErrorCallback
 import me.hgj.mvvmhelper.widget.state.BaseLoadingCallback
-import me.hgj.mvvmhelper.widget.toolbar.CustomToolBar
 
 /**
  * 作者　: hegaojian
@@ -32,7 +33,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     lateinit var mViewModel: VM
 
     //toolbar 这个可替换成自己想要的标题栏
-    lateinit var mToolbar: CustomToolBar
+    private var mTitleBarView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +53,11 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     }
 
     private fun initStatusView(savedInstanceState: Bundle?) {
-        mToolbar = findViewById(R.id.baseToolBar)
-        mToolbar.run {
+        mTitleBarView = getTitleBarView()
+        mTitleBarView?.let {
+            findViewById<LinearLayout>(R.id.baseRootView).addView(it,0)
             //是否隐藏标题栏
-            visibleOrGone(showToolBar())
+            it.visibleOrGone(showToolBar())
         }
         initImmersionBar()
         findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
@@ -91,16 +93,16 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         return true
     }
 
-
     /**
      * 初始化沉浸式
      * Init immersion bar.
      */
     protected open fun initImmersionBar() {
         //设置共同沉浸式样式
-        if(showToolBar()){
-            setSupportActionBar(mToolbar.getBaseToolBar())
-            ImmersionBar.with(this).titleBar(mToolbar).init()
+        mTitleBarView?.let {
+            if(showToolBar()){
+                ImmersionBar.with(this).titleBar(it).init()
+            }
         }
     }
 
@@ -117,9 +119,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
             loading.observeInActivity(this@BaseVmActivity) {
                 if (it.loadingType == LoadingType.LOADING_DIALOG) {
                     if (it.isShow) {
-                        showLoadingExt()
+                        showLoading(it)
                     } else {
-                        dismissLoadingExt()
+                        dismissLoading(it)
                     }
                     return@observeInActivity
                 }
@@ -146,11 +148,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
-           /*     if(it.errorCode == 999){
-                    // 示例 退出所有的activity 跳转到 loginActivity
-                    ... 老板好，
-                    return@observeInActivity
-                }*/
                 onRequestError(it)
             }
             showSuccess.observeInActivity(this@BaseVmActivity) {
@@ -200,7 +197,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         uiStatusManger.showCallback(BaseErrorCallback::class.java)
     }
 
-
     /**
      * 显示 错误 状态界面
      */
@@ -213,15 +209,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      */
     override fun showLoadingUi() {
         uiStatusManger.showCallback(BaseLoadingCallback::class.java)
-    }
-
-    /**
-     * 子类可传入需要被包裹的View，做状态显示-空、错误、加载
-     * 如果子类不覆盖该方法 那么会将整个当前Activity界面（除封装的头部Toolbar）都当做View包裹
-     * @return View?
-     */
-    override fun getLoadingView(): View? {
-        return null
     }
 
     /**
@@ -242,4 +229,11 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         dismissLoadingExt()
     }
 
+    override fun showLoading(setting: LoadingDialogEntity) {
+        showLoadingExt()
+    }
+
+    override fun dismissLoading(setting: LoadingDialogEntity) {
+        dismissLoadingExt()
+    }
 }

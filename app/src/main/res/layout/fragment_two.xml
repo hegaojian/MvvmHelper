@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <me.hgj.mvvmhelper.widget.toolbar.CustomToolBar
+        <com.zhixinhuixue.zsyte.xxx.app.widget.CustomToolBar
             android:id="@+id/customToolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize" />

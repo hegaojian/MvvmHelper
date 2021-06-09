@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="helperColorWhite">#FFFFFFFF</color>
+    <color name="helperColorBlack">#000000</color>
+    <color name="helperColorBlackGray3">#333333</color>
+    <color name="helperColorBlackGray6">#666666</color>
+    <color name="helperColorBlack80">#80000000</color>
+</resources>

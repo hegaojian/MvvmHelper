@@ -7,7 +7,7 @@ import com.tencent.mmkv.MMKV
  * 获取MMKV
  */
 val mmkv: MMKV by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-    MMKV.mmkvWithID(CommonConstant.MMKV_APP_KEY)
+    MMKV.mmkvWithID("mmp")
 }
 
 /**

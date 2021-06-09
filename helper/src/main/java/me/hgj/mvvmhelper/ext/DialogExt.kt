@@ -1,4 +1,4 @@
-package com.zhixinhuixue.library.common.ext
+package me.hgj.mvvmhelper.ext
 
 import android.app.Dialog
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
-import com.zhixinhuixue.library.common.R
+import me.hgj.mvvmhelper.R
 
 /**
  * 作者　: hegaojian
@@ -103,9 +103,9 @@ fun AppCompatActivity.showLoadingExt(message: String = "请求网络中...") {
                 setCanceledOnTouchOutside(false)
                 setContentView(
                     LayoutInflater.from(this@showLoadingExt)
-                        .inflate(R.layout.layout_custom_progress_dialog_view, null).apply {
-                        this.findViewById<TextView>(R.id.loading_tips).text = message
-                    })
+                        .inflate(R.layout.layout_loading_view, null).apply {
+                            this.findViewById<TextView>(R.id.loading_tips).text = message
+                        })
             }
             loadingDialog?.setOnDismissListener {
                 //设置dialog关闭时 置空 不然会出现 一个隐藏bug 这里就不细说了
@@ -130,9 +130,9 @@ fun Fragment.showLoadingExt(message: String = "请求网络中...") {
                     setCanceledOnTouchOutside(false)
                     setContentView(
                         LayoutInflater.from(it)
-                            .inflate(R.layout.layout_custom_progress_dialog_view, null).apply {
-                            this.findViewById<TextView>(R.id.loading_tips).text = message
-                        })
+                            .inflate(R.layout.layout_loading_view, null).apply {
+                                this.findViewById<TextView>(R.id.loading_tips).text = message
+                            })
                 }
                 loadingDialog?.setOnDismissListener {
                     //设置dialog关闭时 置空 不然会出现 一个隐藏bug 这里就不细说了
@@ -159,4 +159,5 @@ fun Fragment.dismissLoadingExt() {
     loadingDialog?.dismiss()
     loadingDialog = null
 }
+
 

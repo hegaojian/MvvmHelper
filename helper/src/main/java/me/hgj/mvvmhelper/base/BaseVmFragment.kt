@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.zhixinhuixue.library.common.ext.*
-import me.hgj.mvvmhelper.ext.logD
+import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 import me.hgj.mvvmhelper.net.LoadingType
@@ -151,9 +151,9 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
                     //通用弹窗Dialog
                     LoadingType.LOADING_DIALOG ->{
                         if (it.isShow) {
-                            showLoadingExt()
+                            showLoading(it)
                         } else {
-                            dismissLoadingExt()
+                            dismissLoading(it)
                         }
                     }
                     //不同的请求自定义loading
@@ -263,6 +263,14 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
      * @param setting LoadingDialogEntity
      */
     override fun dismissCustomLoading(setting: LoadingDialogEntity) {
+        dismissLoadingExt()
+    }
+
+    override fun showLoading(setting: LoadingDialogEntity) {
+        showLoadingExt()
+    }
+
+    override fun dismissLoading(setting: LoadingDialogEntity) {
         dismissLoadingExt()
     }
 }

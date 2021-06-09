@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_empty"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/state_empty_linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="SpUsage">
 
-    <ImageView
-        android:id="@+id/loading_emptyimg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/loading_empty_img"
+        android:layout_width="@dimen/helper.dp.80"
+        android:layout_height="@dimen/helper.dp.80"
         android:background="@drawable/load_empty" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:text="暂时没有数据"
-        android:textColor="#333333"
-        android:textSize="14dp" />
+        android:layout_marginTop="@dimen/helper.dp.12"
+        android:layout_marginBottom="@dimen/helper.dp.12"
+        android:text="@string/helper_loading_error_tip"
+        android:textColor="@color/helperColorBlackGray3"
+        android:textSize="@dimen/helper.dp.14" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="点击我重试"
-        android:textColor="#666666"
-        android:textSize="14dp" />
+        android:layout_marginBottom="@dimen/helper.dp.12"
+        android:text="@string/helper_loading_net_empty"
+        android:textColor="@color/helperColorBlackGray6"
+        android:textSize="@dimen/helper.dp.14" />
 </LinearLayout>

@@ -3,6 +3,7 @@ package me.hgj.mvvmhelper.net.interception.logging.util
 import android.text.TextUtils
 import android.util.Log
 import com.rxlife.coroutine.BuildConfig
+import me.hgj.mvvmhelper.util.XLog
 
 /**
  * 作者　: hegaojian
@@ -12,13 +13,13 @@ import com.rxlife.coroutine.BuildConfig
 class LogUtils private constructor() {
     companion object {
         private const val DEFAULT_TAG = "MvvmHelper"
-        private var isLog = BuildConfig.DEBUG
+        private var isLog = true
         fun isLog(): Boolean {
             return isLog
         }
-
         fun setLog(isLog: Boolean) {
             Companion.isLog = isLog
+            XLog.init(isLog)
         }
 
         fun debugInfo(tag: String?, msg: String?) {

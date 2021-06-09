@@ -68,9 +68,9 @@ fun addActivity(activity: Activity) {
 }
 
 /**
- * 移除Activity出栈
+ * 关闭Activity出栈
  */
-fun removeActivity(activity: Activity) {
+fun finishActivity(activity: Activity) {
     if (!activity.isFinishing) {
         activity.finish()
     }
@@ -78,9 +78,9 @@ fun removeActivity(activity: Activity) {
 }
 
 /**
- * 移除Activity出栈
+ * 关闭Activity出栈
  */
-fun removeActivity(cls: Class<*>) {
+fun finishActivity(cls: Class<*>) {
     if (activityList.isNullOrEmpty()) return
     val index = activityList.indexOfFirst { it.javaClass == cls }
     if (index == -1) return
@@ -91,9 +91,9 @@ fun removeActivity(cls: Class<*>) {
 }
 
 /**
- * 移除所有的Activity 全部出栈
+ * 关闭所有的Activity 全部出栈
  */
-fun removeAllActivity() {
+fun finishAllActivity() {
     activityList.forEach {
         if (!it.isFinishing) {
             it.finish()

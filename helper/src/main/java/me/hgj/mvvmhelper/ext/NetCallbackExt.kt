@@ -6,7 +6,7 @@ import me.hgj.mvvmhelper.base.BaseViewModel
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 import me.hgj.mvvmhelper.net.LoadingType
-import me.hgj.mvvmhelper.net.NetConstant
+import me.hgj.mvvmhelper.net.BaseNetConstant
 
 /**
  * 封装一下 RxHttp请求
@@ -26,7 +26,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
     }, {
         if (httpRequestDsl.onError == null) {
             //如果没有传递 onError参数 默认调用封装的逻辑
-            if (it.code.toString() == NetConstant.EMPTY_CODE) {
+            if (it.code.toString() == BaseNetConstant.EMPTY_CODE) {
                 //如果错误code 为 定义的 EMPTY_CODE（具体逻辑看 ResponseParser 的onParse方法）  说明是列表请求到了空数据
                 loadingChange.showEmpty.value =
                     LoadStatusEntity(

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.zhixinhuixue.zsyte.xxx.viewmodel.LoginViewModel" />
+            type="com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel" />
 
         <variable
             name="view"
@@ -61,7 +61,7 @@
                     android:paddingRight="@dimen/dp.12"
                     android:text="@={viewModel.userName}"
                     android:textColor="@color/colorBlackGry"
-                    android:textSize="@dimen/sp.15" />
+                    android:textSize="@dimen/dp.15" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/dp.24"
@@ -94,7 +94,7 @@
                     android:paddingRight="@dimen/dp.12"
                     android:text="@={viewModel.password}"
                     android:textColor="@color/colorBlackGry"
-                    android:textSize="@dimen/sp.15"
+                    android:textSize="@dimen/dp.15"
                     bind:showPwd="@{viewModel.isShowPwd}" />
 
                 <CheckBox
@@ -117,7 +117,7 @@
                 android:onClick="@{() -> click.login()}"
                 android:text="@string/login_submit"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp.20" />
+                android:textSize="@dimen/dp.20" />
 
             <TextView
                 android:id="@+id/downText"
@@ -126,7 +126,7 @@
                 android:layout_marginTop="@dimen/dp.8"
                 android:text="@string/login_tips"
                 android:textColor="@color/colorBlackGry6"
-                android:textSize="@dimen/sp.13" />
+                android:textSize="@dimen/dp.13" />
 
 
         </LinearLayout>

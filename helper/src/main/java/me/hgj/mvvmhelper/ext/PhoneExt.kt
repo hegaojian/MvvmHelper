@@ -2,11 +2,7 @@ package me.hgj.mvvmhelper.ext
 
 import android.os.Build
 
-/**
- *  @description:
- *  @author xcl qq:244672784
- *  @Date 2020/7/1
- **/
+
 
 /**
  * 获取手机型号

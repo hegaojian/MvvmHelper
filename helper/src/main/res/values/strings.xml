@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helper_loading_net_error">请检查网络后点击重试</string>
+    <string name="helper_loading_net_empty">点击重试</string>
+    <string name="helper_loading_error_tip">数据获取失败</string>
+    <string name="helper_loading_empty_tip">暂时没有数据</string>
+    <string name="helper_loading_tip">请求网络中...</string>
+</resources>

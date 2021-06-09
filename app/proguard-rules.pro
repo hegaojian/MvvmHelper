@@ -87,9 +87,11 @@
 -keep class **.*_SnakeProxy
 -keep @com.youngfeng.snake.annotations.EnableDragToClose public class *
 
+
+
+# DataBinding反射混淆，必加，包名 请换成自己的
+-keep class com.zhixinhuixue.zsyte.xxx.databinding.** { *; }
 #所有GSON生成的对象类不能被混淆
--keep class com.zhixinhuixue.library.net.body.**{*;}
--keep class com.zhixinhuixue.library.net.entity.**{*;}
 -keep class com.zhixinhuixue.zsyte.xxx.data.response.**{*;}
 -keep class com.zhixinhuixue.zsyte.xxx.data.request.**{*;}
 

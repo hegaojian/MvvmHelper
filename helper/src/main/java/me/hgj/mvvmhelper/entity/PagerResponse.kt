@@ -1,7 +1,9 @@
 package me.hgj.mvvmhelper.entity
 
+/**
+ * 分页帮助类
+ */
 abstract class  BasePage<T> {
-
     /**
      * 列表数据
      * @return ArrayList<T>

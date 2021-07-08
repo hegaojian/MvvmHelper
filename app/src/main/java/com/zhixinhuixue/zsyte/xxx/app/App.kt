@@ -16,7 +16,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         val processName = currentProcessName
-        LogUtils.setLog(BuildConfig.DEBUG)
         if (processName == packageName) {
             // 主进程初始化
             onMainProcessInit()
@@ -26,10 +25,10 @@ class App : Application() {
         }
     }
 
+    /**
+     * @description  代码的初始化请不要放在onCreate直接操作，按照下面新建异步方法
+     */
     private fun onMainProcessInit() {
-        /**
-         * @description  代码的初始化请不要放在onCreate直接操作，按照下面新建异步方法
-         */
         AnchorsManager.getInstance()
             .debuggable(BuildConfig.DEBUG)
             //设置锚点

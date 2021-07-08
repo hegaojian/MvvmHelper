@@ -1,4 +1,4 @@
-package com.zhixinhuixue.zsyte.xxx.app.widget
+package me.hgj.mvvmhelper.util.decoration
 
 import android.annotation.SuppressLint
 import android.graphics.Canvas

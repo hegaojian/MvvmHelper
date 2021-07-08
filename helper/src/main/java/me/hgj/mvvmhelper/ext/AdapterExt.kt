@@ -44,20 +44,20 @@ fun SmartRefreshLayout.loadMore(loadMoreAction: () -> Unit = {}): SmartRefreshLa
  */
 fun <T> BaseQuickAdapter<T, *>.loadListSuccess(baseListNetEntity: BasePage<T>, smartRefreshLayout: SmartRefreshLayout) {
     //关闭头部刷新
-    smartRefreshLayout.finishRefresh()
     if (baseListNetEntity.isRefresh()) {
         //如果是第一页 那么设置最新数据替换
         this.setNewInstance(baseListNetEntity.getPageData())
-        smartRefreshLayout.setNoMoreData(false)
+        smartRefreshLayout.finishRefresh()
     } else {
         //不是第一页，累加数据
         this.addData(baseListNetEntity.getPageData())
         //刷新一下分割线
-        this.recyclerView.invalidateItemDecorations()
+        this.recyclerView.post { this.recyclerView.invalidateItemDecorations() }
     }
     //乳沟还有下一页数据 那么设置 smartRefreshLayout 还可以加载更多数据
     if (baseListNetEntity.hasMore()) {
         smartRefreshLayout.finishLoadMore()
+        smartRefreshLayout.setNoMoreData(false)
     } else {
         //乳沟没有更多数据了，设置 smartRefreshLayout 加载完毕 没有更多数据
         smartRefreshLayout.finishLoadMoreWithNoMoreData()

@@ -64,7 +64,7 @@ open class ResponseParser<T> : AbstractParser<T> {
         }
 
         // errCode 不等于 SUCCESS_CODE，抛出异常
-        if (data.errorCode != NetConstant.SUCCESS_CODE) {
+        if (data.errorCode != NetUrl.SUCCESS_CODE) {
             throw ParseException(data.errorCode.toString(), data.errorMsg, response)
         }
         return t

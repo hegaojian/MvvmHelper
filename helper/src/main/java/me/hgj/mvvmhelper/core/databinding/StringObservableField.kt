@@ -10,7 +10,7 @@ import androidx.databinding.ObservableField
 class StringObservableField(value: String = "") : ObservableField<String>(value) {
 
     override fun get(): String {
-        return super.get()!!
+        return if(super.get().isNullOrEmpty()) "" else super.get()!!
     }
 
 }

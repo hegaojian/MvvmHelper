@@ -499,7 +499,6 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 draw(canvas)
             }
         }
-
         canvas.restore()
     }
 

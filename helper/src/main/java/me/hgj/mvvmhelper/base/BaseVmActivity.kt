@@ -1,6 +1,7 @@
 package me.hgj.mvvmhelper.base
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout

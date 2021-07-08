@@ -2,10 +2,10 @@ package com.zhixinhuixue.zsyte.xxx.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
-import me.hgj.mvvmhelper.core.databinding.BooleanObservableField
-import me.hgj.mvvmhelper.core.databinding.StringObservableField
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
+import me.hgj.mvvmhelper.core.databinding.BooleanObservableField
+import me.hgj.mvvmhelper.core.databinding.StringObservableField
 import me.hgj.mvvmhelper.ext.logA
 import me.hgj.mvvmhelper.ext.rxHttpRequest
 import me.hgj.mvvmhelper.net.LoadingType
@@ -40,11 +40,7 @@ class LoginViewModel : me.hgj.mvvmhelper.base.BaseViewModel() {
     fun login(phoneNumber: String, password: String) {
         rxHttpRequest {
             onRequest = {
-                loginData.value = RxHttp.postForm(NetUrl.LOGIN)
-                    .add("username", phoneNumber)
-                    .add("password", password)
-                    .toResponse<UserInfo>()
-                    .await()
+                loginData.value = UserRepository.login(phoneNumber,password).await()
             }
             loadingType = LoadingType.LOADING_DIALOG //选传
             loadingMessage = "正在登录中....." // 选传

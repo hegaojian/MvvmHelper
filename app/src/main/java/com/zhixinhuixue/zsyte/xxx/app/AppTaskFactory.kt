@@ -10,6 +10,7 @@ import com.kingja.loadsir.core.LoadSir
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.tencent.mmkv.MMKV
 import com.zhixinhuixue.library.common.ext.dp
 import com.zhixinhuixue.zsyte.xxx.BuildConfig
 import com.zhixinhuixue.zsyte.xxx.R
@@ -61,8 +62,6 @@ class InitNetWork : Task(TASK_ID, true) {
     override fun run(name: String) {
         //传入自己的OKHttpClient 并添加了自己的拦截器
         RxHttp.init(NetHttpClient.getDefaultOkHttpClient().build())
-        //假装初始化某个SDK2秒
-        doJob(2000)
     }
 }
 
@@ -109,6 +108,7 @@ class InitUtils : Task(TASK_ID, true) {
 
     override fun run(name: String) {
         //初始化Log打印
+        MMKV.initialize(appContext)
         XLog.init(BuildConfig.DEBUG)
     }
 }

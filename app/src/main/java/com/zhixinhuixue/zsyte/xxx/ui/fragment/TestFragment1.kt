@@ -2,19 +2,15 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.zhixinhuixue.library.common.ext.*
+import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseFragment
-import com.zhixinhuixue.zsyte.xxx.app.widget.SpaceItemDecoration
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.ListViewModel
-import me.hgj.mvvmhelper.ext.loadListError
-import me.hgj.mvvmhelper.ext.loadListSuccess
-import me.hgj.mvvmhelper.ext.loadMore
-import me.hgj.mvvmhelper.ext.refresh
+import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.net.LoadStatusEntity
+import me.hgj.mvvmhelper.util.decoration.DividerOrientation
 
 /**
  * 作者　: hegaojian
@@ -35,12 +31,12 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
             mViewModel.getList(false)
         }
         //初始化 recycleView
-        mDataBind.listRecyclerView.run {
-            layoutManager = LinearLayoutManager(mActivity)
-            setHasFixedSize(true)
-            addItemDecoration(SpaceItemDecoration(8.dp,8.dp))
-            adapter = testAdapter
-        }
+        mDataBind.listRecyclerView.grid(1).divider {
+            orientation = DividerOrientation.GRID
+            includeVisible = true
+            setDivider(10,true)
+            setColor(getColorExt(R.color.colorRed))
+        }.adapter = testAdapter
     }
 
     /**

@@ -27,7 +27,7 @@ allprojects {
 ```
 dependencies {
   ...
-  implementation 'com.github.hegaojian:MvvmHelper:1.0.2'
+  implementation 'com.github.hegaojian:MvvmHelper:1.0.4'
     kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
 }
 ```

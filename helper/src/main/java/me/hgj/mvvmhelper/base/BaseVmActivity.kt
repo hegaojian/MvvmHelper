@@ -218,7 +218,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      * @param setting LoadingDialogEntity
      */
     override fun showCustomLoading(setting: LoadingDialogEntity) {
-        showLoadingExt()
+        showLoadingExt(setting.loadingMessage)
     }
 
     /**
@@ -231,7 +231,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     }
 
     override fun showLoading(setting: LoadingDialogEntity) {
-        showLoadingExt()
+        showLoadingExt(setting.loadingMessage)
     }
 
     override fun dismissLoading(setting: LoadingDialogEntity) {

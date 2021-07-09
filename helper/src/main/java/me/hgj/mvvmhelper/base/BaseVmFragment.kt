@@ -233,7 +233,6 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
         uiStatusManger.showCallback(BaseErrorCallback::class.java)
     }
 
-
     /**
      * 显示 错误 状态界面
      */
@@ -267,7 +266,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
     }
 
     override fun showLoading(setting: LoadingDialogEntity) {
-        showLoadingExt()
+        showLoadingExt(setting.loadingMessage)
     }
 
     override fun dismissLoading(setting: LoadingDialogEntity) {

@@ -148,8 +148,10 @@ fun Fragment.showLoadingExt(message: String = "请求网络中...") {
  * 关闭等待框
  */
 fun AppCompatActivity.dismissLoadingExt() {
-    loadingDialog?.dismiss()
-    loadingDialog = null
+    if(!this.isFinishing){
+        loadingDialog?.dismiss()
+        loadingDialog = null
+    }
 }
 
 /**

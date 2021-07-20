@@ -2,12 +2,14 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 import com.zhixinhuixue.zsyte.xxx.ui.activity.ListActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
+import me.hgj.mvvmhelper.base.BaseDbFragment
 import me.hgj.mvvmhelper.ext.*
 
 /**
@@ -15,16 +17,21 @@ import me.hgj.mvvmhelper.ext.*
  * 时间　: 2020/11/18
  * 描述　:
  */
-class OneFragment : me.hgj.mvvmhelper.base.BaseDbFragment<TestViewModel, FragmentOneBinding>() {
+class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
 
     private var downloadApkPath = ""
 
     override fun initView(savedInstanceState: Bundle?) {
         mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
         mDataBind.customToolbar.setBackgroundResource(R.color.colorPrimary)
-        ImmersionBar.with(this).titleBar(mDataBind.customToolbar).init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        immersionBar {
+            titleBar(mDataBind.customToolbar)
+        }
+    }
     override fun onBindViewClick() {
         setOnclickNoRepeat(mDataBind.loginBtn, mDataBind.testPageBtn,mDataBind.testListBtn,mDataBind.testDownload,mDataBind.testUpload) {
             when (it.id) {

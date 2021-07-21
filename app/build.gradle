@@ -66,8 +66,8 @@ dependencies {
     //微信开源项目，替代SP
     implementation 'com.tencent:mmkv-static:1.2.10'
 
-//    implementation project(path: ':helper')
-    implementation 'com.github.hegaojian:MvvmHelper:1.0.6'
+    implementation project(path: ':helper')
+//    implementation 'com.github.hegaojian:MvvmHelper:1.0.6'
     kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
 
 }

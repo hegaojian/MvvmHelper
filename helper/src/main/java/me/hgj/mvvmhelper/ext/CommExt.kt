@@ -25,8 +25,11 @@ import me.hgj.mvvmhelper.base.appContext
  * 描述　:一些常用的方法
  */
 
+
+val gson: Gson by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { Gson() }
+
 fun Any?.toJsonStr(): String {
-    return Gson().toJsonStr()
+    return gson.toJson(this)
 }
 
 fun Any?.toast() {

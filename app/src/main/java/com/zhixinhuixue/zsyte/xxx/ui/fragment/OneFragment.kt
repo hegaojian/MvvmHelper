@@ -23,7 +23,7 @@ class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
-        mDataBind.customToolbar.setBackgroundResource(R.color.colorPrimary)
+        mDataBind.customToolbar.setBackgroundResource(R.color.colorOrange)
     }
 
     override fun onResume() {
@@ -32,6 +32,7 @@ class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
             titleBar(mDataBind.customToolbar)
         }
     }
+
     override fun onBindViewClick() {
         setOnclickNoRepeat(mDataBind.loginBtn, mDataBind.testPageBtn,mDataBind.testListBtn,mDataBind.testDownload,mDataBind.testUpload) {
             when (it.id) {

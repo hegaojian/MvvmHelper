@@ -12,8 +12,8 @@ android {
         applicationId "com.zhixinhuixue.zsyte.xxx"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.0.5"
+        versionCode 7
+        versionName "1.0.6"
     }
 
     buildTypes {
@@ -67,7 +67,7 @@ dependencies {
     implementation 'com.tencent:mmkv-static:1.2.10'
 
 //    implementation project(path: ':helper')
-    implementation 'com.github.hegaojian:MvvmHelper:1.0.5'
+    implementation 'com.github.hegaojian:MvvmHelper:1.0.6'
     kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
 
 }

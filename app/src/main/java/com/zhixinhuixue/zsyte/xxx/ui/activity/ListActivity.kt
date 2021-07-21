@@ -40,7 +40,6 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
             divider {
                 setColor(getColorExt(R.color.colorWhite))
                 setDivider(10.dp)
-                startVisible = true
                 includeVisible = true
                 orientation = DividerOrientation.GRID
             }

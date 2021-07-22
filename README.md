@@ -25,10 +25,14 @@ allprojects {
 - **1.2 在app's build.gradle中添加依赖**
 
 ```
+apply plugin: 'kotlin-kapt'
+
+...
+
 dependencies {
   ...
-  implementation 'com.github.hegaojian:MvvmHelper:1.0.5'
-    kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
+  implementation 'com.github.hegaojian:MvvmHelper:1.0.6'
+  kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
 }
 ```
 

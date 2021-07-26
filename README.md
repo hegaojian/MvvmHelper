@@ -7,7 +7,7 @@ clone慢的可以用 gitee链接 https://gitee.com/hegaojian/MvvmHelper
 
 - **1.1 在root's build.gradle中加入Jitpack仓库**
 
-```
+```gradle
 buildscript {
     repositories {
         ...
@@ -24,7 +24,7 @@ allprojects {
 
 - **1.2 在app's build.gradle中添加依赖**
 
-```
+```gradle
 apply plugin: 'kotlin-kapt'
 
 ...
@@ -38,7 +38,7 @@ dependencies {
 
 - **1.3 在app's build.gradle中，android 模块下开启DataBinding(如果你不想用DataBinding,请忽略这一步)**
 
-```
+``` gradle
 AndroidStudio 4.0 以下版本------>
 android {
     ...

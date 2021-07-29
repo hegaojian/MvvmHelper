@@ -70,7 +70,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
         super.onViewCreated(view, savedInstanceState)
         mViewModel = createViewModel()
         initStatusView(view, savedInstanceState)
-        initLoadingUiChange()
+        addLoadingUiChange(mViewModel)
         initObserver()
         onRequestSuccess()
         onBindViewClick()
@@ -144,8 +144,8 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
     /**
      * 注册 UI 事件 监听请求时的回调UI的操作
      */
-    private fun initLoadingUiChange() {
-        mViewModel.loadingChange.run {
+    fun addLoadingUiChange(viewModel:BaseViewModel) {
+        viewModel.loadingChange.run {
             loading.observeInFragment(this@BaseVmFragment) {
                 when(it.loadingType){
                     //通用弹窗Dialog

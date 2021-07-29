@@ -21,7 +21,7 @@ import me.hgj.mvvmhelper.ext.visible
  * 时间　: 2020/12/3
  * 描述　:
  */
-class SplashActivity(override val layoutId: Int = R.layout.activity_splash) :BaseActivity<BaseViewModel, ActivitySplashBinding>() {
+class SplashActivity :BaseActivity<BaseViewModel, ActivitySplashBinding>() {
 
     private var resList = arrayOf(R.drawable.sanshang_teacher,R.drawable.yingkongtao_teacher, R.drawable.boduo_teacher)
 

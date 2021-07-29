@@ -5,7 +5,7 @@ clone慢的可以用 gitee链接 https://gitee.com/hegaojian/MvvmHelper
 
 ## 1.如何集成
 
-- **1.1 在root's build.gradle中加入Jitpack仓库**
+- **1.1 在root's build.gradle中加入 Jitpack 仓库**
 
 ```
 buildscript {

@@ -1,7 +1,6 @@
 package me.hgj.mvvmhelper.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -44,7 +43,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         //初始化 status View
         initStatusView(savedInstanceState)
         //注册界面响应事件
-        initLoadingUiChange()
+        addLoadingUiChange(mViewModel)
         //初始化绑定observer
         initObserver()
         //初始化请求成功方法
@@ -56,13 +55,13 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     private fun initStatusView(savedInstanceState: Bundle?) {
         mTitleBarView = getTitleBarView()
         mTitleBarView?.let {
-            findViewById<LinearLayout>(R.id.baseRootView).addView(it,0)
+            findViewById<LinearLayout>(R.id.baseRootView).addView(it, 0)
             //是否隐藏标题栏
             it.visibleOrGone(showToolBar())
         }
         initImmersionBar()
         findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
-        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!){
+        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
             onLoadRetry()
         }
         findViewById<FrameLayout>(R.id.baseContentView).post {
@@ -101,7 +100,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     protected open fun initImmersionBar() {
         //设置共同沉浸式样式
         mTitleBarView?.let {
-            if(showToolBar()){
+            if (showToolBar()) {
                 ImmersionBar.with(this).titleBar(it).init()
             }
         }
@@ -115,8 +114,8 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     /**
      * 注册 UI 事件 监听请求时的回调UI的操作
      */
-    private fun initLoadingUiChange() {
-        mViewModel.loadingChange.run {
+    fun addLoadingUiChange(viewModel: BaseViewModel) {
+        viewModel.loadingChange.run {
             loading.observeInActivity(this@BaseVmActivity) {
                 if (it.loadingType == LoadingType.LOADING_DIALOG) {
                     if (it.isShow) {
@@ -134,7 +133,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
                     }
                     return@observeInActivity
                 }
-                if(it.loadingType == LoadingType.LOADING_XML){
+                if (it.loadingType == LoadingType.LOADING_XML) {
                     if (it.isShow) {
                         showLoadingUi()
                     }
@@ -226,7 +225,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      * 具体是哪个请求隐藏该请求自定义的loading
      * @param setting LoadingDialogEntity
      */
-    override fun dismissCustomLoading(setting:LoadingDialogEntity) {
+    override fun dismissCustomLoading(setting: LoadingDialogEntity) {
         dismissLoadingExt()
     }
 
@@ -236,5 +235,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
 
     override fun dismissLoading(setting: LoadingDialogEntity) {
         dismissLoadingExt()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

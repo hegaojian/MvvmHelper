@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import com.zhixinhuixue.library.common.ext.*
 import me.hgj.mvvmhelper.R
 import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.net.LoadStatusEntity
@@ -237,7 +236,8 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         dismissLoadingExt()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun finish() {
+        dismissLoadingExt()
+        super.finish()
     }
 }

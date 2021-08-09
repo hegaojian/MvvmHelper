@@ -5,7 +5,6 @@ import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.Project
 import com.zhixinhuixue.zsyte.xxx.BuildConfig
 import me.hgj.mvvmhelper.ext.currentProcessName
-import me.hgj.mvvmhelper.net.interception.logging.util.LogUtils
 
 /**
  * 作者　: hegaojian

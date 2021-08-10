@@ -234,7 +234,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
     }
 
     /**
-     * 显示 错误 状态界面
+     * 显示 空数据 状态界面
      */
     override fun showEmptyUi() {
         uiStatusManger.showCallback(BaseEmptyCallback::class.java)

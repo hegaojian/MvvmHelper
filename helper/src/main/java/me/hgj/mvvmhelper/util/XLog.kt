@@ -4,14 +4,27 @@ import com.google.gson.Gson
 import com.socks.library.klog.BaseLog
 import com.socks.library.klog.JsonLog
 import com.socks.library.klog.XmlLog
+import me.hgj.mvvmhelper.net.interception.logging.util.LogUtils
 import java.io.PrintWriter
 import java.io.StringWriter
 
 /**
- *  @description:
- *  @author xcl qq:244672784
- *  @Date 2020/6/30
- **/
+ * 作者　: hegaojian
+ * 时间　: 2021/8/10
+ * 描述　:
+ */
+
+/**
+ * 打印日志开关，框架是否打印请求日志、输出Log日志 默认为 true 打印数据
+ */
+var mvvmHelperLog :Boolean = true
+    set(value) {
+        field = value
+        XLog.init(value)
+        LogUtils.setLog(value)
+
+    }
+
 object XLog {
 
     private val gson by lazy {

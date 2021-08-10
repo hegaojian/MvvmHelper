@@ -18,6 +18,7 @@ import com.zhixinhuixue.zsyte.xxx.app.api.NetHttpClient
 import me.hgj.mvvmhelper.base.appContext
 import me.hgj.mvvmhelper.ext.getColorExt
 import me.hgj.mvvmhelper.util.XLog
+import me.hgj.mvvmhelper.util.mvvmHelperLog
 import me.hgj.mvvmhelper.widget.state.BaseEmptyCallback
 import me.hgj.mvvmhelper.widget.state.BaseErrorCallback
 import me.hgj.mvvmhelper.widget.state.BaseLoadingCallback
@@ -106,11 +107,12 @@ class InitUtils : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "3"
     }
-
+    
     override fun run(name: String) {
         //初始化Log打印
         MMKV.initialize(appContext)
-        XLog.init(BuildConfig.DEBUG)
+        //框架全局打印日志开关
+        mvvmHelperLog = BuildConfig.DEBUG
     }
 }
 

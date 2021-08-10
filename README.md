@@ -8,12 +8,6 @@ clone慢的可以用 gitee链接 https://gitee.com/hegaojian/MvvmHelper
 - **1.1 在root's build.gradle中加入 Jitpack 仓库**
 
 ```gradle
-buildscript {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
 allprojects {
     repositories {
         ...
@@ -31,12 +25,12 @@ apply plugin: 'kotlin-kapt'
 
 dependencies {
   ...
-  implementation 'com.github.hegaojian:MvvmHelper:1.0.8'
+  implementation 'com.github.hegaojian:MvvmHelper:1.0.9'
   kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
 }
 ```
 
-- **1.3 在app's build.gradle中，android 模块下开启DataBinding(如果你不想用DataBinding,请忽略这一步)**
+- **1.3 在app's build.gradle中，android 模块下开启DataBinding或者ViewBinding 可以自行选择**
 
 ``` gradle
 AndroidStudio 4.0 以下版本------>
@@ -45,6 +39,9 @@ android {
     dataBinding {
         enabled = true 
     }
+    viewBinding {
+            enabled = true
+    }
 }
 
 AndroidStudio 4.0及以上版本 ------>
@@ -52,6 +49,7 @@ android {
     ...
    buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 }
  

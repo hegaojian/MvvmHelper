@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <data>
-
-    </data>
+    <com.zhixinhuixue.zsyte.xxx.app.widget.CustomToolBar
+        android:id="@+id/customToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
 
     <LinearLayout
-        android:id="@+id/baseView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <com.zhixinhuixue.zsyte.xxx.app.widget.CustomToolBar
-            android:id="@+id/customToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_40"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="点我去登录界面"
+            app:layout_constraintBottom_toTopOf="@+id/testPageBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <Button
-                android:id="@+id/loginBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_40"
-                android:gravity="center"
-                android:text="点我去登录界面"
-                app:layout_constraintBottom_toTopOf="@+id/testPageBtn"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/testPageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点我去测试Fragment界面"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-            <Button
-                android:id="@+id/testPageBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点我去测试Fragment界面"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        <Button
+            android:id="@+id/testListBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点我去测试List界面"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-            <Button
-                android:id="@+id/testListBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点我去测试List界面"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        <Button
+            android:id="@+id/testDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击我下载文件"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-            <Button
-                android:id="@+id/testDownload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击我下载文件"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        <Button
+            android:id="@+id/testUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击我上传文件"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-            <Button
-                android:id="@+id/testUpload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击我上传文件"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
-            <TextView
-                android:id="@+id/testUpdateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="进度：==" />
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/testUpdateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进度：==" />
     </LinearLayout>
-</layout>
+
+</LinearLayout>

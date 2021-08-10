@@ -3,12 +3,12 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 import android.os.Bundle
 import com.gyf.immersionbar.ktx.immersionBar
 import com.zhixinhuixue.zsyte.xxx.R
+import com.zhixinhuixue.zsyte.xxx.app.base.BaseNewFragment
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.ListActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
-import me.hgj.mvvmhelper.base.BaseDbFragment
 import me.hgj.mvvmhelper.ext.msg
 import me.hgj.mvvmhelper.ext.setOnclickNoRepeat
 import me.hgj.mvvmhelper.ext.showDialogMessage
@@ -19,24 +19,24 @@ import me.hgj.mvvmhelper.ext.toStartActivity
  * 时间　: 2020/11/18
  * 描述　:
  */
-class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
+class OneFragment : BaseNewFragment<TestViewModel, FragmentOneBinding>() {
 
     private var downloadApkPath = ""
 
     override fun initView(savedInstanceState: Bundle?) {
-        mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
-        mDataBind.customToolbar.setBackgroundResource(R.color.colorOrange)
+        mViewBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
+        mViewBind.customToolbar.setBackgroundResource(R.color.colorOrange)
     }
 
     override fun onResume() {
         super.onResume()
         immersionBar {
-            titleBar(mDataBind.customToolbar)
+            titleBar(mViewBind.customToolbar)
         }
     }
 
     override fun onBindViewClick() {
-        setOnclickNoRepeat(mDataBind.loginBtn, mDataBind.testPageBtn,mDataBind.testListBtn,mDataBind.testDownload,mDataBind.testUpload) {
+        setOnclickNoRepeat(mViewBind.loginBtn, mViewBind.testPageBtn, mViewBind.testListBtn, mViewBind.testDownload, mViewBind.testUpload) {
             when (it.id) {
                 R.id.loginBtn -> {
                     toStartActivity(LoginActivity::class.java)
@@ -51,25 +51,25 @@ class OneFragment : BaseDbFragment<TestViewModel, FragmentOneBinding>() {
                 R.id.testDownload -> {
                     mViewModel.downLoad({
                         //下载中
-                        mDataBind.testUpdateText.text = "下载进度：${it.progress}%"
-                    },{
+                        mViewBind.testUpdateText.text = "下载进度：${it.progress}%"
+                    }, {
                         //下载完成
                         downloadApkPath = it
                         showDialogMessage("下载成功，路径为：${it}")
-                    },{
+                    }, {
                         //下载失败
                         showDialogMessage(it.msg)
                     })
                 }
 
                 R.id.testUpload -> {
-                    mViewModel.upload(downloadApkPath,{
+                    mViewModel.upload(downloadApkPath, {
                         //上传中 进度
-                        mDataBind.testUpdateText.text = "上传进度：${it.progress}%"
-                    },{
+                        mViewBind.testUpdateText.text = "上传进度：${it.progress}%"
+                    }, {
                         //上传完成
                         showDialogMessage("上传成功：${it}")
-                    },{
+                    }, {
                         //上传失败
                         showDialogMessage("${it.msg}--${it.message}")
                     })

@@ -77,6 +77,7 @@ class InitComm : Task(TASK_ID, true) {
         SmartRefreshLayout.setDefaultRefreshInitializer { context, layout ->
             //设置 SmartRefreshLayout 通用配置
             layout.setEnableScrollContentWhenLoaded(true)//是否在加载完成时滚动列表显示新的内容
+            layout.setFooterTriggerRate(0.6f)
         }
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ ->
             //设置 Head

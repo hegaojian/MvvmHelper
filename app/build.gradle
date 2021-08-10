@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.tencent:mmkv-static:1.2.10'
 
     implementation project(path: ':helper')
-//    implementation 'com.github.hegaojian:MvvmHelper:1.0.8'
+//    implementation 'com.github.hegaojian:MvvmHelper:1.0.9'
     kapt "com.ljx.rxhttp:rxhttp-compiler:2.5.5"
 
 }

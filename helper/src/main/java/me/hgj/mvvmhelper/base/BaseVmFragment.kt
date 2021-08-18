@@ -146,7 +146,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
      */
     fun addLoadingUiChange(viewModel:BaseViewModel) {
         viewModel.loadingChange.run {
-            loading.observeInFragment(this@BaseVmFragment) {
+            loading.observe(this@BaseVmFragment) {
                 when(it.loadingType){
                     //通用弹窗Dialog
                     LoadingType.LOADING_DIALOG ->{
@@ -173,18 +173,18 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
                 }
             }
             //当分页列表数据第一页返回空数据时 显示空布局
-            showEmpty.observeInFragment(this@BaseVmFragment) {
+            showEmpty.observe(this@BaseVmFragment) {
                 onRequestEmpty(it)
             }
             //当请求失败时
-            showError.observeInFragment(this@BaseVmFragment) {
+            showError.observe(this@BaseVmFragment) {
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
                 onRequestError(it)
             }
             //如果是 LoadingType.LOADING_XML，当请求成功时 会显示正常的成功布局
-            showSuccess.observeInFragment(this@BaseVmFragment) {
+            showSuccess.observe(this@BaseVmFragment) {
                 showSuccessUi()
             }
         }

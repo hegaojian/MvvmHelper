@@ -115,41 +115,40 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      */
     fun addLoadingUiChange(viewModel: BaseViewModel) {
         viewModel.loadingChange.run {
-            loading.observeInActivity(this@BaseVmActivity) {
-                if (it.loadingType == LoadingType.LOADING_DIALOG) {
-                    if (it.isShow) {
-                        showLoading(it)
-                    } else {
-                        dismissLoading(it)
+            loading.observe(this@BaseVmActivity) {
+                when (it.loadingType) {
+                    LoadingType.LOADING_DIALOG -> {
+                        if (it.isShow) {
+                            showLoading(it)
+                        } else {
+                            dismissLoading(it)
+                        }
                     }
-                    return@observeInActivity
-                }
-                if (it.loadingType == LoadingType.LOADING_CUSTOM) {
-                    if (it.isShow) {
-                        showCustomLoading(it)
-                    } else {
-                        dismissCustomLoading(it)
+                    LoadingType.LOADING_CUSTOM -> {
+                        if (it.isShow) {
+                            showCustomLoading(it)
+                        } else {
+                            dismissCustomLoading(it)
+                        }
                     }
-                    return@observeInActivity
-                }
-                if (it.loadingType == LoadingType.LOADING_XML) {
-                    if (it.isShow) {
-                        showLoadingUi()
+                    LoadingType.LOADING_XML -> {
+                        if (it.isShow) {
+                            showLoadingUi()
+                        }
                     }
-                    return@observeInActivity
                 }
             }
-            showEmpty.observeInActivity(this@BaseVmActivity) {
+            showEmpty.observe(this@BaseVmActivity) {
                 onRequestEmpty(it)
             }
-            showError.observeInActivity(this@BaseVmActivity) {
+            showError.observe(this@BaseVmActivity) {
                 //如果请求错误 并且loading类型为 xml 那么控制界面显示为错误布局
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
                 onRequestError(it)
             }
-            showSuccess.observeInActivity(this@BaseVmActivity) {
+            showSuccess.observe(this@BaseVmActivity) {
                 showSuccessUi()
             }
         }

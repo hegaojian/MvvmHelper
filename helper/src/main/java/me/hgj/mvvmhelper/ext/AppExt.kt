@@ -62,6 +62,7 @@ val currentActivity: Activity? get() = if (activityList.isNullOrEmpty()) null el
 
 /**
  * 添加Activity入栈
+ * @param activity Activity
  */
 fun addActivity(activity: Activity) {
     activityList.add(activity)
@@ -69,6 +70,7 @@ fun addActivity(activity: Activity) {
 
 /**
  * 关闭Activity出栈
+ * @param activity Activity
  */
 fun finishActivity(activity: Activity) {
     if (!activity.isFinishing) {
@@ -78,7 +80,16 @@ fun finishActivity(activity: Activity) {
 }
 
 /**
+ * 从栈移除activity 不会finish
+ * @param activity Activity
+ */
+fun removeActivity(activity: Activity) {
+    activityList.remove(activity)
+}
+
+/**
  * 关闭Activity出栈
+ * @param cls Class<*>
  */
 fun finishActivity(cls: Class<*>) {
     if (activityList.isNullOrEmpty()) return

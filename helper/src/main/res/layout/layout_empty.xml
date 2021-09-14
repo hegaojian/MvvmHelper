@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/helper.dp.12"
         android:layout_marginBottom="@dimen/helper.dp.12"
-        android:text="@string/helper_loading_error_tip"
+        android:text="@string/helper_loading_empty_tip"
         android:textColor="@color/helperColorBlackGray3"
         android:textSize="@dimen/helper.dp.14" />
 

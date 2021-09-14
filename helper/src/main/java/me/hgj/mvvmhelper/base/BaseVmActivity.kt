@@ -63,15 +63,24 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
             onLoadRetry()
         }
+
         findViewById<FrameLayout>(R.id.baseContentView).post {
             initView(savedInstanceState)
         }
     }
 
     /**
-     * 初始化view
+     * 初始化view 这个方法会有延迟，因为使用了LoadSir，需要等待LoadSir注册完成后才能执行
      */
     abstract fun initView(savedInstanceState: Bundle?)
+
+    /**
+     * 已创建View 执行在 initView 之前，
+     * @param savedInstanceState Bundle?
+     */
+    open fun onCreatedView(savedInstanceState: Bundle?){
+
+    }
 
     /**
      * 创建观察者
@@ -167,7 +176,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      * @param loadStatus LoadStatusEntity
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
-        loadStatus.toast()
+        loadStatus.errorMessage.toast()
     }
 
     /**

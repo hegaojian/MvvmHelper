@@ -90,6 +90,14 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
     }
 
     /**
+     * 已创建View 执行在 initView 之前，
+     * @param savedInstanceState Bundle?
+     */
+    open fun onCreatedView(savedInstanceState: Bundle?){
+
+    }
+
+    /**
      * 创建viewModel
      */
     private fun createViewModel(): VM {
@@ -97,7 +105,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
     }
 
     /**
-     * 初始化view操作
+     * 初始化view操作  这个方法会有延迟，因为使用了LoadSir，需要等待LoadSir注册完成后才能执行
      */
     abstract fun initView(savedInstanceState: Bundle?)
 

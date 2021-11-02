@@ -26,7 +26,7 @@ class ListViewModel : BaseViewModel() {
      */
     fun getList(isRefresh: Boolean, loadingXml: Boolean = false) {
         if (isRefresh) {
-            //是刷新 玩Android的这个接口pageIndex 是0 开始 （真操蛋啊...）
+            //是刷新 玩Android的这个接口pageIndex 是0 开始
             pageIndex = 0
         }
         rxHttpRequest {

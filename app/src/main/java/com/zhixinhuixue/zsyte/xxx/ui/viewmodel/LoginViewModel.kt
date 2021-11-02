@@ -10,8 +10,6 @@ import me.hgj.mvvmhelper.ext.logA
 import me.hgj.mvvmhelper.ext.rxHttpRequest
 import me.hgj.mvvmhelper.net.LoadingType
 import rxhttp.async
-import rxhttp.wrapper.param.RxHttp
-import rxhttp.wrapper.param.toResponse
 
 /**
  * 作者　: hegaojian

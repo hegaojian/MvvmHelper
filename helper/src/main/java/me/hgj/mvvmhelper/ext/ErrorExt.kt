@@ -23,7 +23,7 @@ val Throwable.code: Int
             else -> "-1"
         }
         return try {
-            errorCode.toInt()
+            errorCode.toString().toInt()
         } catch (e: Exception) {
             -1
         }
@@ -35,7 +35,7 @@ val Throwable.msg: String
             //网络异常
             "当前无网络，请检查你的网络设置"
         } else if (
-               this is SocketTimeoutException  //okHttp全局设置超时
+            this is SocketTimeoutException  //okHttp全局设置超时
             || this is TimeoutException     //方法超时
             || this is TimeoutCancellationException  //协程超时
         ) {

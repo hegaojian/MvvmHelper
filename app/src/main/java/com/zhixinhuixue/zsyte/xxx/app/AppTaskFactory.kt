@@ -17,12 +17,11 @@ import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetHttpClient
 import me.hgj.mvvmhelper.base.appContext
 import me.hgj.mvvmhelper.ext.getColorExt
-import me.hgj.mvvmhelper.util.XLog
 import me.hgj.mvvmhelper.util.mvvmHelperLog
 import me.hgj.mvvmhelper.widget.state.BaseEmptyCallback
 import me.hgj.mvvmhelper.widget.state.BaseErrorCallback
 import me.hgj.mvvmhelper.widget.state.BaseLoadingCallback
-import rxhttp.wrapper.param.RxHttp
+import rxhttp.RxHttpPlugins
 import java.util.*
 
 /**
@@ -62,7 +61,7 @@ class InitNetWork : Task(TASK_ID, true) {
     }
     override fun run(name: String) {
         //传入自己的OKHttpClient 并添加了自己的拦截器
-        RxHttp.init(NetHttpClient.getDefaultOkHttpClient().build())
+        RxHttpPlugins.init(NetHttpClient.getDefaultOkHttpClient().build())
     }
 }
 
@@ -107,7 +106,7 @@ class InitUtils : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "3"
     }
-    
+
     override fun run(name: String) {
         //初始化Log打印
         MMKV.initialize(appContext)

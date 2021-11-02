@@ -2,7 +2,6 @@ package me.hgj.mvvmhelper.net.interception.logging.util
 
 import android.text.TextUtils
 import android.util.Log
-import com.rxlife.coroutine.BuildConfig
 import me.hgj.mvvmhelper.util.XLog
 
 /**

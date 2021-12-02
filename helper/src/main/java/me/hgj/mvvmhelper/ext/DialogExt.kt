@@ -94,7 +94,7 @@ private var loadingDialog: Dialog? = null
  * 打开等待框
  */
 fun AppCompatActivity.showLoadingExt(message: String = "请求网络中...") {
-    loadingDialog = null
+    dismissLoadingExt()
     if (!this.isFinishing) {
         if (loadingDialog == null) {
             //弹出loading时 把当前界面的输入法关闭
@@ -121,7 +121,7 @@ fun AppCompatActivity.showLoadingExt(message: String = "请求网络中...") {
  * 打开等待框
  */
 fun Fragment.showLoadingExt(message: String = "请求网络中...") {
-    loadingDialog = null
+    dismissLoadingExt()
     activity?.let {
         if (!it.isFinishing) {
             if (loadingDialog == null) {
@@ -150,10 +150,8 @@ fun Fragment.showLoadingExt(message: String = "请求网络中...") {
  * 关闭等待框
  */
 fun AppCompatActivity.dismissLoadingExt() {
-    if(!this.isFinishing){
-        loadingDialog?.dismiss()
-        loadingDialog = null
-    }
+    loadingDialog?.dismiss()
+    loadingDialog = null
 }
 
 /**

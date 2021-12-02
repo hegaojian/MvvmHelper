@@ -18,7 +18,7 @@ class MainActivity : BaseNewActivity<TestViewModel, ActivityMainBinding>() {
         mViewBinding.mainViewPager.adapter = MainAdapter(this)
         mViewBinding.mainViewPager.offscreenPageLimit = mViewBinding.mainViewPager.adapter!!.itemCount
         mViewBinding.mainViewPager.isUserInputEnabled = false
-        mViewBinding.mainNavigation.setOnNavigationItemSelectedListener { item ->
+        mViewBinding.mainNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigationRead -> {
                     mViewBinding.mainViewPager.setCurrentItem(0, false)

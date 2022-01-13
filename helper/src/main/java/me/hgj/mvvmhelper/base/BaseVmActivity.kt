@@ -37,6 +37,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
+        javaClass.simpleName.logD()
         //生成ViewModel
         mViewModel = createViewModel()
         //初始化 status View
@@ -53,6 +54,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
 
     private fun initStatusView(savedInstanceState: Bundle?) {
         mTitleBarView = getTitleBarView()
+        dataBindView = initViewDataBind()
         mTitleBarView?.let {
             findViewById<LinearLayout>(R.id.baseRootView).addView(it, 0)
             //是否隐藏标题栏
@@ -247,5 +249,12 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     override fun finish() {
         dismissLoadingExt()
         super.finish()
+    }
+
+    /**
+     * 供子类BaseVmDbActivity 初始化 DataBinding ViewBinding操作
+     */
+    open fun initViewDataBind(): View? {
+        return null
     }
 }

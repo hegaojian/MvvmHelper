@@ -17,14 +17,14 @@ import me.hgj.mvvmhelper.base.BaseViewModel
 class TwoFragment : BaseFragment<BaseViewModel, FragmentTwoBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
-        mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_paper)
-        mDataBind.customToolbar.setBackgroundResource(R.color.colorRed)
+        mBind.customToolbar.setCenterTitle(R.string.bottom_title_paper)
+        mBind.customToolbar.setBackgroundResource(R.color.colorRed)
     }
 
     override fun onResume() {
         super.onResume()
         immersionBar {
-            titleBar(mDataBind.customToolbar)
+            titleBar(mBind.customToolbar)
         }
     }
 }

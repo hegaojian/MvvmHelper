@@ -7,6 +7,7 @@ import com.zhixinhuixue.zsyte.xxx.app.base.BaseNewFragment
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.ListActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
+import com.zhixinhuixue.zsyte.xxx.ui.activity.NavigationActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 import me.hgj.mvvmhelper.ext.msg
@@ -24,19 +25,19 @@ class OneFragment : BaseNewFragment<TestViewModel, FragmentOneBinding>() {
     private var downloadApkPath = ""
 
     override fun initView(savedInstanceState: Bundle?) {
-        mViewBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
-        mViewBind.customToolbar.setBackgroundResource(R.color.colorOrange)
+        mBind.customToolbar.setCenterTitle(R.string.bottom_title_read)
+        mBind.customToolbar.setBackgroundResource(R.color.colorOrange)
     }
 
     override fun onResume() {
         super.onResume()
         immersionBar {
-            titleBar(mViewBind.customToolbar)
+            titleBar(mBind.customToolbar)
         }
     }
 
     override fun onBindViewClick() {
-        setOnclickNoRepeat(mViewBind.loginBtn, mViewBind.testPageBtn, mViewBind.testListBtn, mViewBind.testDownload, mViewBind.testUpload) {
+        setOnclickNoRepeat(mBind.loginBtn, mBind.testPageBtn, mBind.testListBtn, mBind.testDownload, mBind.testUpload) {
             when (it.id) {
                 R.id.loginBtn -> {
                     toStartActivity(LoginActivity::class.java)
@@ -51,7 +52,7 @@ class OneFragment : BaseNewFragment<TestViewModel, FragmentOneBinding>() {
                 R.id.testDownload -> {
                     mViewModel.downLoad({
                         //下载中
-                        mViewBind.testUpdateText.text = "下载进度：${it.progress}%"
+                        mBind.testUpdateText.text = "下载进度：${it.progress}%"
                     }, {
                         //下载完成
                         downloadApkPath = it
@@ -65,7 +66,7 @@ class OneFragment : BaseNewFragment<TestViewModel, FragmentOneBinding>() {
                 R.id.testUpload -> {
                     mViewModel.upload(downloadApkPath, {
                         //上传中 进度
-                        mViewBind.testUpdateText.text = "上传进度：${it.progress}%"
+                        mBind.testUpdateText.text = "上传进度：${it.progress}%"
                     }, {
                         //上传完成
                         showDialogMessage("上传成功：${it}")

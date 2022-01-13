@@ -22,7 +22,7 @@ class TestActivity : BaseActivity<BaseViewModel, ActivityTestBinding>() {
         mToolbar.initBack("测试Fragment") {
             finish()
         }
-        mDataBind.testViewPager.adapter = object :
+        mBind.testViewPager.adapter = object :
             FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getItem(position: Int): Fragment {
                 return TestFragment1()
@@ -36,7 +36,7 @@ class TestActivity : BaseActivity<BaseViewModel, ActivityTestBinding>() {
                 return titles[position]
             }
         }
-        mDataBind.testTableLayout.setupWithViewPager(mDataBind.testViewPager)
-        mDataBind.testViewPager.offscreenPageLimit = titles.size
+        mBind.testTableLayout.setupWithViewPager(mBind.testViewPager)
+        mBind.testViewPager.offscreenPageLimit = titles.size
     }
 }

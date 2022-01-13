@@ -27,7 +27,7 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
         mToolbar.initBack("列表界面") {
             finish()
         }
-        mDataBind.listSmartRefresh.refresh {
+        mBind.listSmartRefresh.refresh {
             //下拉刷新
             mViewModel.getList(true)
         }.loadMore {
@@ -35,7 +35,7 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
             mViewModel.getList(false)
         }
         //初始化recyclerview
-        mDataBind.listRecyclerView.run {
+        mBind.listRecyclerView.run {
             grid(3)
             divider {
                 setColor(getColorExt(R.color.colorWhite))
@@ -55,7 +55,7 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
     override fun onRequestSuccess() {
         mViewModel.listData.observe(this, Observer {
             //请求到列表数据
-            testAdapter.loadListSuccess(it,mDataBind.listSmartRefresh)
+            testAdapter.loadListSuccess(it,mBind.listSmartRefresh)
         })
     }
 
@@ -67,7 +67,7 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
         when (loadStatus.requestCode) {
             NetUrl.HOME_LIST -> {
                 //列表数据请求失败
-                testAdapter.loadListError(loadStatus,mDataBind.listSmartRefresh)
+                testAdapter.loadListError(loadStatus,mBind.listSmartRefresh)
             }
         }
     }

@@ -19,14 +19,14 @@ class ThreeFragment : BaseFragment<TestViewModel, FragmentThreeBinding>() {
     override val layoutId: Int get() = R.layout.fragment_three
 
     override fun initView(savedInstanceState: Bundle?) {
-        mDataBind.customToolbar.setCenterTitle(R.string.bottom_title_report)
-        mDataBind.customToolbar.setBackgroundResource(R.color.colorPrimary_20)
+        mBind.customToolbar.setCenterTitle(R.string.bottom_title_report)
+        mBind.customToolbar.setBackgroundResource(R.color.colorPrimary_20)
     }
 
     override fun onResume() {
         super.onResume()
         immersionBar {
-            titleBar(mDataBind.customToolbar)
+            titleBar(mBind.customToolbar)
         }
     }
 }

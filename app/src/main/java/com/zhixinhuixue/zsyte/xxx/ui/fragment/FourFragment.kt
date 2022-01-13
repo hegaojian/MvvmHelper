@@ -23,7 +23,7 @@ class FourFragment : BaseFragment<TestViewModel, FragmentFourBinding>() {
     override fun onResume() {
         super.onResume()
         immersionBar {
-            titleBar(mDataBind.userHeadImg)
+            titleBar(mBind.userHeadImg)
         }
     }
 

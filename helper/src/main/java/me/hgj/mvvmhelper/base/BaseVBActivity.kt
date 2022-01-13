@@ -1,10 +1,9 @@
 package me.hgj.mvvmhelper.base
 
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.noober.background.BackgroundLibrary
-import java.lang.reflect.ParameterizedType
+import me.hgj.mvvmhelper.ext.inflateBinding
 
 /**
  * 作者　: hegaojian
@@ -15,23 +14,12 @@ abstract class BaseVBActivity<VM : BaseViewModel,VB: ViewBinding> : BaseVmActivi
 
     //使用了 ViewBinding 就不需要 layoutId了，因为 会从 VB 泛型 找到相关的view
     override val layoutId: Int = 0
-    lateinit var mViewBinding: VB
+    lateinit var mBind: VB
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        initViewBind()
-        super.onCreate(savedInstanceState)
-    }
-
-    /**
-     * 创建 ViewBinding
-     */
-    private fun initViewBind() {
-        //利用反射 根据泛型得到 ViewBinding
-        val superClass = javaClass.genericSuperclass
-        val aClass = (superClass as ParameterizedType).actualTypeArguments[1] as Class<*>
+    override fun initViewDataBind(): View? {
+        //利用反射 根据泛型得到 ViewDataBinding
+        mBind = inflateBinding()
         BackgroundLibrary.inject(this)
-        val method = aClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
-        mViewBinding =  method.invoke(null,layoutInflater) as VB
-        dataBindView = mViewBinding.root
+        return mBind.root
     }
 }

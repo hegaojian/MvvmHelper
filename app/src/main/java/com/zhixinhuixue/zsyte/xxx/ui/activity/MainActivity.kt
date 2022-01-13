@@ -15,22 +15,22 @@ import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 class MainActivity : BaseNewActivity<TestViewModel, ActivityMainBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar.setCenterTitle(R.string.bottom_title_read)
-        mViewBinding.mainViewPager.adapter = MainAdapter(this)
-        mViewBinding.mainViewPager.offscreenPageLimit = mViewBinding.mainViewPager.adapter!!.itemCount
-        mViewBinding.mainViewPager.isUserInputEnabled = false
-        mViewBinding.mainNavigation.setOnItemSelectedListener { item ->
+        mBind.mainViewPager.adapter = MainAdapter(this)
+        mBind.mainViewPager.offscreenPageLimit = mBind.mainViewPager.adapter!!.itemCount
+        mBind.mainViewPager.isUserInputEnabled = false
+        mBind.mainNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigationRead -> {
-                    mViewBinding.mainViewPager.setCurrentItem(0, false)
+                    mBind.mainViewPager.setCurrentItem(0, false)
                 }
                 R.id.navigationPaper -> {
-                    mViewBinding.mainViewPager.setCurrentItem(1, false)
+                    mBind.mainViewPager.setCurrentItem(1, false)
                 }
                 R.id.navigationReport -> {
-                    mViewBinding.mainViewPager.setCurrentItem(2, false)
+                    mBind.mainViewPager.setCurrentItem(2, false)
                 }
                 R.id.navigationUser -> {
-                    mViewBinding.mainViewPager.setCurrentItem(3, false)
+                    mBind.mainViewPager.setCurrentItem(3, false)
                 }
             }
             true

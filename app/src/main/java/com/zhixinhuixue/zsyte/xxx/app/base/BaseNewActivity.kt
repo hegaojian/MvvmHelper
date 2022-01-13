@@ -17,7 +17,7 @@ import me.hgj.mvvmhelper.base.BaseViewModel
 abstract class BaseNewActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVBActivity<VM, VB>(){
 
     lateinit var mToolbar: CustomToolBar
-
+    
     override fun getTitleBarView(): View? {
         val titleBarView = LayoutInflater.from(this).inflate(R.layout.layout_titlebar_view, null)
         mToolbar = titleBarView.findViewById(R.id.customToolBar)

@@ -23,7 +23,7 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
 
-        mDataBind.listSmartRefresh.refresh {
+        mBind.listSmartRefresh.refresh {
             //刷新
             mViewModel.getList(true)
         }.loadMore {
@@ -31,7 +31,7 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
             mViewModel.getList(false)
         }
         //初始化 recycleView
-        mDataBind.listRecyclerView.grid(1).divider {
+        mBind.listRecyclerView.grid(1).divider {
             orientation = DividerOrientation.GRID
             includeVisible = true
             setDivider(10,true)
@@ -52,7 +52,7 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
     override fun onRequestSuccess() {
         mViewModel.listData.observe(this, Observer {
             //请求到列表数据
-            testAdapter.loadListSuccess(it,mDataBind.listSmartRefresh)
+            testAdapter.loadListSuccess(it,mBind.listSmartRefresh)
         })
     }
 
@@ -64,7 +64,7 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
         when (loadStatus.requestCode) {
             NetUrl.HOME_LIST -> {
                 //列表数据请求失败
-                testAdapter.loadListError(loadStatus,mDataBind.listSmartRefresh)
+                testAdapter.loadListError(loadStatus,mBind.listSmartRefresh)
             }
         }
     }

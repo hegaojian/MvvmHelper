@@ -39,7 +39,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
-        javaClass.simpleName.logD()
         //生成ViewModel
         mViewModel = createViewModel()
         //初始化 status View

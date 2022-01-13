@@ -6,6 +6,8 @@ import okhttp3.OkHttpClient
 import rxhttp.wrapper.cookie.CookieStore
 import java.io.File
 import java.util.concurrent.TimeUnit
+import rxhttp.wrapper.ssl.HttpsUtils
+
 
 /**
  * 作者　: hegaojian
@@ -15,6 +17,7 @@ import java.util.concurrent.TimeUnit
 object NetHttpClient {
     fun getDefaultOkHttpClient():  OkHttpClient.Builder {
         //在这里面可以写你想要的配置 太多了，我就简单的写了一点，具体可以看rxHttp的文档，有很多
+        val sslParams = HttpsUtils.getSslSocketFactory()
         return OkHttpClient.Builder()
             //使用CookieStore对象磁盘缓存,自动管理cookie 玩安卓自动登录验证
             .cookieJar(CookieStore(File(appContext.externalCacheDir, "RxHttpCookie")))
@@ -23,5 +26,7 @@ object NetHttpClient {
             .writeTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(HeadInterceptor())//自定义头部参数拦截器
             .addInterceptor(LogInterceptor())//添加Log拦截器
+            .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager) //添加信任证书
+            .hostnameVerifier { hostname, session -> true } //忽略host验证
     }
 }

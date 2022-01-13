@@ -110,8 +110,6 @@ class InitUtils : Task(TASK_ID, true) {
     override fun run(name: String) {
         //初始化Log打印
         MMKV.initialize(appContext)
-        //框架全局打印日志开关
-        mvvmHelperLog = BuildConfig.DEBUG
     }
 }
 

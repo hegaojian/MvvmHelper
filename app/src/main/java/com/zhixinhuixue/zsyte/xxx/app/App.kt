@@ -4,6 +4,7 @@ import android.app.Application
 import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.Project
 import com.zhixinhuixue.zsyte.xxx.BuildConfig
+import me.hgj.mvvmhelper.base.MvvmHelper
 import me.hgj.mvvmhelper.ext.currentProcessName
 
 /**
@@ -14,8 +15,9 @@ import me.hgj.mvvmhelper.ext.currentProcessName
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        MvvmHelper.init(this,BuildConfig.DEBUG)
         val processName = currentProcessName
-        if (processName == packageName) {
+        if (currentProcessName == packageName) {
             // 主进程初始化
             onMainProcessInit()
         } else {

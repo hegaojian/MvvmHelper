@@ -22,7 +22,6 @@ var mvvmHelperLog :Boolean = true
         field = value
         XLog.init(value)
         LogUtils.setLog(value)
-
     }
 
 object XLog {

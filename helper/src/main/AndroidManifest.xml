@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.hgj.mvvmhelper">
+<manifest package="me.hgj.mvvmhelper">
 
-    <application>
-        <provider
-            android:name=".base.Ktx"
-            android:authorities="${applicationId}.KtxInstaller"
-            android:exported="false" />
-    </application>
 </manifest>

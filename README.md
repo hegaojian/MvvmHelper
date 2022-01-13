@@ -25,8 +25,8 @@ apply plugin: 'kotlin-kapt'
 
 dependencies {
   ...
-  implementation 'com.github.hegaojian:MvvmHelper:1.1.4'
-  kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:2.7.2'
+  implementation 'com.github.hegaojian:MvvmHelper:1.1.5'
+  kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:2.8.3'
 }
 ```
 
@@ -54,6 +54,13 @@ android {
 }
  
 ```
+
+- **1.4 在Application中初始化**
+
+```kotlin
+ MvvmHelper.init(this,BuildConfig.DEBUG)
+```
+
 
 ## 混淆
 

@@ -1,6 +1,5 @@
 package me.hgj.mvvmhelper.base
 
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -11,7 +10,5 @@ import androidx.appcompat.app.AppCompatActivity
 abstract class BaseInitActivity : AppCompatActivity() {
 
     abstract val layoutId: Int
-
-    var dataBindView :View? = null
 
 }

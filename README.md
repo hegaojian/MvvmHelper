@@ -37,10 +37,10 @@ AndroidStudio 4.0 以下版本------>
 android {
     ...
     dataBinding {
-        enabled = true 
+        enabled = true //可选 不用可以不写
     }
     viewBinding {
-            enabled = true
+        enabled = true //可选 不用可以不写
     }
 }
 
@@ -48,8 +48,8 @@ AndroidStudio 4.0及以上版本 ------>
 android {
     ...
    buildFeatures {
-        dataBinding = true
-        viewBinding = true
+        dataBinding = true //可选 不用可以不写
+        viewBinding = true //可选 不用可以不写
     }
 }
  

@@ -13,8 +13,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 16
-        versionName "1.1.5"
+        versionCode 17
+        versionName "1.1.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -76,7 +76,7 @@ dependencies {
     api "com.scwang.smart:refresh-layout-kernel:2.0.1"
     api "com.scwang.smart:refresh-header-classics:2.0.1"
     //利用liveData发送消息
-    api 'com.kunminx.arch:unpeek-livedata:7.1.0-beta1'
+    api 'com.kunminx.arch:unpeek-livedata:7.2.0-beta1'
     //通过标签直接生成shape，无需再写shape.xml
     api "com.noober.background:core:1.6.5"
     //管理界面状态

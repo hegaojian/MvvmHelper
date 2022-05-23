@@ -67,7 +67,7 @@ dependencies {
     //微信开源项目，替代SP
     implementation 'com.tencent:mmkv-static:1.2.10'
     implementation project(path: ':helper')
-//    implementation 'com.github.hegaojian:MvvmHelper:1.1.5'
+//    implementation 'com.github.hegaojian:MvvmHelper:1.1.6'
     kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:2.8.3'
     //这是用来测试 navigation 的 可以忽略
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'

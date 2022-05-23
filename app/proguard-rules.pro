@@ -20,6 +20,18 @@
   public static final android.os.Parcelable$Creator *;
 }
 -keepnames class * implements java.io.Serializable
+# 显式保留所有序列化成员。可序列化接口只是一个标记接口，因此不会保存它们。
+-keep public class * implements java.io.Serializable {*;}
+-keepclassmembers class * implements java.io.Serializable {
+   static final long serialVersionUID;
+   private static final java.io.ObjectStreamField[]   serialPersistentFields;
+   private void writeObject(java.io.ObjectOutputStream);
+   private void readObject(java.io.ObjectInputStream);
+   java.lang.Object writeReplace();
+   java.lang.Object readResolve();
+}
+
+
 -keepattributes Signature
 -keep class **.R$* {*;}
 -ignorewarnings
@@ -70,7 +82,6 @@
 #okio
 -dontwarn okio.**
 -keep class okio.**{*;}
-
 # 保留自定义控件(继承自View)不能被混淆
 -keep public class * extends android.view.View {
     public <init>(android.content.Context);

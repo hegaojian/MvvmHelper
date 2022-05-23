@@ -10,7 +10,9 @@ import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
 import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel
+import me.hgj.mvvmhelper.ext.dismissLoadingExt
 import me.hgj.mvvmhelper.ext.showDialogMessage
+import me.hgj.mvvmhelper.ext.showLoadingExt
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 
@@ -28,6 +30,9 @@ class LoginActivity: BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         }
         mBind.viewModel = mViewModel
         mBind.click = LoginClickProxy()
+        showLoadingExt("第一个")
+        dismissLoadingExt()
+        showLoadingExt("第二个")
     }
 
     /**

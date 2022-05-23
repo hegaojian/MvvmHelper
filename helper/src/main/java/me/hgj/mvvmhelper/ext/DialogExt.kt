@@ -108,10 +108,6 @@ fun AppCompatActivity.showLoadingExt(message: String = "请求网络中...") {
                             this.findViewById<TextView>(R.id.loading_tips).text = message
                         })
             }
-            loadingDialog?.setOnDismissListener {
-                //设置dialog关闭时 置空 不然会出现 一个隐藏bug 这里就不细说了
-                dismissLoadingExt()
-            }
         }
         loadingDialog?.show()
     }
@@ -135,10 +131,6 @@ fun Fragment.showLoadingExt(message: String = "请求网络中...") {
                             .inflate(R.layout.layout_loading_view, null).apply {
                                 this.findViewById<TextView>(R.id.loading_tips).text = message
                             })
-                }
-                loadingDialog?.setOnDismissListener {
-                    //设置dialog关闭时 置空 不然会出现 一个隐藏bug 这里就不细说了
-                    dismissLoadingExt()
                 }
             }
             loadingDialog?.show()

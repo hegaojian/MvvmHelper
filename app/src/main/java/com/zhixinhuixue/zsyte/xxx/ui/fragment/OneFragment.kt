@@ -1,6 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.gyf.immersionbar.ktx.immersionBar
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseNewFragment

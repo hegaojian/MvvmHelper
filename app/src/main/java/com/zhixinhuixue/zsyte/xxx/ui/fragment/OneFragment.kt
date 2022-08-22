@@ -1,19 +1,17 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.gyf.immersionbar.ktx.immersionBar
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseNewFragment
+import com.zhixinhuixue.zsyte.xxx.app.ext.LiveDataEvent
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentOneBinding
 import com.zhixinhuixue.zsyte.xxx.ui.activity.ListActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
-import com.zhixinhuixue.zsyte.xxx.ui.activity.NavigationActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
-import me.hgj.mvvmhelper.ext.msg
-import me.hgj.mvvmhelper.ext.setOnclickNoRepeat
-import me.hgj.mvvmhelper.ext.showDialogMessage
-import me.hgj.mvvmhelper.ext.toStartActivity
+import me.hgj.mvvmhelper.ext.*
 
 /**
  * 作者　: hegaojian
@@ -34,6 +32,10 @@ class OneFragment : BaseNewFragment<TestViewModel, FragmentOneBinding>() {
         immersionBar {
             titleBar(mBind.customToolbar)
         }
+        LiveDataEvent.loginEvent.observe(viewLifecycleOwner, Observer {
+            //登录成功通知
+            "登录成功".toast()
+        })
     }
 
     override fun onBindViewClick() {

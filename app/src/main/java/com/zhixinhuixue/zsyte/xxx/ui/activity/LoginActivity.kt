@@ -7,6 +7,7 @@ import me.hgj.mvvmhelper.ext.getStringExt
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
+import com.zhixinhuixue.zsyte.xxx.app.ext.LiveDataEvent
 import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel
@@ -42,6 +43,8 @@ class LoginActivity: BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         //监听登录结果
         mViewModel.loginData.observe(this, Observer {
             //做保存信息等操作
+            //通知登录成功
+            LiveDataEvent.loginEvent.value = true
             finish()
         })
     }
@@ -54,6 +57,7 @@ class LoginActivity: BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         when(loadStatus.requestCode){
             NetUrl.LOGIN ->{
                 showDialogMessage(loadStatus.errorMessage)
+
             }
         }
     }

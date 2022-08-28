@@ -9,12 +9,10 @@ import me.hgj.mvvmhelper.util.decoration.DefaultDecoration
 /**
  * 纵向recyclerview
  * @receiver RecyclerView
- * @param baseAdapter BaseQuickAdapter<*, *>
  * @return RecyclerView
  */
 fun RecyclerView.vertical(): RecyclerView {
     layoutManager = LinearLayoutManager(this.context)
-    setHasFixedSize(true)
     return this
 }
 
@@ -27,7 +25,6 @@ fun RecyclerView.horizontal(): RecyclerView {
     layoutManager = LinearLayoutManager(this.context).apply {
         orientation = RecyclerView.HORIZONTAL
     }
-    setHasFixedSize(true)
     return this
 }
 
@@ -38,7 +35,6 @@ fun RecyclerView.horizontal(): RecyclerView {
  */
 fun RecyclerView.grid(count: Int): RecyclerView {
     layoutManager = GridLayoutManager(this.context, count)
-    setHasFixedSize(true)
     return this
 }
 

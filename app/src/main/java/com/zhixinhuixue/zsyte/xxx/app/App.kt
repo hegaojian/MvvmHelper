@@ -33,12 +33,11 @@ class App : Application() {
         AnchorsManager.getInstance()
             .debuggable(BuildConfig.DEBUG)
             //设置锚点
-            .addAnchor(InitNetWork.TASK_ID, InitUtils.TASK_ID, InitComm.TASK_ID, InitToast.TASK_ID).start(
+            .addAnchor(InitNetWork.TASK_ID, InitUtils.TASK_ID, InitComm.TASK_ID).start(
                 Project.Builder("app", AppTaskFactory())
                     .add(InitNetWork.TASK_ID)
                     .add(InitComm.TASK_ID)
                     .add(InitUtils.TASK_ID)
-                    .add(InitToast.TASK_ID)
                     .build()
             )
     }

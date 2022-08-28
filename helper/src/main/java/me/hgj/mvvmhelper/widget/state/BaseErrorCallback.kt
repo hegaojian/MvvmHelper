@@ -1,7 +1,7 @@
 package me.hgj.mvvmhelper.widget.state
 
-import com.kingja.loadsir.callback.Callback
 import me.hgj.mvvmhelper.R
+import me.hgj.mvvmhelper.loadsir.callback.Callback
 
 /**
  * 作者　: hegaojian

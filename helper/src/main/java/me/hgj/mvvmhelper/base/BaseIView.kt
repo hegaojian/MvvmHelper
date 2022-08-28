@@ -1,6 +1,7 @@
 package me.hgj.mvvmhelper.base
 
 import android.view.View
+import me.hgj.mvvmhelper.loadsir.callback.Callback
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 
@@ -89,6 +90,22 @@ interface BaseIView {
      * 隐藏自定义loading弹窗dialog
      */
     fun dismissCustomLoading(setting: LoadingDialogEntity)
+
+
+    /**
+     *  返回当前Activity/Fragment 自定义 空状态布局
+     */
+    fun getEmptyStateLayout(): Callback?
+
+    /**
+     *  返回当前Activity/Fragment 自定义 加载中状态布局
+     */
+    fun getLoadingStateLayout(): Callback?
+
+    /**
+     *  返回当前Activity/Fragment 自定义 错误状态布局
+     */
+    fun getErrorStateLayout(): Callback?
 
 
 }

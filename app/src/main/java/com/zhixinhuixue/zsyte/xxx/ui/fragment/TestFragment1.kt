@@ -19,7 +19,7 @@ import me.hgj.mvvmhelper.util.decoration.DividerOrientation
  */
 class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
 
-    private val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
+    private val testAdapter: TestAdapter by lazy { TestAdapter() }
 
     override fun initView(savedInstanceState: Bundle?) {
 

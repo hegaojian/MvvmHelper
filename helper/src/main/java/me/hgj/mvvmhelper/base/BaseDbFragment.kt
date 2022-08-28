@@ -25,6 +25,7 @@ abstract class BaseDbFragment<VM : BaseViewModel,DB: ViewDataBinding> : BaseVmFr
      */
     override fun initViewDataBind(inflater: LayoutInflater, container: ViewGroup?): View? {
         _binding = inflateBinding(inflater, container, false)
+        _binding?.lifecycleOwner = viewLifecycleOwner
         return mBind.root
     }
 

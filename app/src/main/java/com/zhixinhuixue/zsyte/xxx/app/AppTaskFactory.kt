@@ -1,23 +1,18 @@
 package com.zhixinhuixue.zsyte.xxx.app
 
-import android.view.Gravity
 import com.effective.android.anchors.Project
 import com.effective.android.anchors.Task
 import com.effective.android.anchors.TaskCreator
-import com.hjq.toast.ToastUtils
-import com.kingja.loadsir.callback.SuccessCallback
-import com.kingja.loadsir.core.LoadSir
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
-import com.zhixinhuixue.library.common.ext.dp
-import com.zhixinhuixue.zsyte.xxx.BuildConfig
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetHttpClient
 import me.hgj.mvvmhelper.base.appContext
 import me.hgj.mvvmhelper.ext.getColorExt
-import me.hgj.mvvmhelper.util.mvvmHelperLog
+import me.hgj.mvvmhelper.loadsir.callback.SuccessCallback
+import me.hgj.mvvmhelper.loadsir.core.LoadSir
 import me.hgj.mvvmhelper.widget.state.BaseEmptyCallback
 import me.hgj.mvvmhelper.widget.state.BaseErrorCallback
 import me.hgj.mvvmhelper.widget.state.BaseLoadingCallback
@@ -36,7 +31,6 @@ object TaskCreator : TaskCreator {
             InitNetWork.TASK_ID -> InitNetWork()
             InitComm.TASK_ID -> InitComm()
             InitUtils.TASK_ID -> InitUtils()
-            InitToast.TASK_ID -> InitToast()
             else -> InitDefault()
         }
     }
@@ -46,6 +40,7 @@ class InitDefault : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "0"
     }
+
     override fun run(name: String) {
 
     }
@@ -59,12 +54,12 @@ class InitNetWork : Task(TASK_ID, true) {
     companion object {
         const val TASK_ID = "1"
     }
+
     override fun run(name: String) {
         //传入自己的OKHttpClient 并添加了自己的拦截器
         RxHttpPlugins.init(NetHttpClient.getDefaultOkHttpClient().build())
     }
 }
-
 
 
 //初始化常用控件类
@@ -91,11 +86,12 @@ class InitComm : Task(TASK_ID, true) {
                 setAccentColor(getColorExt(R.color.colorBlack))
             }
         }
-        //注册界面状态管理
+        //注册界面状态管理: 以下代码 其实 在调用MvvmHelper.init()的时候就已经注册了
+        //这里写的原因是 框架的 状态布局页面可能不适用于你的项目，你可以添加自己的 错误 空 加载中全局配置
         LoadSir.beginBuilder()
-            .addCallback(BaseErrorCallback())
-            .addCallback(BaseEmptyCallback())
-            .addCallback(BaseLoadingCallback())
+            .setErrorCallBack(BaseErrorCallback())
+            .setEmptyCallBack(BaseEmptyCallback())
+            .setLoadingCallBack(BaseLoadingCallback())
             .setDefaultCallback(SuccessCallback::class.java)
             .commit()
     }
@@ -110,19 +106,6 @@ class InitUtils : Task(TASK_ID, true) {
     override fun run(name: String) {
         //初始化Log打印
         MMKV.initialize(appContext)
-    }
-}
-
-//初始化Utils
-class InitToast : Task(TASK_ID, false) {
-    companion object {
-        const val TASK_ID = "4"
-    }
-
-    override fun run(name: String) {
-        //初始化吐司 这个吐司必须要主线程中初始化
-        ToastUtils.init(appContext)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, 100.dp)
     }
 }
 

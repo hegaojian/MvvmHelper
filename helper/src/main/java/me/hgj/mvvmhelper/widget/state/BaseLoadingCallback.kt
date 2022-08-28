@@ -2,8 +2,8 @@ package me.hgj.mvvmhelper.widget.state
 
 import android.content.Context
 import android.view.View
-import com.kingja.loadsir.callback.Callback
 import me.hgj.mvvmhelper.R
+import me.hgj.mvvmhelper.loadsir.callback.Callback
 
 /**
  * 作者　: hegaojian

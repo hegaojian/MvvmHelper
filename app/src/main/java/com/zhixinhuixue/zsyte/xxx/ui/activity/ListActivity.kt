@@ -21,7 +21,7 @@ import me.hgj.mvvmhelper.util.decoration.DividerOrientation
  */
 class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
 
-    private  val testAdapter: TestAdapter by lazy { TestAdapter(arrayListOf()) }
+    private  val testAdapter: TestAdapter by lazy { TestAdapter() }
 
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar.initBack("列表界面") {
@@ -36,13 +36,19 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
         }
         //初始化recyclerview
         mBind.listRecyclerView.run {
+            //设置 recyclerview 模式 为 网格
             grid(3)
             divider {
+                //分割线颜色
                 setColor(getColorExt(R.color.colorWhite))
+                //分割线高度
                 setDivider(10.dp)
+                //是否首尾都有分割线
                 includeVisible = true
+                //分割线方向
                 orientation = DividerOrientation.GRID
             }
+            //设置适配器
             adapter = testAdapter
         }
         //发起请求
@@ -78,5 +84,4 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
     override fun onLoadRetry() {
         mViewModel.getList(isRefresh = true, loadingXml = true)
     }
-
 }

@@ -1,9 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
-import android.widget.CompoundButton
 import androidx.lifecycle.Observer
-import me.hgj.mvvmhelper.ext.getStringExt
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
@@ -11,40 +9,32 @@ import com.zhixinhuixue.zsyte.xxx.app.ext.LiveDataEvent
 import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
 import com.zhixinhuixue.zsyte.xxx.databinding.ActivityLoginBinding
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.LoginViewModel
-import me.hgj.mvvmhelper.ext.dismissLoadingExt
-import me.hgj.mvvmhelper.ext.showDialogMessage
-import me.hgj.mvvmhelper.ext.showLoadingExt
+import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.net.LoadStatusEntity
-import me.hgj.mvvmhelper.net.LoadingDialogEntity
 
 /**
  * 作者　: hegaojian
  * 时间　: 2020/11/18
- * 描述　: 虽然在Activity代码少了，但是DataBinding 不太好用
+ * 描述　:
  */
-class LoginActivity: BaseActivity<LoginViewModel, ActivityLoginBinding>() {
+class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         //初始化toolbar
         mToolbar.initBack(getStringExt(R.string.login_submit)) {
             finish()
         }
-        mBind.viewModel = mViewModel
-        mBind.click = LoginClickProxy()
-        showLoadingExt("第一个")
-        dismissLoadingExt()
-        showLoadingExt("第二个")
     }
 
     /**
      * 请求成功
      */
     override fun onRequestSuccess() {
-        //监听登录结果
+        //方式1 的 请求成功回调 登录结果
         mViewModel.loginData.observe(this, Observer {
-            //做保存信息等操作
-            //通知登录成功
-            LiveDataEvent.loginEvent.value = true
+            //请求成功  可以做保存信息等操作 ....
+
+            LiveDataEvent.loginEvent.value = true //通知登录成功
             finish()
         })
     }
@@ -54,45 +44,38 @@ class LoginActivity: BaseActivity<LoginViewModel, ActivityLoginBinding>() {
      * @param loadStatus LoadStatusEntity
      */
     override fun onRequestError(loadStatus: LoadStatusEntity) {
-        when(loadStatus.requestCode){
-            NetUrl.LOGIN ->{
+        // 不重写 这个方法，或者 不注释 super.xxx  默认就会吐司 错误消息，以下代码我们编写自己的处理错误的逻辑
+//        super.onRequestError(loadStatus)
+        when (loadStatus.requestCode) {
+            NetUrl.LOGIN -> {
+                //是登录接口 ，弹窗提示错误消息
                 showDialogMessage(loadStatus.errorMessage)
-
             }
         }
     }
 
-    inner class LoginClickProxy{
+    override fun onBindViewClick() {
+        //绑定点击事件
+        setOnclick(mBind.loginBtn) {
+            when (it) {
+                mBind.loginBtn -> {
+                    when {
+                        mBind.loginPhone.isEmpty() -> showDialogMessage("手机号不能为空")
+                        mBind.loginPwd.isEmpty() -> showDialogMessage("密码不能为空")
+                        else -> {
+                            //方式1：
+//                            mViewModel.login(mBind.loginPhone.textString(), mBind.loginPwd.textString())
+                            //方式2:
+                            mViewModel.loginCallBack(mBind.loginPhone.textString(), mBind.loginPwd.textString())?.observe(this){
+                                //请求成功  可以做保存信息等操作 ....
 
-        fun clear() {
-            mViewModel.userName.set("")
-        }
-
-        //登录
-        fun login(){
-            when {
-                mViewModel.userName.get().isEmpty() -> showDialogMessage("手机号不能为空")
-                mViewModel.password.get().isEmpty() -> showDialogMessage("密码不能为空")
-                else -> mViewModel.login(mViewModel.userName.get(), mViewModel.password.get())
+                                LiveDataEvent.loginEvent.value = true //通知登录成功
+                                finish()
+                            }
+                        }
+                    }
+                }
             }
-        }
-
-        var onCheckedChangeListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-                mViewModel.isShowPwd.set(isChecked)
-            }
-    }
-
-    override fun showCustomLoading(setting: LoadingDialogEntity) {
-        if(setting.requestCode== NetUrl.LOGIN){
-            //可以根据不同的code 做不同的loading处理
-            showLoadingUi()
-        }
-    }
-
-    override fun dismissCustomLoading(setting: LoadingDialogEntity) {
-        if(setting.requestCode==NetUrl.LOGIN){
-            //可以根据不同的code 做不同的loading处理
-            showSuccessUi()
         }
     }
 

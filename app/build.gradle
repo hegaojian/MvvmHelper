@@ -3,15 +3,23 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.devtools.ksp' version '1.7.10-1.0.6'
 }
-android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
 
+//让IDE知道ksp生成的kotlin代码(仅使用ksp时才需要)
+kotlin {
+    sourceSets.debug {
+        //如果通过productFlavors配置了多渠道，则配置 /../ksp/xxxDebug/kotlin
+        kotlin.srcDir("build/generated/ksp/debug/kotlin")
+    }
+}
+
+android {
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.zhixinhuixue.zsyte.xxx"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 16
         versionName "1.1.5"
     }
@@ -36,8 +44,8 @@ android {
         viewBinding = true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -52,25 +60,24 @@ android {
     }
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //banner
-    implementation "com.github.zhpanvip:BannerViewPager:3.5.2"
+    implementation "com.github.zhpanvip:BannerViewPager:3.5.4"
     //微信开源项目，替代SP
     implementation 'com.tencent:mmkv-static:1.2.10'
     implementation project(path: ':helper')
-//    implementation 'com.github.hegaojian:MvvmHelper:1.1.6'
-    kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:2.8.3'
-    //这是用来测试 navigation 的 可以忽略
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+//    implementation 'com.github.hegaojian:MvvmHelper:1.1.7'
+    ksp  "com.github.liujingxing.rxhttp:rxhttp-compiler:2.9.3"
+
 
 }

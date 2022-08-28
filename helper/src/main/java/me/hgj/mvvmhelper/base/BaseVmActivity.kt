@@ -7,10 +7,12 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
 import com.gyf.immersionbar.ImmersionBar
-import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
 import me.hgj.mvvmhelper.R
 import me.hgj.mvvmhelper.ext.*
+import me.hgj.mvvmhelper.loadsir.callback.Callback
+import me.hgj.mvvmhelper.loadsir.callback.SuccessCallback
+import me.hgj.mvvmhelper.loadsir.core.LoadService
+import me.hgj.mvvmhelper.loadsir.core.LoadSir
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 import me.hgj.mvvmhelper.net.LoadingType
@@ -25,7 +27,7 @@ import me.hgj.mvvmhelper.widget.state.BaseLoadingCallback
  */
 abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIView {
 
-    private var dataBindView :View? = null
+    private var dataBindView: View? = null
 
     //界面状态管理者
     lateinit var uiStatusManger: LoadService<*>
@@ -63,8 +65,22 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
         }
         initImmersionBar()
         findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
-        uiStatusManger = LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
-            onLoadRetry()
+
+        uiStatusManger = if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null) {
+            //如果子类有自定义CallBack ，那么就不能用 全局的，得新建一个 LoadSir
+            val builder = LoadSir.beginBuilder()
+            builder.setEmptyCallBack(getEmptyStateLayout() ?: LoadSir.getDefault().emptyCallBack)
+            builder.setLoadingCallBack(getLoadingStateLayout() ?: LoadSir.getDefault().loadingCallBack)
+            builder.setErrorCallBack(getErrorStateLayout() ?: LoadSir.getDefault().errorCallBack)
+            builder.setDefaultCallback(SuccessCallback::class.java)
+            builder.build().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
+                onLoadRetry()
+            }
+        } else {
+            //没有自定义CallBack 那么就用全局的LoadSir来注册
+            LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
+                onLoadRetry()
+            }
         }
 
         findViewById<FrameLayout>(R.id.baseContentView).post {
@@ -81,7 +97,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      * 已创建View 执行在 initView 之前，
      * @param savedInstanceState Bundle?
      */
-    open fun onCreatedView(savedInstanceState: Bundle?){
+    open fun onCreatedView(savedInstanceState: Bundle?) {
 
     }
 
@@ -148,6 +164,8 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
                             showLoadingUi()
                         }
                     }
+                    LoadingType.LOADING_NULL -> {
+                    }
                 }
             }
             showEmpty.observe(this@BaseVmActivity) {
@@ -204,21 +222,27 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      * @param errMessage String
      */
     override fun showErrorUi(errMessage: String) {
-        uiStatusManger.showCallback(BaseErrorCallback::class.java)
+        uiStatusManger.showCallback(
+            getErrorStateLayout()?.javaClass ?: LoadSir.getDefault().errorCallBack::class.java
+        )
     }
 
     /**
      * 显示 空数据 状态界面
      */
     override fun showEmptyUi() {
-        uiStatusManger.showCallback(BaseEmptyCallback::class.java)
+        uiStatusManger.showCallback(
+            getEmptyStateLayout()?.javaClass ?: LoadSir.getDefault().emptyCallBack::class.java
+        )
     }
 
     /**
      * 显示 loading 状态界面
      */
     override fun showLoadingUi() {
-        uiStatusManger.showCallback(BaseLoadingCallback::class.java)
+        uiStatusManger.showCallback(
+            getLoadingStateLayout()?.javaClass ?: LoadSir.getDefault().loadingCallBack::class.java
+        )
     }
 
     /**
@@ -227,7 +251,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
      * @param setting LoadingDialogEntity
      */
     override fun showCustomLoading(setting: LoadingDialogEntity) {
-        showLoadingExt(setting.loadingMessage)
+        showLoadingExt(setting.loadingMessage,setting.coroutineScope)
     }
 
     /**
@@ -240,7 +264,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     }
 
     override fun showLoading(setting: LoadingDialogEntity) {
-        showLoadingExt(setting.loadingMessage)
+        showLoadingExt(setting.loadingMessage,setting.coroutineScope)
     }
 
     override fun dismissLoading(setting: LoadingDialogEntity) {
@@ -258,4 +282,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseInitActivity(), BaseIVie
     open fun initViewDataBind(): View? {
         return null
     }
+
+    override fun getEmptyStateLayout(): Callback? = null
+    override fun getErrorStateLayout(): Callback? = null
+    override fun getLoadingStateLayout(): Callback? = null
+
 }

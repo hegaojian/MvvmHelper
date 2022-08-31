@@ -1,9 +1,6 @@
 ## :chicken::chicken::chicken: 这是一个快速开发的框架，使用Kotlin语言开发，MVVM+Jetpack架构，封装了公共头部、界面状态管理、ViewModel、LiveData、DataBinding、ViewBinding、头部刷新、加载更多、沉浸式、全局通知、丰富好用的拓展函数、RxHttp网络请求等等一系列工具
 
 
-### 自用框架，事情多比较忙，没什么时间去写文档，文档比较简陋，感兴趣的话，可以下载下来看看 demo
-
-
 clone慢的可以用 gitee链接 https://gitee.com/hegaojian/MvvmHelper
 
 ## 1.如何集成
@@ -64,6 +61,7 @@ android {
  MvvmHelper.init(this,BuildConfig.DEBUG)
 ```
 
+### 更详细的文档介绍 请看 [Wiki](https://github.com/hegaojian/MvvmHelper/wiki)   [Wiki](https://github.com/hegaojian/MvvmHelper/wiki)   [Wiki](https://github.com/hegaojian/MvvmHelper/wiki)
 
 ## 混淆
 

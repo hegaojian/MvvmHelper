@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
 import com.zhixinhuixue.zsyte.xxx.data.response.ApiPagerResponse
+import kotlinx.coroutines.delay
 import me.hgj.mvvmhelper.base.BaseViewModel
 import me.hgj.mvvmhelper.ext.rxHttpRequest
 import me.hgj.mvvmhelper.net.LoadingType
@@ -36,6 +37,7 @@ class ListViewModel : BaseViewModel() {
                 pageIndex++
             }
             loadingType = if (loadingXml) LoadingType.LOADING_XML else LoadingType.LOADING_NULL
+            loadingMessage = "正在拉取网络中..."
             requestCode = NetUrl.HOME_LIST
             isRefreshRequest = isRefresh
         }

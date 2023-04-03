@@ -1,23 +1,29 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
-import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseFragment
-import com.zhixinhuixue.zsyte.xxx.databinding.FragmentFourBinding
+import com.zhixinhuixue.zsyte.xxx.databinding.FragmentUserBinding
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 
 /**
  * 作者　: hegaojian
- * 时间　: 2020/11/18
- * 描述　:
+ * 时间　: 2023/4/3
+ * 描述　: 个人中心
  */
-class FourFragment : BaseFragment<TestViewModel, FragmentFourBinding>() {
+class UserFragment : BaseFragment<TestViewModel, FragmentUserBinding>() {
 
-    override val layoutId: Int get() = R.layout.fragment_four
+    companion object{
+        fun newInstance():UserFragment {
+            val args = Bundle()
+            val fragment = UserFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun initView(savedInstanceState: Bundle?) {
+
     }
 
     override fun onResume() {

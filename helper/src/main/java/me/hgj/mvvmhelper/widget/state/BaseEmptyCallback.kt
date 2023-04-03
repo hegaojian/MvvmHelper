@@ -11,7 +11,7 @@ import me.hgj.mvvmhelper.loadsir.callback.Callback
 class BaseEmptyCallback() : Callback() {
 
     override fun onCreateView(): Int {
-        return R.layout.layout_empty
+        return R.layout.layout_base_empty
     }
 
 }

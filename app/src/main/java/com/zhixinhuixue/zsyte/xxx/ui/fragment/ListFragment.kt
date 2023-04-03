@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseFragment
-import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
+import com.zhixinhuixue.zsyte.xxx.databinding.LayoutListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.ListViewModel
 import me.hgj.mvvmhelper.ext.*
@@ -14,15 +14,14 @@ import me.hgj.mvvmhelper.util.decoration.DividerOrientation
 
 /**
  * 作者　: hegaojian
- * 时间　: 2020/11/18
+ * 时间　: 2023/4/3
  * 描述　:
  */
-class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
+class ListFragment : BaseFragment<ListViewModel, LayoutListBinding>() {
 
     private val testAdapter: TestAdapter by lazy { TestAdapter() }
 
     override fun initView(savedInstanceState: Bundle?) {
-
         mBind.listSmartRefresh.refresh {
             //刷新
             mViewModel.getList(true)
@@ -35,8 +34,15 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
             orientation = DividerOrientation.GRID
             includeVisible = true
             setDivider(10,true)
-            setColor(getColorExt(R.color.colorRed))
+            setColor(getColorExt(R.color.white))
         }.adapter = testAdapter
+    }
+
+    /**
+     * 错误界面 空界面 点击重试触发的方法
+     */
+    override fun onLoadRetry() {
+        mViewModel.getList(isRefresh = true, loadingXml = true)
     }
 
     /**
@@ -69,10 +75,5 @@ class TestFragment1 : BaseFragment<ListViewModel, ActivityListBinding>() {
         }
     }
 
-    /**
-     * 错误界面 空界面 点击重试
-     */
-    override fun onLoadRetry() {
-        mViewModel.getList(isRefresh = true, loadingXml = true)
-    }
+
 }

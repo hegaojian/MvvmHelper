@@ -7,7 +7,7 @@ import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity
 import com.zhixinhuixue.zsyte.xxx.app.ext.initBack
-import com.zhixinhuixue.zsyte.xxx.databinding.ActivityListBinding
+import com.zhixinhuixue.zsyte.xxx.databinding.LayoutListBinding
 import com.zhixinhuixue.zsyte.xxx.ui.adapter.TestAdapter
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.ListViewModel
 import me.hgj.mvvmhelper.ext.*
@@ -19,7 +19,7 @@ import me.hgj.mvvmhelper.util.decoration.DividerOrientation
  * 时间　: 2020/11/4
  * 描述　:
  */
-class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
+class ListActivity: BaseActivity<ListViewModel, LayoutListBinding>() {
 
     private  val testAdapter: TestAdapter by lazy { TestAdapter() }
 
@@ -40,7 +40,7 @@ class ListActivity: BaseActivity<ListViewModel, ActivityListBinding>() {
             grid(3)
             divider {
                 //分割线颜色
-                setColor(getColorExt(R.color.colorWhite))
+                setColor(getColorExt(R.color.white))
                 //分割线高度
                 setDivider(10.dp)
                 //是否首尾都有分割线

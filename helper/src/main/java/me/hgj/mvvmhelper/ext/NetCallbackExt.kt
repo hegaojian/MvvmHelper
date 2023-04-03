@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import me.hgj.mvvmhelper.base.BaseViewModel
 import me.hgj.mvvmhelper.net.BaseNetConstant
@@ -14,12 +15,13 @@ import me.hgj.mvvmhelper.net.LoadingType
 /**
  * 普通封装一下 RxHttp请求
  * @receiver BaseViewModel
- * @param requestDslClass [@kotlin.ExtensionFunctionType] Function1<HttpResultDsl, Unit>
+ * @param requestDslClass [@kotlin.ExtensionFunctionType] Function1<HttpRequestDsl, Unit>
+ * @return Job? 可以根据这玩意 取消请求
  */
-fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
+fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit): Job? {
     val httpRequestDsl = HttpRequestDsl()
     requestDslClass(httpRequestDsl)
-    viewModelScope.launch {
+    return viewModelScope.launch {
         //发起请求时
         if (httpRequestDsl.loadingType != LoadingType.LOADING_NULL) {
             loadingChange.loading.value = LoadingDialogEntity(
@@ -31,7 +33,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
             )
         }
         runCatching {
-            // 携程体方法执行工作
+            // 携程体方法执行工作 默认是在主线程中运行的，如果有耗时操作，需要自己切换线程 ，当然请求的话RxHttp内部做了处理的，不需要额外操作
             httpRequestDsl.onRequest.invoke(this)
         }.onSuccess {
             //请求完成 走到这里说明请求成功了 如果请求类型为LOADING_XML 那么通知Activity/Fragment展示success 界面
@@ -49,7 +51,7 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
             }
         }.onFailure {
             //手动取消异常，不用管 一般是手动关闭了请求弹窗，会跟着把这个请求取消了，然后会走错误异常，这里处理一下
-            if(it is CancellationException){
+            if (it is CancellationException) {
                 return@onFailure
             }
             if (httpRequestDsl.onError == null) {
@@ -107,7 +109,8 @@ fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit) {
 /**
  * 普通封装一下 RxHttp请求
  * @receiver BaseViewModel
- * @param requestDslClass [@kotlin.ExtensionFunctionType] Function1<HttpResultDsl, Unit>
+ * @param requestDslClass [@kotlin.ExtensionFunctionType] Function1<HttpRequestCallBackDsl<T>, Unit>
+ * @return MutableLiveData<T>? 返回内部的 liveData
  */
 fun <T> BaseViewModel.rxHttpRequestCallBack(requestDslClass: HttpRequestCallBackDsl<T>.() -> Unit): MutableLiveData<T>? {
     val httpRequestDsl = HttpRequestCallBackDsl<T>()
@@ -125,7 +128,7 @@ fun <T> BaseViewModel.rxHttpRequestCallBack(requestDslClass: HttpRequestCallBack
             )
         }
         runCatching {
-            // 携程体方法执行工作
+            // 携程体方法执行工作 默认是在主线程中运行的，如果有耗时操作，需要切换线程 ，当然请求的话RxHttp内部做了处理的，不需要额外操作
             httpRequestDsl.onRequest.invoke(this)
         }.onSuccess {
             //请求完成 走到这里说明请求成功了 如果请求类型为LOADING_XML 那么通知Activity/Fragment展示success 界面
@@ -147,7 +150,7 @@ fun <T> BaseViewModel.rxHttpRequestCallBack(requestDslClass: HttpRequestCallBack
             //请求失败，将 iAwaitLiveData 置空
             httpRequestDsl.iAwaitLiveData = null
             //手动取消异常，不用管 一般是手动关闭了请求弹窗，会跟着把这个请求取消了，然后会走错误异常，这里处理一下
-            if(it is CancellationException){
+            if (it is CancellationException) {
                 return@onFailure
             }
             if (httpRequestDsl.onError == null) {
@@ -216,7 +219,7 @@ class HttpRequestDsl {
     var onError: ((Throwable) -> Unit)? = null
 
     /**
-     * 目前这个只有在 loadingType == LOADING_DIALOG 的时候才有用 不是的话都不用传他
+     * 目前这个只有在 loadingType != LOADING_NULL 的时候才有用 不然的话都不用传他
      */
     var loadingMessage: String = "请求网络中..."
 
@@ -254,7 +257,7 @@ class HttpRequestCallBackDsl<T> {
     var onError: ((Throwable) -> Unit)? = null
 
     /**
-     * 目前这个只有在 loadingType == LOADING_DIALOG 的时候才有用 不是的话都不用传他
+     * 目前这个只有在 loadingType != LOADING_NULL 的时候才有用 不然的话都不用传他
      */
     var loadingMessage: String = "请求网络中..."
 

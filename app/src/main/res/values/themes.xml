@@ -1,0 +1,68 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Project" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <!-- 关闭 RecyclerView NestedScrollView ViewPager 水波纹效果 -->
+        <item name="android:overScrollMode">never</item>
+        <!-- 窗口背景颜色 -->
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+        <item name="android:windowLightNavigationBar">true</item><!-- This does nothing -->
+        <!-- 默认文本颜色，Button、TextView 的文字颜色 -->
+        <item name="android:textColor">@color/common_text_color</item>
+        <!-- 默认提示颜色，Button、TextView 的提示文字颜色 -->
+        <item name="android:textColorHint">@color/common_text_hint_color</item>
+
+        <!-- 默认字体大小，Button、TextView 的字体大小 -->
+        <item name="android:textSize">14sp</item>
+
+        <!--修改水波纹颜色-->
+        <item name="colorControlHighlight">@color/config_color_separator</item>
+
+        <item name="ui_general_shadow_alpha">0.25</item>
+        <item name="ui_general_shadow_elevation">14dp</item>
+        <item name="ui_radius">10dp</item>
+
+        <item name="ui_alpha_pressed">0.6</item>
+        <item name="ui_alpha_disabled">0.6</item>
+    </style>
+
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@drawable/sanshang_teacher</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <!--选中的样式，可以设置选择的字体颜色，这里只是为了改变选择时的字体大小-->
+    <style name="bottom_tab_title_active">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--没有选中的样式，导航默认的字体大小就是12sp-->
+    <style name="bottom_tab_title_inactive">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+</resources>

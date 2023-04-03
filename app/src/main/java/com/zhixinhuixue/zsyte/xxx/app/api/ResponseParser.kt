@@ -4,10 +4,9 @@ import com.zhixinhuixue.zsyte.xxx.data.response.ApiPagerResponse
 import com.zhixinhuixue.zsyte.xxx.data.response.ApiResponse
 import me.hgj.mvvmhelper.net.BaseNetConstant
 import rxhttp.wrapper.annotation.Parser
-import rxhttp.wrapper.entity.ParameterizedTypeImpl
 import rxhttp.wrapper.exception.ParseException
-import rxhttp.wrapper.parse.AbstractParser
-import rxhttp.wrapper.utils.convert
+import rxhttp.wrapper.parse.TypeParser
+import rxhttp.wrapper.utils.convertTo
 import java.io.IOException
 import java.lang.reflect.Type
 
@@ -19,7 +18,7 @@ import java.lang.reflect.Type
  */
 
 @Parser(name = "Response")
-open class ResponseParser<T> : AbstractParser<T> {
+open class ResponseParser<T> : TypeParser<T> {
     /**
      * 此构造方法适用于任意Class对象，但更多用于带泛型的Class对象，如：List<Student>
      *
@@ -42,16 +41,14 @@ open class ResponseParser<T> : AbstractParser<T> {
 
     @Throws(IOException::class)
     override fun onParse(response: okhttp3.Response): T {
-        val type: Type = ParameterizedTypeImpl[ApiResponse::class.java, mType] //获取泛型类型
-        val data: ApiResponse<T> = response.convert(type)
+        val data: ApiResponse<T> = response.convertTo(ApiResponse::class, *types)
         var t = data.data //获取data字段
-
         /*
          * 考虑到有些时候服务端会返回：{"errorCode":0,"errorMsg":"关注成功"}  类似没有data的数据
          * 此时code正确，但是data字段为空，直接返回data的话，会报空指针错误，
          * 所以，判断泛型为 String 或者 Any 类型时，重新赋值，并确保赋值不为null
         */
-        if (t == null && mType == String::class.java || t == null && mType == Any::class.java) {
+        if (t == null && types[0] == String::class.java || t == null && types[0] == Any::class.java) {
             t = "" as T
         }
 

@@ -68,19 +68,16 @@ fun <T> BaseQuickAdapter<T, *>.loadListSuccess(baseListNetEntity: BasePage<T>, s
  * 列表数据请求失败
  * @receiver BaseQuickAdapter<*, *>
  * @param loadStatus LoadStatusEntity
- * @param status LoadService<*>
  * @param smartRefreshLayout SmartRefreshLayout
  */
 fun BaseQuickAdapter<*, *>.loadListError(loadStatus: LoadStatusEntity, smartRefreshLayout: SmartRefreshLayout) {
-    //关闭头部刷新
     if (loadStatus.isRefresh) {
+        //关闭头部刷新
         smartRefreshLayout.finishRefresh()
-        //第一页，但是之前有数据，只给提示
-        loadStatus.errorMessage.toast()
     } else {
         // 不是第一页请求，让recyclerview设置加载失败
         smartRefreshLayout.finishLoadMore(false)
-        //给个错误提示
-        loadStatus.errorMessage.toast()
     }
+    //给个错误提示
+    loadStatus.errorMessage.toast()
 }

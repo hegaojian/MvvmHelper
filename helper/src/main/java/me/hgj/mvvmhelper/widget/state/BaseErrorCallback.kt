@@ -11,7 +11,7 @@ import me.hgj.mvvmhelper.loadsir.callback.Callback
 class BaseErrorCallback : Callback() {
 
     override fun onCreateView(): Int {
-        return R.layout.layout_error
+        return R.layout.layout_base_error
     }
 
 }

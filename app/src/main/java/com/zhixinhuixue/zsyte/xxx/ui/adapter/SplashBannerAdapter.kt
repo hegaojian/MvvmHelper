@@ -7,7 +7,7 @@ import com.zhpan.bannerview.BaseViewHolder
 /**
  * 作者　: hegaojian
  * 时间　: 2021/7/8
- * 描述　:
+ * 描述　: 闪屏页banner适配器
  */
 class SplashBannerAdapter : BaseBannerAdapter<Int>(){
     override fun bindData(holder: BaseViewHolder<Int>?, data: Int?, position: Int, pageSize: Int) {

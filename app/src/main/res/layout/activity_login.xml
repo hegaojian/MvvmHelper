@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ui="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/white"
     android:fillViewport="true">
 
     <LinearLayout
@@ -25,11 +24,12 @@
             android:shadowColor="#000000"
             android:src="@mipmap/ic_launcher" />
 
-        <LinearLayout
+        <com.noober.background.view.BLLinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp.48"
             android:layout_marginTop="@dimen/dp.48"
-            android:background="@drawable/shape_login_edit"
+            app:bl_solid_color="@color/colorLinEEE"
+            app:bl_corners_radius="@dimen/dp.3"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -47,16 +47,17 @@
                 android:maxLength="11"
                 android:paddingLeft="@dimen/dp.12"
                 android:paddingRight="@dimen/dp.12"
-                android:textColor="@color/colorBlackGry"
+                android:textColor="@color/black"
                 android:textSize="@dimen/dp.15" />
 
-        </LinearLayout>
+        </com.noober.background.view.BLLinearLayout>
 
-        <LinearLayout
+        <com.noober.background.view.BLLinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp.48"
-            android:layout_marginTop="@dimen/dp.30"
-            android:background="@drawable/shape_login_edit"
+            android:layout_marginTop="@dimen/dp.48"
+            app:bl_solid_color="@color/colorLinEEE"
+            app:bl_corners_radius="@dimen/dp.3"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -73,10 +74,10 @@
                 android:lines="1"
                 android:paddingLeft="@dimen/dp.12"
                 android:paddingRight="@dimen/dp.12"
-                android:textColor="@color/colorBlackGry"
+                android:textColor="@color/black"
                 android:textSize="@dimen/dp.15" />
 
-        </LinearLayout>
+        </com.noober.background.view.BLLinearLayout>
 
         <com.noober.background.view.BLButton
             android:id="@+id/login_btn"
@@ -87,7 +88,7 @@
             android:background="@null"
             android:gravity="center"
             android:text="@string/login_submit"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="@dimen/dp.20"
             app:bl_corners_radius="@dimen/dp.3"
             app:bl_solid_color="@color/colorPrimary" />

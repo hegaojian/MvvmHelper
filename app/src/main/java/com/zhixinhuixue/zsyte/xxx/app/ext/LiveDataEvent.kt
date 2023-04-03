@@ -1,6 +1,6 @@
 package com.zhixinhuixue.zsyte.xxx.app.ext
 
-import com.kunminx.architecture.ui.callback.UnPeekLiveData
+import com.kunminx.architecture.domain.message.MutableResult
 
 /**
  * 作者　: hegaojian
@@ -10,6 +10,6 @@ import com.kunminx.architecture.ui.callback.UnPeekLiveData
 object LiveDataEvent {
 
     //示例：登录成功发送通知
-    val loginEvent = UnPeekLiveData<Boolean>()
+    val loginEvent = MutableResult<Boolean>()
 
 }

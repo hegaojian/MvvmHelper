@@ -33,7 +33,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         //方式1 的 请求成功回调 登录结果
         mViewModel.loginData.observe(this, Observer {
             //请求成功  可以做保存信息等操作 ....
-
             LiveDataEvent.loginEvent.value = true //通知登录成功
             finish()
         })
@@ -68,7 +67,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                             //方式2:
                             mViewModel.loginCallBack(mBind.loginPhone.textString(), mBind.loginPwd.textString())?.observe(this){
                                 //请求成功  可以做保存信息等操作 ....
-
                                 LiveDataEvent.loginEvent.value = true //通知登录成功
                                 finish()
                             }

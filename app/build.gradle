@@ -1,27 +1,22 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
-    id 'com.google.devtools.ksp' version '1.7.10-1.0.6'
-}
-
-//让IDE知道ksp生成的kotlin代码(仅使用ksp时才需要)
-kotlin {
-    sourceSets.debug {
-        //如果通过productFlavors配置了多渠道，则配置 /../ksp/xxxDebug/kotlin
-        kotlin.srcDir("build/generated/ksp/debug/kotlin")
-    }
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.zhixinhuixue.zsyte.xxx"
         minSdkVersion 21
-        targetSdkVersion 31
-        versionCode 16
-        versionName "1.1.5"
+        targetSdkVersion 33
+        versionCode 18
+        versionName "1.1.7"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -39,22 +34,18 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = '11'
     }
 
     android.applicationVariants.all {
         variant ->
             variant.outputs.all {
-                //在这里修改apk文件名
+                //在这里修改打包时apk文件名
                 outputFileName = "cxk-v${variant.versionName}.apk"
             }
     }
@@ -63,21 +54,19 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //banner
-    implementation "com.github.zhpanvip:BannerViewPager:3.5.4"
+    implementation "com.github.zhpanvip:bannerviewpager:3.5.11"
     //微信开源项目，替代SP
-    implementation 'com.tencent:mmkv-static:1.2.10'
+    implementation 'com.tencent:mmkv-static:1.2.12'
     implementation project(path: ':helper')
-//    implementation 'com.github.hegaojian:MvvmHelper:1.1.7'
-    ksp  "com.github.liujingxing.rxhttp:rxhttp-compiler:2.9.3"
-
+//    implementation 'com.github.hegaojian:MvvmHelper:1.1.8'
+    kapt "com.github.liujingxing.rxhttp:rxhttp-compiler:3.0.2"
+    //lottie动画
+    implementation "com.airbnb.android:lottie:5.2.0"
 
 }

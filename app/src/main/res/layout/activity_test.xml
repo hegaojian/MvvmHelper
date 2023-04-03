@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
 
-    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/testTableLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/testTableLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp.50" />
+        android:layout_height="@dimen/dp.50" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp.1"
-            android:background="@color/colorDivider" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp.1"
+        android:background="@color/colorLinEEE" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/testViewPager" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/testViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    </LinearLayout>
-</layout>
+</LinearLayout>

@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#2196F3</color>
-    <color name="colorAccent">#2196F3</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorBlack">#000000</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="colorPrimary">#594ACB</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#E4DFFF</color>
+    <color name="colorOnPrimaryContainer">#160066</color>
+    <color name="colorSecondary">#5F5C71</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorSecondaryContainer">#E4DFF9</color>
+    <color name="colorOnSecondaryContainer">#1B192C</color>
+    <color name="colorTertiary">#7B5266</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorTertiaryContainer">#FFD8E8</color>
+    <color name="colorOnTertiaryContainer">#301122</color>
+    <color name="colorError">#BA1A1A</color>
+    <color name="colorErrorContainer">#FFDAD6</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorOnErrorContainer">#410002</color>
+    <color name="colorBackground">#FFFBFF</color>
+    <color name="colorOnBackground">#1C1B1F</color>
+    <color name="colorSurface">#FFFBFF</color>
+    <color name="colorOnSurface">#1C1B1F</color>
+    <color name="colorSurfaceVariant">#E5E1EC</color>
+    <color name="colorOnSurfaceVariant">#47464F</color>
+    <color name="colorOutline">#787680</color>
+    <color name="colorOnSurfaceInverse">#F4EFF4</color>
+    <color name="colorSurfaceInverse">#313034</color>
+    <color name="elevationOverlayColor">#C6BFFF</color>
+    <color name="colorPrimaryInverse">#000000</color>
+    <color name="colorLine">#F1F1F1</color>
+    <color name="colorLinEEE">#D8D8D8</color>
 
-    <color name="colorGreen">#62B75D</color>
-    <color name="colorBottomNavDefault">#505050</color>
-    <color name="colorGray_E">#EEEEEE</color>
-    <color name="colorBlackGry">#333333</color>
-    <color name="colorBlackGry6">#666666</color>
-    <color name="colorDivider">#ffd2d2d2</color>
-    <color name="colorRed">#c00811</color>
-    <color name="colorOrange">#FF7800</color>
-    <color name="colorPrimary_10">#550C6721</color>
-    <color name="colorPrimary_20">#5CBE73</color>
-    <color name="colorPrimary_30">#E0EEEE</color>
-
+    <color name="common_text_color">#222222</color>
+    <color name="common_text_hint_color">#999999</color>
 
 </resources>

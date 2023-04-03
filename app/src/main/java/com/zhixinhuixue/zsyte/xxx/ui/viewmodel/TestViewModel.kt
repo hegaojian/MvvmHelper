@@ -31,7 +31,7 @@ class TestViewModel : BaseViewModel() {
      * @param downLoadError Function1<Throwable, Unit>
      */
     fun downLoad(downLoadData: (Progress) -> Unit = {}, downLoadSuccess: (String) -> Unit, downLoadError: (Throwable) -> Unit = {}) {
-        viewModelScope.launch {
+        /*viewModelScope.launch {
             if (checkedAndroid_Q()) {
                 //android 10 以上
                 val factory = Android10DownloadFactory(appContext, "${System.currentTimeMillis()}.apk")
@@ -59,7 +59,7 @@ class TestViewModel : BaseViewModel() {
                         downLoadSuccess.invoke(it)
                     }
             }
-        }
+        }*/
     }
 
     /**

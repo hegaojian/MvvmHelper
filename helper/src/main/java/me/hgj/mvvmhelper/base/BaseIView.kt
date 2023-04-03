@@ -31,18 +31,18 @@ interface BaseIView {
     /**
      * 展示加载中界面
      */
-    fun showEmptyUi()
+    fun showEmptyUi(message: String = "暂无数据")
 
     /**
      * 展示加载中界面
      */
-    fun showLoadingUi()
+    fun showLoadingUi(message: String = "请求网络中...")
 
     /**
      * 展示错误界面
-     * @param errMessage String
+     * @param message String
      */
-    fun showErrorUi(errMessage: String)
+    fun showErrorUi(message: String = "加载失败")
 
     /**
      * 界面显示加载成功
@@ -91,7 +91,6 @@ interface BaseIView {
      */
     fun dismissCustomLoading(setting: LoadingDialogEntity)
 
-
     /**
      *  返回当前Activity/Fragment 自定义 空状态布局
      */
@@ -107,5 +106,9 @@ interface BaseIView {
      */
     fun getErrorStateLayout(): Callback?
 
+    /**
+     *  返回当前Activity/Fragment 自定义 的其他状态布局集合
+     */
+    fun getCustomStateLayout(): List<Callback>?
 
 }

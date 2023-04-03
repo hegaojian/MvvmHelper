@@ -5,7 +5,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import me.hgj.mvvmhelper.base.BaseViewModel
+import me.hgj.mvvmhelper.base.BaseVmActivity
+import me.hgj.mvvmhelper.base.BaseVmFragment
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.ParameterizedType
 
@@ -53,4 +57,18 @@ private fun <VB : ViewBinding> bindingClass(any: Any, block: (Class<VB>) -> VB):
         superclass = superclass.superclass
     }
     throw IllegalArgumentException("没有找到ViewBinding泛型")
+}
+
+/**
+ * 创建viewModel
+ */
+fun <VM:BaseViewModel> BaseVmActivity<VM>.createViewModel(): VM {
+    return ViewModelProvider(this)[getVmClazz(this)]
+}
+
+/**
+ * 创建viewModel
+ */
+fun <VM:BaseViewModel> BaseVmFragment<VM>.createViewModel(): VM {
+    return ViewModelProvider(this)[getVmClazz(this)]
 }

@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import me.hgj.mvvmhelper.R
 import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.loadsir.callback.Callback
 import me.hgj.mvvmhelper.loadsir.callback.SuccessCallback
@@ -22,7 +25,9 @@ import me.hgj.mvvmhelper.net.LoadingType
  * 时间　: 2020/11/18
  * 描述　:
  */
-abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIView {
+abstract class BaseVmFragment<VM : BaseViewModel> : Fragment(), BaseIView {
+
+    abstract val layoutId: Int
 
     private var dataBindView: View? = null
 
@@ -70,9 +75,11 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
         mViewModel = createViewModel()
         initStatusView(view, savedInstanceState)
         addLoadingUiChange(mViewModel)
+        //view加载完成后执行
+        initView(savedInstanceState)
+        onBindViewClick()
         initObserver()
         onRequestSuccess()
-        onBindViewClick()
     }
 
     private fun initStatusView(view: View, savedInstanceState: Bundle?) {
@@ -80,17 +87,18 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
             //如果传入了自定义包裹view 将该view注册 做 空 错误 loading 布局处理
             initUiStatusManger(it)
         }
-        //view加载完成后执行
-        initView(savedInstanceState)
     }
 
     private fun initUiStatusManger(view: View?) {
-        uiStatusManger = if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null) {
+        uiStatusManger = if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null || getCustomStateLayout()!=null) {
             //如果子类有自定义CallBack ，那么就不能用 全局的，得新建一个 LoadSir
             val builder = LoadSir.beginBuilder()
             builder.setEmptyCallBack(getEmptyStateLayout() ?: LoadSir.getDefault().emptyCallBack)
             builder.setLoadingCallBack(getLoadingStateLayout() ?: LoadSir.getDefault().loadingCallBack)
             builder.setErrorCallBack(getErrorStateLayout() ?: LoadSir.getDefault().errorCallBack)
+            getCustomStateLayout()?.forEach {
+                builder.addCallback(it)
+            }
             builder.setDefaultCallback(SuccessCallback::class.java)
             builder.build().register(view) {
                 onLoadRetry()
@@ -103,23 +111,9 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
         }
     }
 
-    /**
-     * 已创建View 执行在 initView 之前，
-     * @param savedInstanceState Bundle?
-     */
-    open fun onCreatedView(savedInstanceState: Bundle?) {
-
-    }
 
     /**
-     * 创建viewModel
-     */
-    private fun createViewModel(): VM {
-        return ViewModelProvider(this).get(getVmClazz(this))
-    }
-
-    /**
-     * 初始化view操作  这个方法会有延迟，因为使用了LoadSir，需要等待LoadSir注册完成后才能执行
+     * 初始化view操作
      */
     abstract fun initView(savedInstanceState: Bundle?)
 
@@ -168,7 +162,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
      */
     fun addLoadingUiChange(viewModel: BaseViewModel) {
         viewModel.loadingChange.run {
-            loading.observe(this@BaseVmFragment) {
+            loading.observe(viewLifecycleOwner) {
                 when (it.loadingType) {
                     //通用弹窗Dialog
                     LoadingType.LOADING_DIALOG -> {
@@ -189,7 +183,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
                     //请求时 xml显示 loading
                     LoadingType.LOADING_XML -> {
                         if (it.isShow) {
-                            showLoadingUi()
+                            showLoadingUi(it.loadingMessage)
                         }
                     }
                     LoadingType.LOADING_NULL -> {
@@ -197,19 +191,24 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
                 }
             }
             //当分页列表数据第一页返回空数据时 显示空布局
-            showEmpty.observe(this@BaseVmFragment) {
+            showEmpty.observe(viewLifecycleOwner) {
                 onRequestEmpty(it)
             }
             //当请求失败时
-            showError.observe(this@BaseVmFragment) {
+            showError.observe(viewLifecycleOwner) {
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
                 onRequestError(it)
             }
             //如果是 LoadingType.LOADING_XML，当请求成功时 会显示正常的成功布局
-            showSuccess.observe(this@BaseVmFragment) {
-                showSuccessUi()
+            showSuccess.observe(viewLifecycleOwner) {
+                //只有 当前 状态为 加载中时， 才切换成 成功页面
+                if (getLoadingStateLayout() != null && uiStatusManger.currentCallback == getLoadingStateLayout()!!::class.java
+                    || uiStatusManger.currentCallback == LoadSir.getDefault().loadingCallBack::class.java
+                ) {
+                    showSuccessUi()
+                }
             }
         }
     }
@@ -251,29 +250,53 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
 
     /**
      * 显示 错误 状态界面
-     * @param errMessage String
+     * @param message String
      */
-    override fun showErrorUi(errMessage: String) {
+    override fun showErrorUi(message: String) {
         uiStatusManger.showCallback(
-            getErrorStateLayout()?.javaClass ?: LoadSir.getDefault().errorCallBack::class.java
+            (getErrorStateLayout()?.javaClass ?: LoadSir.getDefault().errorCallBack::class.java).apply {
+                uiStatusManger.setCallBack(this) { _, view ->
+                    val messageView = view.findViewById<TextView>(R.id.state_error_tip)
+                    messageView?.let {
+                        it.text = message
+                        it.visibleOrGone(message.isNotEmpty())
+                    }
+                }
+            }
         )
     }
 
     /**
      * 显示 空数据 状态界面
      */
-    override fun showEmptyUi() {
+    override fun showEmptyUi(message: String) {
         uiStatusManger.showCallback(
-            getEmptyStateLayout()?.javaClass ?: LoadSir.getDefault().emptyCallBack::class.java
+            (getEmptyStateLayout()?.javaClass ?: LoadSir.getDefault().emptyCallBack::class.java).apply {
+                uiStatusManger.setCallBack(this) { _, view ->
+                    val messageView = view.findViewById<TextView>(R.id.state_empty_tip)
+                    messageView?.let {
+                        it.text = message
+                        it.visibleOrGone(message.isNotEmpty())
+                    }
+                }
+            }
         )
     }
 
     /**
      * 显示 loading 状态界面
      */
-    override fun showLoadingUi() {
+    override fun showLoadingUi(message: String) {
         uiStatusManger.showCallback(
-            getLoadingStateLayout()?.javaClass ?: LoadSir.getDefault().loadingCallBack::class.java
+            (getLoadingStateLayout()?.javaClass ?: LoadSir.getDefault().loadingCallBack::class.java).apply {
+                uiStatusManger.setCallBack(this) { _, view ->
+                    val messageView = view.findViewById<TextView>(R.id.state_loading_tip)
+                    messageView?.let {
+                        it.text = message
+                        it.visibleOrGone(message.isNotEmpty())
+                    }
+                }
+            }
         )
     }
 
@@ -313,4 +336,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : BaseInitFragment(), BaseIVie
     override fun getEmptyStateLayout(): Callback? = null
     override fun getErrorStateLayout(): Callback? = null
     override fun getLoadingStateLayout(): Callback? = null
+    override fun getCustomStateLayout(): List<Callback>? = null
+
+
 }

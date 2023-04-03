@@ -13,7 +13,7 @@ import me.hgj.mvvmhelper.loadsir.callback.Callback
 class BaseLoadingCallback: Callback() {
 
     override fun onCreateView(): Int {
-        return R.layout.layout_loading
+        return R.layout.layout_base_loading
     }
 
     /**

@@ -9,6 +9,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetHttpClient
+import com.zhixinhuixue.zsyte.xxx.app.widget.callback.LoadingCallback
 import me.hgj.mvvmhelper.base.appContext
 import me.hgj.mvvmhelper.ext.getColorExt
 import me.hgj.mvvmhelper.loadsir.callback.SuccessCallback
@@ -77,13 +78,13 @@ class InitComm : Task(TASK_ID, true) {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ ->
             //设置 Head
             ClassicsHeader(context).apply {
-                setAccentColor(getColorExt(R.color.colorBlack))
+                setAccentColor(getColorExt(R.color.black))
             }
         }
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ ->
             //设置 Footer
             ClassicsFooter(context).apply {
-                setAccentColor(getColorExt(R.color.colorBlack))
+                setAccentColor(getColorExt(R.color.black))
             }
         }
         //注册界面状态管理: 以下代码 其实 在调用MvvmHelper.init()的时候就已经注册了
@@ -91,7 +92,8 @@ class InitComm : Task(TASK_ID, true) {
         LoadSir.beginBuilder()
             .setErrorCallBack(BaseErrorCallback())
             .setEmptyCallBack(BaseEmptyCallback())
-            .setLoadingCallBack(BaseLoadingCallback())
+            .setLoadingCallBack(LoadingCallback()) //比如我替换了全局loading加载
+//            .setLoadingCallBack(BaseLoadingCallback())
             .setDefaultCallback(SuccessCallback::class.java)
             .commit()
     }

@@ -32,5 +32,6 @@
             android:text="@string/helper_loading_tip"
             android:textColor="@color/helperColorWhite"
             android:textSize="@dimen/helper.dp.13" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

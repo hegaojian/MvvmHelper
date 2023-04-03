@@ -5,7 +5,7 @@ import com.zhixinhuixue.zsyte.xxx.data.response.ApiPagerResponse
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
 import rxhttp.wrapper.coroutines.Await
 import rxhttp.wrapper.param.RxHttp
-import rxhttp.wrapper.param.toResponse
+import rxhttp.wrapper.param.toAwaitResponse
 
 /**
  * 作者　: hegaojian
@@ -21,7 +21,7 @@ object UserRepository {
         return RxHttp.postForm(NetUrl.LOGIN)
             .add("username", userName)
             .add("password", password)
-            .toResponse()
+            .toAwaitResponse()
     }
 
     /**
@@ -29,7 +29,7 @@ object UserRepository {
      */
     fun getList(pageIndex: Int): Await<ApiPagerResponse<Any>> {
         return RxHttp.get(NetUrl.HOME_LIST, pageIndex)
-            .toResponse()
+            .toAwaitResponse()
     }
 
 }

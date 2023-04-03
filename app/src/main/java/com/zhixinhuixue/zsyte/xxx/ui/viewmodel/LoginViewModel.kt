@@ -4,12 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.data.repository.UserRepository
 import com.zhixinhuixue.zsyte.xxx.data.response.UserInfo
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import me.hgj.mvvmhelper.base.BaseViewModel
-import me.hgj.mvvmhelper.core.databinding.BooleanObservableField
-import me.hgj.mvvmhelper.core.databinding.StringObservableField
 import me.hgj.mvvmhelper.ext.logA
 import me.hgj.mvvmhelper.ext.logI
 import me.hgj.mvvmhelper.ext.rxHttpRequest
@@ -35,7 +32,7 @@ class LoginViewModel : BaseViewModel() {
     fun login(phoneNumber: String, password: String) {
         rxHttpRequest {
             onRequest = {
-                loginData.value = UserRepository.login(phoneNumber,password).await()
+                loginData.value = UserRepository.login(phoneNumber, password).await()
             }
             loadingType = LoadingType.LOADING_DIALOG //选传 默认为 LoadingType.LOADING_NULL
             loadingMessage = "正在登录中....." // 选传
@@ -49,10 +46,10 @@ class LoginViewModel : BaseViewModel() {
      * @param password String
      * @return MutableLiveData<UserInfo>?
      */
-    fun loginCallBack(phoneNumber: String, password: String):MutableLiveData<UserInfo>? {
+    fun loginCallBack(phoneNumber: String, password: String): MutableLiveData<UserInfo>? {
         return rxHttpRequestCallBack {
             onRequest = {
-                iAwaitLiveData?.value = UserRepository.login(phoneNumber,password).await()
+                iAwaitLiveData?.value = UserRepository.login(phoneNumber, password).await()
             }
             loadingType = LoadingType.LOADING_DIALOG //选传 默认为 LoadingType.LOADING_NULL
             loadingMessage = "正在登录中....." // 选传
@@ -102,5 +99,5 @@ class LoginViewModel : BaseViewModel() {
             requestCode = NetUrl.LOGIN // 如果要判断接口错误业务 - 必传
         }
     }
-
 }
+

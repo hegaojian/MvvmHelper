@@ -16,7 +16,10 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hjq.toast.ToastUtils
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import me.hgj.mvvmhelper.base.appContext
 
 /**
@@ -27,6 +30,25 @@ import me.hgj.mvvmhelper.base.appContext
 
 
 val gson: Gson by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { Gson() }
+
+inline fun <reified T> String.toEntity(): T? {
+    val type = object : TypeToken<T>() {}
+    return try {
+        gson.fromJson(this, type.type)
+    } catch (e: Exception) {
+        null
+    }
+}
+
+inline fun <reified T> String.toArrayEntity(): ArrayList<T>? {
+    val type = object : TypeToken<ArrayList<T>>() {}
+    return try {
+        gson.fromJson(this, type.type)
+    } catch (e: Exception) {
+        null
+    }
+
+}
 
 fun Any?.toJsonStr(): String {
     return gson.toJson(this)
@@ -174,3 +196,23 @@ fun getIntArrayExt(id: Int) = appContext.resources.getIntArray(id)
 fun getDimensionExt(id: Int) = appContext.resources.getDimension(id)
 
 
+/**
+ * 倒计时扩展函数
+ * @param total Int 倒计时的秒数 比如 10秒
+ * @param onTick Function1<Int, Unit> 倒计时一次回调函数
+ * @param onFinish Function0<Unit> 倒计时结束回调函数
+ * @param scope CoroutineScope 作用域
+ * @return Job
+ */
+fun countDownCoroutines(total: Int, onTick: (Int) -> Unit, onFinish: () -> Unit, scope: CoroutineScope = GlobalScope): Job {
+    return flow {
+        for (i in total downTo 1) {
+            emit(i)
+            delay(1000)
+        }
+    }.flowOn(Dispatchers.Default)
+        .onCompletion { onFinish.invoke() }
+        .onEach { onTick.invoke(it) }
+        .flowOn(Dispatchers.Main)
+        .launchIn(scope)
+}

@@ -27,8 +27,8 @@ apply plugin: 'kotlin-kapt'
 
 dependencies {
   ...
-  implementation 'com.github.hegaojian:MvvmHelper:1.1.7'
-  kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:2.9.3'
+  implementation 'com.github.hegaojian:MvvmHelper:1.1.8'
+  kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:3.0.2'
 }
 ```
 

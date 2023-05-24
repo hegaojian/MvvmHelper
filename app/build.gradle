@@ -63,6 +63,7 @@ dependencies {
     implementation "com.github.zhpanvip:bannerviewpager:3.5.11"
     //微信开源项目，替代SP
     implementation 'com.tencent:mmkv-static:1.2.12'
+    
     implementation project(path: ':helper')
 //    implementation 'com.github.hegaojian:MvvmHelper:1.1.8'
     kapt "com.github.liujingxing.rxhttp:rxhttp-compiler:3.0.2"

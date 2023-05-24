@@ -2,7 +2,7 @@ package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.zhixinhuixue.library.common.ext.dp
+import me.hgj.mvvmhelper.ext.dp
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseActivity

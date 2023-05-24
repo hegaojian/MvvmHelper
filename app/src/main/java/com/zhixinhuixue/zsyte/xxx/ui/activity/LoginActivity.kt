@@ -1,6 +1,7 @@
 package com.zhixinhuixue.zsyte.xxx.ui.activity
 
 import android.os.Bundle
+import android.widget.EditText
 import androidx.lifecycle.Observer
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.api.NetUrl

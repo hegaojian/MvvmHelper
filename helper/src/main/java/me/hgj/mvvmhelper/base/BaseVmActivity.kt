@@ -119,6 +119,12 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
     open fun showToolBar(): Boolean {
         return true
     }
+    /**
+     * 标题栏 是否darkMode
+     */
+    open fun showToolBarDark(): Boolean? {
+        return null
+    }
 
     /**
      * 初始化沉浸式
@@ -128,7 +134,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
         //设置共同沉浸式样式
         mTitleBarView?.let {
             if (showToolBar()) {
-                immersive(it)
+                immersive(it, showToolBarDark())
             }
         }
     }

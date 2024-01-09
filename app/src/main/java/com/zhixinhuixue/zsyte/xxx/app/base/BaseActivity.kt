@@ -29,7 +29,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVBActivi
         //设置共同沉浸式样式
         if (showToolBar()) {
             mToolbar.setBackgroundResource(R.color.colorPrimary)
-            immersive(mToolbar)
+            immersive(mToolbar,showToolBarDark())
         }
     }
 

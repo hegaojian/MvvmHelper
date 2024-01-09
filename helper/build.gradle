@@ -87,8 +87,8 @@ dependencies {
     //启动优化异步加载
     api "com.effective.android:anchors:1.1.1"
     //状态栏
-    api "com.gyf.immersionbar:immersionbar:3.0.0"
-    api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
+//    api "com.gyf.immersionbar:immersionbar:3.0.0"
+//    api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
     //刷新头
     api "com.scwang.smart:refresh-layout-kernel:2.0.1"
     api "com.scwang.smart:refresh-header-classics:2.0.1"

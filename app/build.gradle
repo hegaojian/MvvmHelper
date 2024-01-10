@@ -60,12 +60,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //banner
-    implementation "com.github.zhpanvip:bannerviewpager:3.5.11"
+    implementation "com.github.zhpanvip:bannerviewpager:3.5.12"
     //微信开源项目，替代SP
     implementation 'com.tencent:mmkv-static:1.2.12'
     
     implementation project(path: ':helper')
-//    implementation 'com.github.hegaojian:MvvmHelper:1.1.9'
+//    implementation 'com.github.hegaojian:MvvmHelper:1.2.0'
     kapt "com.github.liujingxing.rxhttp:rxhttp-compiler:3.2.3"
     //lottie动画
     implementation "com.airbnb.android:lottie:5.2.0"

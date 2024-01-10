@@ -7,7 +7,6 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.gyf.immersionbar.ImmersionBar
 import me.hgj.mvvmhelper.R
 import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.loadsir.callback.Callback
@@ -67,7 +66,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
         initImmersionBar()
         findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
 
-        uiStatusManger = if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null || getCustomStateLayout()!=null) {
+        uiStatusManger = if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null || getCustomStateLayout() != null) {
             //如果子类有自定义CallBack ，那么就不能用 全局的，得新建一个 LoadSir
             val builder = LoadSir.beginBuilder()
             builder.setEmptyCallBack(getEmptyStateLayout() ?: LoadSir.getDefault().emptyCallBack)
@@ -97,13 +96,21 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
      * 创建观察者
      */
     @Deprecated("这个方法没啥子用，后面要废弃了")
-    open fun initObserver() {}
+    open fun initObserver() {
+    }
 
     /**
      * 是否隐藏 标题栏 默认显示
      */
     open fun showToolBar(): Boolean {
         return true
+    }
+
+    /**
+     * 是否显示暗色状态栏文字颜色
+     */
+    open fun showToolBarDark(): Boolean? {
+        return null
     }
 
     /**
@@ -114,7 +121,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
         //设置共同沉浸式样式
         mTitleBarView?.let {
             if (showToolBar()) {
-                ImmersionBar.with(this).titleBar(it).init()
+                immersive(it, showToolBarDark())
             }
         }
     }
@@ -138,6 +145,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
                             dismissLoading(it)
                         }
                     }
+
                     LoadingType.LOADING_CUSTOM -> {
                         if (it.isShow) {
                             showCustomLoading(it)
@@ -145,11 +153,13 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
                             dismissCustomLoading(it)
                         }
                     }
+
                     LoadingType.LOADING_XML -> {
                         if (it.isShow) {
                             showLoadingUi(it.loadingMessage)
                         }
                     }
+
                     LoadingType.LOADING_NULL -> {
                     }
                 }
@@ -266,7 +276,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
      * @param setting LoadingDialogEntity
      */
     override fun showCustomLoading(setting: LoadingDialogEntity) {
-        showLoadingExt(setting.loadingMessage,setting.coroutineScope)
+        showLoadingExt(setting.loadingMessage, setting.coroutineScope)
     }
 
     /**
@@ -279,7 +289,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
     }
 
     override fun showLoading(setting: LoadingDialogEntity) {
-        showLoadingExt(setting.loadingMessage,setting.coroutineScope)
+        showLoadingExt(setting.loadingMessage, setting.coroutineScope)
     }
 
     override fun dismissLoading(setting: LoadingDialogEntity) {

@@ -86,7 +86,7 @@ dependencies {
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11"
     //启动优化异步加载
     api "com.effective.android:anchors:1.1.1"
-    //状态栏(项目不再集成进来，如果你之前的项目使用到了他，请在自己的app.gradle中添加)
+    //状态栏(本项目不再集成进来，如果你项目之前使用到了他，请在自己的app.gradle中添加该依赖)
 //    api "com.gyf.immersionbar:immersionbar:3.0.0"
 //    api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
     //刷新头

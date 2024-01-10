@@ -1,10 +1,10 @@
 package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
-import com.gyf.immersionbar.ktx.immersionBar
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseFragment
 import com.zhixinhuixue.zsyte.xxx.databinding.FragmentUserBinding
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
+import me.hgj.mvvmhelper.ext.immersive
 
 /**
  * 作者　: hegaojian
@@ -28,9 +28,7 @@ class UserFragment : BaseFragment<TestViewModel, FragmentUserBinding>() {
 
     override fun onResume() {
         super.onResume()
-        immersionBar {
-            titleBar(mBind.userHeadImg)
-        }
+        immersive()
     }
 
 }

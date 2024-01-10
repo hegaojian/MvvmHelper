@@ -2,7 +2,6 @@ package com.zhixinhuixue.zsyte.xxx.ui.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import com.gyf.immersionbar.ktx.immersionBar
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.base.BaseFragment
 import com.zhixinhuixue.zsyte.xxx.app.ext.LiveDataEvent
@@ -12,6 +11,8 @@ import com.zhixinhuixue.zsyte.xxx.ui.activity.LoginActivity
 import com.zhixinhuixue.zsyte.xxx.ui.activity.TestActivity
 import com.zhixinhuixue.zsyte.xxx.ui.viewmodel.TestViewModel
 import me.hgj.mvvmhelper.ext.*
+import me.hgj.mvvmhelper.ext.immersive
+
 
 /**
  * 作者　: hegaojian
@@ -36,9 +37,7 @@ class HomeFragment : BaseFragment<TestViewModel, FragmentHomeBinding>() {
 
     override fun onResume() {
         super.onResume()
-        immersionBar {
-            titleBar(mBind.customToolbar)
-        }
+        mBind.customToolbar.statusPadding()
     }
 
     override fun onRequestSuccess() {

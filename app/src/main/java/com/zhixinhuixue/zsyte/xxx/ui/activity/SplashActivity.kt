@@ -16,6 +16,7 @@ import com.zhixinhuixue.zsyte.xxx.ui.adapter.SplashBannerAdapter
 import com.zhpan.bannerview.BannerViewPager
 import me.hgj.mvvmhelper.base.BaseViewModel
 import me.hgj.mvvmhelper.ext.gone
+import me.hgj.mvvmhelper.ext.immersive
 import me.hgj.mvvmhelper.ext.setOnclick
 import me.hgj.mvvmhelper.ext.visible
 import me.hgj.mvvmhelper.ext.visibleOrGone
@@ -41,6 +42,7 @@ class SplashActivity :BaseActivity<BaseViewModel, ActivitySplashBinding>() {
         } else {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         }
+        immersive()
         //判断是否第一次进入
         val isFirst = mmkv.getBoolean(ValueKey.isFirst,true)
         if(isFirst){

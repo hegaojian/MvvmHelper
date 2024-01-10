@@ -3,8 +3,11 @@ package me.hgj.mvvmhelper.ext
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import me.hgj.mvvmhelper.base.appContext
 import java.util.*
+
 
 /**
  * 作者　: hegaojian
@@ -111,5 +114,16 @@ fun finishAllActivity() {
         }
     }
     activityList.clear()
+}
+/***
+ * 判断当前是否在debug模式下
+ */
+fun isApkInDebug():Boolean{
+    return try {
+        val info: ApplicationInfo = appContext.applicationInfo
+        info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    } catch (e: Exception) {
+        false
+    }
 }
 

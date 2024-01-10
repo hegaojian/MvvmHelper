@@ -3,9 +3,9 @@ package com.zhixinhuixue.zsyte.xxx.app
 import android.app.Application
 import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.Project
-import com.zhixinhuixue.zsyte.xxx.BuildConfig
 import me.hgj.mvvmhelper.base.MvvmHelper
 import me.hgj.mvvmhelper.ext.currentProcessName
+import me.hgj.mvvmhelper.ext.isApkInDebug
 
 /**
  * 作者　: hegaojian
@@ -15,7 +15,7 @@ import me.hgj.mvvmhelper.ext.currentProcessName
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        MvvmHelper.init(this,BuildConfig.DEBUG)
+        MvvmHelper.init(this)
         val processName = currentProcessName
         if (currentProcessName == packageName) {
             // 主进程初始化
@@ -31,7 +31,7 @@ class App : Application() {
      */
     private fun onMainProcessInit() {
         AnchorsManager.getInstance()
-            .debuggable(BuildConfig.DEBUG)
+            .debuggable(isApkInDebug())
             //设置锚点
             .addAnchor(InitNetWork.TASK_ID, InitUtils.TASK_ID, InitComm.TASK_ID).start(
                 Project.Builder("app", AppTaskFactory())

@@ -60,7 +60,7 @@ android {
 - **1.4 在Application中初始化**
 
 ```kotlin
- MvvmHelper.init(this,BuildConfig.DEBUG)
+ MvvmHelper.init(this)
 ```
 
 

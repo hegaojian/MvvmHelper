@@ -74,7 +74,8 @@ class TestViewModel : BaseViewModel() {
                 //android 10 以上
                 RxHttp.postForm(NetUrl.UPLOAD_URL)
                     .addPart(appContext, "apkFile", Uri.parse(filePath))
-                    .toFlow<String> {
+                    .toFlow<String>()
+                    .onProgress{
                         //上传进度回调,0-100，仅在进度有更新时才会回调
                         uploadData.invoke(it)
                     }.catch {
@@ -93,7 +94,8 @@ class TestViewModel : BaseViewModel() {
                 }
                 RxHttp.postForm(NetUrl.UPLOAD_URL)
                     .addFile("apkFile", file)
-                    .toFlow<String> {
+                    .toFlow<String>()
+                    .onProgress {
                         //上传进度回调,0-100，仅在进度有更新时才会回调
                         uploadData.invoke(it)
                     }.catch {

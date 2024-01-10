@@ -3,11 +3,12 @@ package com.zhixinhuixue.zsyte.xxx.app.base
 import android.view.LayoutInflater
 import android.view.View
 import androidx.viewbinding.ViewBinding
-import com.gyf.immersionbar.ImmersionBar
 import com.zhixinhuixue.zsyte.xxx.R
 import com.zhixinhuixue.zsyte.xxx.app.widget.CustomToolBar
 import me.hgj.mvvmhelper.base.BaseVBActivity
 import me.hgj.mvvmhelper.base.BaseViewModel
+import me.hgj.mvvmhelper.ext.immersive
+
 
 /**
  * 作者　: hegaojian
@@ -28,7 +29,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVBActivi
         //设置共同沉浸式样式
         if (showToolBar()) {
             mToolbar.setBackgroundResource(R.color.colorPrimary)
-            ImmersionBar.with(this).titleBar(mToolbar).init()
+            immersive(mToolbar,showToolBarDark())
         }
     }
 

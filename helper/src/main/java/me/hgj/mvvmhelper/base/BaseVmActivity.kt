@@ -16,7 +16,6 @@ import me.hgj.mvvmhelper.loadsir.core.LoadSir
 import me.hgj.mvvmhelper.net.LoadStatusEntity
 import me.hgj.mvvmhelper.net.LoadingDialogEntity
 import me.hgj.mvvmhelper.net.LoadingType
-import me.hgj.mvvmhelper.ext.immersive
 
 /**
  * 作者　: hegaojian
@@ -65,40 +64,27 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
             it.visibleOrGone(showToolBar())
         }
         initImmersionBar()
-        findViewById<FrameLayout>(R.id.baseContentView).addView(
-            if (dataBindView == null) LayoutInflater.from(
-                this
-            ).inflate(layoutId, null) else dataBindView
-        )
+        findViewById<FrameLayout>(R.id.baseContentView).addView(if (dataBindView == null) LayoutInflater.from(this).inflate(layoutId, null) else dataBindView)
 
-        uiStatusManger =
-            if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null || getCustomStateLayout() != null) {
-                //如果子类有自定义CallBack ，那么就不能用 全局的，得新建一个 LoadSir
-                val builder = LoadSir.beginBuilder()
-                builder.setEmptyCallBack(
-                    getEmptyStateLayout() ?: LoadSir.getDefault().emptyCallBack
-                )
-                builder.setLoadingCallBack(
-                    getLoadingStateLayout() ?: LoadSir.getDefault().loadingCallBack
-                )
-                builder.setErrorCallBack(
-                    getErrorStateLayout() ?: LoadSir.getDefault().errorCallBack
-                )
-                getCustomStateLayout()?.forEach {
-                    builder.addCallback(it)
-                }
-                builder.setDefaultCallback(SuccessCallback::class.java)
-                builder.build()
-                    .register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
-                        onLoadRetry()
-                    }
-            } else {
-                //没有自定义CallBack 那么就用全局的LoadSir来注册
-                LoadSir.getDefault()
-                    .register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
-                        onLoadRetry()
-                    }
+        uiStatusManger = if (getEmptyStateLayout() != null || getLoadingStateLayout() != null || getErrorStateLayout() != null || getCustomStateLayout() != null) {
+            //如果子类有自定义CallBack ，那么就不能用 全局的，得新建一个 LoadSir
+            val builder = LoadSir.beginBuilder()
+            builder.setEmptyCallBack(getEmptyStateLayout() ?: LoadSir.getDefault().emptyCallBack)
+            builder.setLoadingCallBack(getLoadingStateLayout() ?: LoadSir.getDefault().loadingCallBack)
+            builder.setErrorCallBack(getErrorStateLayout() ?: LoadSir.getDefault().errorCallBack)
+            getCustomStateLayout()?.forEach {
+                builder.addCallback(it)
             }
+            builder.setDefaultCallback(SuccessCallback::class.java)
+            builder.build().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
+                onLoadRetry()
+            }
+        } else {
+            //没有自定义CallBack 那么就用全局的LoadSir来注册
+            LoadSir.getDefault().register(if (getLoadingView() == null) findViewById<FrameLayout>(R.id.baseContentView) else getLoadingView()!!) {
+                onLoadRetry()
+            }
+        }
     }
 
     /**
@@ -119,8 +105,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
     open fun showToolBar(): Boolean {
         return true
     }
+
     /**
-     * 标题栏 是否darkMode
+     * 是否显示暗色状态栏文字颜色
      */
     open fun showToolBarDark(): Boolean? {
         return null
@@ -237,8 +224,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
      */
     override fun showErrorUi(message: String) {
         uiStatusManger.showCallback(
-            (getErrorStateLayout()?.javaClass
-                ?: LoadSir.getDefault().errorCallBack::class.java).apply {
+            (getErrorStateLayout()?.javaClass ?: LoadSir.getDefault().errorCallBack::class.java).apply {
                 uiStatusManger.setCallBack(this) { _, view ->
                     val messageView = view.findViewById<TextView>(R.id.state_error_tip)
                     messageView?.let {
@@ -255,8 +241,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
      */
     override fun showEmptyUi(message: String) {
         uiStatusManger.showCallback(
-            (getEmptyStateLayout()?.javaClass
-                ?: LoadSir.getDefault().emptyCallBack::class.java).apply {
+            (getEmptyStateLayout()?.javaClass ?: LoadSir.getDefault().emptyCallBack::class.java).apply {
                 uiStatusManger.setCallBack(this) { _, view ->
                     val messageView = view.findViewById<TextView>(R.id.state_empty_tip)
                     messageView?.let {
@@ -273,8 +258,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
      */
     override fun showLoadingUi(message: String) {
         uiStatusManger.showCallback(
-            (getLoadingStateLayout()?.javaClass
-                ?: LoadSir.getDefault().loadingCallBack::class.java).apply {
+            (getLoadingStateLayout()?.javaClass ?: LoadSir.getDefault().loadingCallBack::class.java).apply {
                 uiStatusManger.setCallBack(this) { _, view ->
                     val messageView = view.findViewById<TextView>(R.id.state_loading_tip)
                     messageView?.let {

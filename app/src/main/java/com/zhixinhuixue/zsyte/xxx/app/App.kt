@@ -17,7 +17,7 @@ class App : Application() {
         super.onCreate()
         MvvmHelper.init(this)
         val processName = currentProcessName
-        if (currentProcessName == packageName) {
+        if (currentProcessName == null || currentProcessName == packageName) {
             // 主进程初始化
             onMainProcessInit()
         } else {

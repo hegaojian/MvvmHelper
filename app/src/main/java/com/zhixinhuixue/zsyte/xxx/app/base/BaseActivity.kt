@@ -9,7 +9,6 @@ import me.hgj.mvvmhelper.base.BaseVBActivity
 import me.hgj.mvvmhelper.base.BaseViewModel
 import me.hgj.mvvmhelper.ext.immersive
 
-
 /**
  * 作者　: hegaojian
  * 时间　: 2021/6/9

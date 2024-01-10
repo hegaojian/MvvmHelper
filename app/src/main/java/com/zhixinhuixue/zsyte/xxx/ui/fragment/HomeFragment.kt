@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<TestViewModel, FragmentHomeBinding>() {
 
     override fun onResume() {
         super.onResume()
-        immersive(mBind.customToolbar)
+        mBind.customToolbar.statusPadding()
     }
 
     override fun onRequestSuccess() {

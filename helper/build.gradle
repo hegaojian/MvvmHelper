@@ -16,7 +16,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
         versionCode 20
-        versionName "1.1.9"
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -52,7 +52,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.hegaojian'
                 artifactId = 'MvvmHelper'
-                version = '1.1.9'
+                version = '1.2.0'
             }
         }
     }
@@ -86,7 +86,7 @@ dependencies {
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11"
     //启动优化异步加载
     api "com.effective.android:anchors:1.1.1"
-    //状态栏
+    //状态栏(项目不再集成进来，如果你之前的项目使用到了他，请在自己的app.gradle中添加)
 //    api "com.gyf.immersionbar:immersionbar:3.0.0"
 //    api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
     //刷新头
@@ -97,6 +97,6 @@ dependencies {
     //通过标签直接生成shape，无需再写shape.xml
     api "com.noober.background:core:1.6.5"
     //rxHttp
-    api "com.squareup.okhttp3:okhttp:4.10.0"
-    api 'com.github.liujingxing.rxhttp:rxhttp:3.0.2'
+    api "com.squareup.okhttp3:okhttp:4.12.0"
+    api 'com.github.liujingxing.rxhttp:rxhttp:3.2.3'
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import android.view.Gravity
 import com.hjq.toast.ToastUtils
 import me.hgj.mvvmhelper.ext.dp
+import me.hgj.mvvmhelper.ext.isApkInDebug
 import me.hgj.mvvmhelper.loadsir.callback.SuccessCallback
 import me.hgj.mvvmhelper.loadsir.core.LoadSir
 import me.hgj.mvvmhelper.util.KtxActivityLifecycleCallbacks
@@ -32,9 +33,9 @@ object MvvmHelper {
      * @param application Application 全局上下文
      * @param debug Boolean  true为debug模式，会打印Log日志 false 关闭Log日志
      */
-    fun init(application: Application, debug: Boolean) {
+    fun init(application: Application) {
         app = application
-        mvvmHelperLog = debug
+        mvvmHelperLog = isApkInDebug()
         //注册全局 activity生命周期监听
         application.registerActivityLifecycleCallbacks(KtxActivityLifecycleCallbacks())
         LoadSir.beginBuilder()

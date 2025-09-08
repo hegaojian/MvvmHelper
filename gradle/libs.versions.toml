@@ -1,0 +1,68 @@
+[versions]
+agp = "8.10.0"
+kotlin = "2.2.0"
+coreKtx = "1.17.0"
+appcompat = "1.7.1"
+material = "1.13.0"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
+fragment = "1.8.9"
+kotlinxCoroutinesAndroid = "1.10.2"
+lifecycleLivedataKtx = "2.9.3"
+
+log = "1.6.0"
+gson = "2.13.1"
+ksp = "2.2.0-2.0.2"
+banner = "3.5.17"
+mmkv = "2.2.3"
+multidex = "2.0.1"
+lottie = "6.6.7"
+okhttp = "5.1.0"
+refreshLayout = "2.1.1"
+rxhttp = "3.5.0"
+toaster = "13.5"
+unpeekLivedata = "7.8.0"
+anchors = "1.1.1"
+dialog =  "3.3.0"
+immersionbar =  "3.2.2"
+baserecyclerviewadapterhelper = "3.0.14"
+backgroundlibrary = "1.7.6"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleLivedataKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleLivedataKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroid" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+banner = { module = "com.github.zhpanvip:bannerviewpager", version.ref = "banner" }
+mmkv = { module = "com.tencent:mmkv" ,version.ref = "mmkv" }
+lottie = { module = "com.airbnb.android:lottie" ,version.ref = "lottie" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+refresh-header-classics = { module = "io.github.scwang90:refresh-header-classics", version.ref = "refreshLayout" }
+refresh-layout-kernel = { module = "io.github.scwang90:refresh-layout-kernel", version.ref = "refreshLayout" }
+rxhttp = { module = "com.github.liujingxing.rxhttp:rxhttp", version.ref = "rxhttp" }
+rxhttp-compiler = { module = "com.github.liujingxing.rxhttp:rxhttp-compiler", version.ref = "rxhttp" }
+toaster = { module = "com.github.getActivity:Toaster", version.ref = "toaster" }
+unpeek-livedata = { module = "com.kunminx.arch:unpeek-livedata", version.ref = "unpeekLivedata" }
+backgroundlibrary-library = { module = "com.github.JavaNoober.BackgroundLibrary:library", version.ref = "backgroundlibrary" }
+baserecyclerviewadapterhelper = { module = "io.github.cymchad:BaseRecyclerViewAdapterHelper", version.ref = "baserecyclerviewadapterhelper" }
+log = { module = "com.github.zhaokaiqiang.klog:library", version.ref = "log" }
+anchors = { module = "com.effective.android:anchors", version.ref = "anchors" }
+dialog = { module = "com.afollestad.material-dialogs:core", version.ref = "dialog" }
+immersionbar = { module = "com.geyifeng.immersionbar:immersionbar", version.ref = "immersionbar" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "kotlin-parcelize" }
+maven-publish = { id = "maven-publish" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

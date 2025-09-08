@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hjq.toast.ToastUtils
+import com.hjq.toast.Toaster
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import me.hgj.mvvmhelper.base.appContext
@@ -55,7 +55,7 @@ fun Any?.toJsonStr(): String {
 }
 
 fun Any?.toast() {
-    ToastUtils.show(this)
+    Toaster.show(this)
 }
 
 /**

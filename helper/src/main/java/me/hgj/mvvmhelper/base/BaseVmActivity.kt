@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.gyf.immersionbar.ImmersionBar
 import me.hgj.mvvmhelper.R
 import me.hgj.mvvmhelper.ext.*
 import me.hgj.mvvmhelper.loadsir.callback.Callback
@@ -47,8 +48,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
         initStatusView()
         //注册界面响应事件
         initView(savedInstanceState)
-        //初始化绑定observer
-        initObserver()
         //初始化请求成功方法
         onRequestSuccess()
         //初始化绑定点击方法
@@ -93,13 +92,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
     abstract fun initView(savedInstanceState: Bundle?)
 
     /**
-     * 创建观察者
-     */
-    @Deprecated("这个方法没啥子用，后面要废弃了")
-    open fun initObserver() {
-    }
-
-    /**
      * 是否隐藏 标题栏 默认显示
      */
     open fun showToolBar(): Boolean {
@@ -109,8 +101,8 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
     /**
      * 是否显示暗色状态栏文字颜色
      */
-    open fun showToolBarDark(): Boolean? {
-        return null
+    open fun showToolBarDark(): Boolean {
+        return false
     }
 
     /**
@@ -121,7 +113,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity(), BaseIVi
         //设置共同沉浸式样式
         mTitleBarView?.let {
             if (showToolBar()) {
-                immersive(it, showToolBarDark())
+                ImmersionBar.with(this).titleBar(it).statusBarDarkFont(showToolBarDark()).init()
+            }else{
+                ImmersionBar.with(this).statusBarDarkFont(showToolBarDark()).init()
             }
         }
     }

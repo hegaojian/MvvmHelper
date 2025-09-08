@@ -44,7 +44,7 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowBackground">@drawable/sanshang_teacher</item>
+<!--        <item name="android:windowBackground">@drawable/sanshang_teacher</item>-->
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
     </style>
 
@@ -57,12 +57,12 @@
 
     <!--选中的样式，可以设置选择的字体颜色，这里只是为了改变选择时的字体大小-->
     <style name="bottom_tab_title_active">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <!--没有选中的样式，导航默认的字体大小就是12sp-->
     <style name="bottom_tab_title_inactive">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
 </resources>

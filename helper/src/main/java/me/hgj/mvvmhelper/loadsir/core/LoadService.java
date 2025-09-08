@@ -70,6 +70,7 @@ public class LoadService<T> {
      * @since 1.2.2
      * @deprecated
      */
+    @Deprecated
     public LinearLayout getTitleLoadLayout(Context context, ViewGroup rootView, View titleView) {
         LinearLayout newRootView = new LinearLayout(context);
         newRootView.setOrientation(LinearLayout.VERTICAL);

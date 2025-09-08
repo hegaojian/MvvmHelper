@@ -63,12 +63,16 @@ private fun <VB : ViewBinding> bindingClass(any: Any, block: (Class<VB>) -> VB):
  * 创建viewModel
  */
 fun <VM:BaseViewModel> BaseVmActivity<VM>.createViewModel(): VM {
-    return ViewModelProvider(this)[getVmClazz(this)]
+     val clazz = (this.javaClass.genericSuperclass as ParameterizedType)
+        .actualTypeArguments[0] as Class<VM>
+    return ViewModelProvider(this)[clazz]
 }
 
 /**
  * 创建viewModel
  */
 fun <VM:BaseViewModel> BaseVmFragment<VM>.createViewModel(): VM {
-    return ViewModelProvider(this)[getVmClazz(this)]
+    val clazz = (this.javaClass.genericSuperclass as ParameterizedType)
+        .actualTypeArguments[0] as Class<VM>
+    return ViewModelProvider(this)[clazz]
 }

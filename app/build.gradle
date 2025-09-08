@@ -1,18 +1,25 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
-    id 'kotlin-kapt'
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    compileSdkVersion 33
+    namespace 'com.mvvmhelper.demo'
+
+    compileSdkVersion  36
     defaultConfig {
-        applicationId "com.zhixinhuixue.zsyte.xxx"
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 18
+        applicationId "com.mvvmhelper.demo"
+        minSdk  23
+        targetSdk  36
+        versionCode 17
         versionName "1.1.7"
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64'
+        }
     }
 
     buildFeatures {
@@ -34,40 +41,39 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = '11'
+    kotlin {
+        jvmToolchain(17) // 自动设置 Java 17 兼容性
     }
 
-    android.applicationVariants.all {
-        variant ->
-            variant.outputs.all {
-                //在这里修改打包时apk文件名
-                outputFileName = "cxk-v${variant.versionName}.apk"
-            }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
+
 }
 
-
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.multidex)
+
     //banner
-    implementation "com.github.zhpanvip:bannerviewpager:3.5.12"
-    //微信开源项目，替代SP
-    implementation 'com.tencent:mmkv-static:1.2.12'
-    
+    implementation libs.banner
+    //微信本地数据存储方案，替代SP
+    implementation libs.mmkv
+    //lottie动画
+    implementation libs.lottie
+    implementation libs.baserecyclerviewadapterhelper
+
+    //rxhttp
+    implementation libs.okhttp
+    ksp libs.rxhttp.compiler
     implementation project(path: ':helper')
 //    implementation 'com.github.hegaojian:MvvmHelper:1.2.0'
-    kapt "com.github.liujingxing.rxhttp:rxhttp-compiler:3.2.3"
-    //lottie动画
-    implementation "com.airbnb.android:lottie:5.2.0"
+
 
 }

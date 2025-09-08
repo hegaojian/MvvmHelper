@@ -11,11 +11,7 @@ import android.view.Window
 import android.view.WindowManager
 import me.hgj.mvvmhelper.base.appContext
 
-/**
- *  @description:
- *  @author xcl qq:244672784
- *  @Date 2020/7/1
- **/
+
 /************************************** 单位转换*********************************************** */
 /**
  * 像素密度

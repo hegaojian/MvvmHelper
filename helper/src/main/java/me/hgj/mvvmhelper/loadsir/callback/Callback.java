@@ -83,6 +83,7 @@ public abstract class Callback implements Serializable {
     /**
      * @deprecated Use {@link #onReloadEvent(Context context, View view)} instead.
      */
+    @Deprecated
     protected boolean onRetry(Context context, View view) {
         return false;
     }

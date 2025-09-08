@@ -7,9 +7,9 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/userHeadImg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/sanshang_teacher" />
+        android:src="@drawable/ic_splash2" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"

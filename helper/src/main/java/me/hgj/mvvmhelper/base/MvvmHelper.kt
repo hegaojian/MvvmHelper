@@ -2,7 +2,7 @@ package me.hgj.mvvmhelper.base
 
 import android.app.Application
 import android.view.Gravity
-import com.hjq.toast.ToastUtils
+import com.hjq.toast.Toaster
 import me.hgj.mvvmhelper.ext.dp
 import me.hgj.mvvmhelper.loadsir.callback.SuccessCallback
 import me.hgj.mvvmhelper.loadsir.core.LoadSir
@@ -43,7 +43,7 @@ object MvvmHelper {
             .setLoadingCallBack(BaseLoadingCallback())
             .setDefaultCallback(SuccessCallback::class.java)
             .commit()
-        ToastUtils.init(app)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, 100.dp)
+        Toaster.init(app)
+        Toaster.setGravity(Gravity.BOTTOM, 0, 100.dp)
     }
 }

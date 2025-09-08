@@ -8,7 +8,7 @@
         android:id="@+id/banner_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/sanshang_teacher"
+        android:src="@drawable/ic_splash1"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

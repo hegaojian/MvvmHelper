@@ -1,24 +1,19 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
-    id 'maven-publish'
-}
-task generateSourcesJar(type: Jar){
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.maven.publish)
 }
 
 android {
-    compileSdkVersion 33
+    namespace "me.hgj.mvvmhelper"
 
+    compileSdkVersion   36
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 20
-        versionName "1.2.0"
+        minSdk  23
+        targetSdk  36
+        versionCode 21
+        versionName "1.2.1"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -33,12 +28,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = '11'
+    kotlin {
+        jvmToolchain(17) // 自动设置 Java 17 兼容性
     }
     publishing {
         singleVariant("release")
@@ -52,51 +43,50 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.hegaojian'
                 artifactId = 'MvvmHelper'
-                version = '1.2.0'
+                version = '1.2.1'
             }
         }
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    //material-dialog
-    implementation "com.afollestad.material-dialogs:core:3.3.0"
-    api "androidx.fragment:fragment-ktx:1.5.6"
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.constraintlayout)
+    //adapter （有些人不想用，或者想使用更高版本的，这里不使用api的方式集成）
+    implementation libs.baserecyclerviewadapterhelper
+
     // 协程基础库
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    api libs.kotlinx.coroutines.core
+    api libs.kotlinx.coroutines.android
     //lifecycle
-    api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
-    api "androidx.lifecycle:lifecycle-common-java8:2.6.1"
-    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    api libs.androidx.lifecycle.runtime.ktx
     // viewModel
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    api libs.androidx.lifecycle.viewmodel.ktx
     // liveData
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    api libs.androidx.lifecycle.livedata.ktx
+
     //Toast
-    api 'com.github.getActivity:ToastUtils:9.6'
+    api libs.toaster
     //log
-    api "com.github.zhaokaiqiang.klog:library:1.6.0"
-    //万能adapter
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11"
+    api libs.log
+    api libs.gson
+    api libs.dialog
+    api libs.immersionbar
+
     //启动优化异步加载
-    api "com.effective.android:anchors:1.1.1"
-    //状态栏(本项目不再集成进来，如果你项目之前使用到了他，请在自己的app.gradle中添加该依赖)
-//    api "com.gyf.immersionbar:immersionbar:3.0.0"
-//    api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
-    //刷新头
-    api "com.scwang.smart:refresh-layout-kernel:2.0.1"
-    api "com.scwang.smart:refresh-header-classics:2.0.1"
-    //利用liveData发送消息
-    api 'com.kunminx.arch:unpeek-livedata:7.8.0'
+    api libs.anchors
+    //http
+    implementation libs.okhttp
+    api libs.rxhttp
+    //refresh刷新
+    api libs.refresh.layout.kernel
+    api libs.refresh.header.classics
+    //利用liveData发送全局消息
+    api libs.unpeek.livedata
     //通过标签直接生成shape，无需再写shape.xml
-    api "com.noober.background:core:1.6.5"
-    //rxHttp
-    api "com.squareup.okhttp3:okhttp:4.12.0"
-    api 'com.github.liujingxing.rxhttp:rxhttp:3.2.3'
+    api libs.backgroundlibrary.library
 }

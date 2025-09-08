@@ -18,7 +18,7 @@ import me.hgj.mvvmhelper.net.LoadingType
  * @param requestDslClass [@kotlin.ExtensionFunctionType] Function1<HttpRequestDsl, Unit>
  * @return Job? 可以根据这玩意 取消请求
  */
-fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit): Job? {
+fun BaseViewModel.rxHttpRequest(requestDslClass: HttpRequestDsl.() -> Unit): Job {
     val httpRequestDsl = HttpRequestDsl()
     requestDslClass(httpRequestDsl)
     return viewModelScope.launch {

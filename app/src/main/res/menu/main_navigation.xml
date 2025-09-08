@@ -3,10 +3,10 @@
     <item
         android:id="@+id/navigationHome"
         android:checked="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_home"
         android:title="@string/bottom_title_home" />
     <item
         android:id="@+id/navigationUser"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_me"
         android:title="@string/bottom_title_user" />
 </menu>

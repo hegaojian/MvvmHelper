@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp.48"
             android:layout_marginTop="@dimen/dp.48"
-            app:bl_solid_color="@color/colorLinEEE"
+            app:bl_solid_color="#F5F5F5"
             app:bl_corners_radius="@dimen/dp.3"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp.48"
             android:layout_marginTop="@dimen/dp.48"
-            app:bl_solid_color="@color/colorLinEEE"
+            app:bl_solid_color="#F5F5F5"
             app:bl_corners_radius="@dimen/dp.3"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -70,6 +70,7 @@
                 android:drawableStart="@drawable/ic_login_pwd"
                 android:drawablePadding="@dimen/dp.6"
                 android:hint="@string/login_password"
+                android:includeFontPadding="false"
                 android:inputType="textPassword"
                 android:lines="1"
                 android:paddingLeft="@dimen/dp.12"

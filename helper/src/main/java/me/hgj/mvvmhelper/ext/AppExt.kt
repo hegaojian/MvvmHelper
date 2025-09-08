@@ -3,7 +3,9 @@ package me.hgj.mvvmhelper.ext
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import me.hgj.mvvmhelper.base.appContext
 import java.util.*
 
 /**
@@ -42,13 +44,26 @@ fun getPackageNameName(context: Context): String {
     return ""
 }
 
+/***
+ * 判断当前是否在debug模式下
+ */
+val isApkInDebug: Boolean get() {
+    return try {
+        val info: ApplicationInfo = appContext.applicationInfo
+        info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    } catch (e: Exception) {
+        false
+    }
+}
+
+
 /**
  * 获取versionName
  */
 fun getAppVersion(context: Context): String {
     try {
         val pi = context.packageManager.getPackageInfo(context.packageName, 0)
-        return pi.versionName
+        return pi.versionName?:""
     } catch (e: PackageManager.NameNotFoundException) {
         e.printStackTrace()
     }

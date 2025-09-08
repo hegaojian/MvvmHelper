@@ -24,6 +24,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -73,7 +74,7 @@ dependencies {
     implementation libs.okhttp
     ksp libs.rxhttp.compiler
     implementation project(path: ':helper')
-//    implementation 'com.github.hegaojian:MvvmHelper:1.2.0'
+//    implementation 'com.github.hegaojian:MvvmHelper:1.2.1'
 
 
 }

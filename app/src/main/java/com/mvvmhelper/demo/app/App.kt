@@ -15,7 +15,7 @@ import me.hgj.mvvmhelper.ext.isApkInDebug
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        MvvmHelper.init(this, isApkInDebug)
+        MvvmHelper.init(this)
         val processName = currentProcessName
         if (currentProcessName == null || currentProcessName == packageName) {
             // 主进程初始化

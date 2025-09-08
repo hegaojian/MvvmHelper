@@ -7,11 +7,11 @@ plugins {
 android {
     namespace "me.hgj.mvvmhelper"
 
-    compileSdkVersion   36
+    compileSdkVersion  36
     defaultConfig {
         minSdk  23
         targetSdk  36
-        versionCode 21
+        versionCode 22
         versionName "1.2.1"
 
         consumerProguardFiles "consumer-rules.pro"
@@ -43,7 +43,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.hegaojian'
                 artifactId = 'MvvmHelper'
-                version = '1.2.1'
+                version = '1.2.2'
             }
         }
     }

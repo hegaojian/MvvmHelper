@@ -21,32 +21,23 @@ allprojects {
 - **1.2 在app's build.gradle中添加依赖**
 
 ```gradle
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.google.devtools.ksp' version '2.2.0-2.0.2'
+}
 
 ...
 
 dependencies {
   ...
-  implementation 'com.github.hegaojian:MvvmHelper:1.2.0'
-  kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:3.2.3'
+  implementation 'com.github.hegaojian:MvvmHelper:1.2.1'
+  implementation 'com.squareup.okhttp3:okhttp:5.1.0' 
+  ksp 'com.github.liujingxing.rxhttp:rxhttp-compiler:3.5.0'
 }
 ```
 
 - **1.3 在app's build.gradle中，android 模块下开启DataBinding或者ViewBinding 可以自行选择**
 
 ``` gradle
-AndroidStudio 4.0 以下版本------>
-android {
-    ...
-    dataBinding {
-        enabled = true //可选 不用可以不写
-    }
-    viewBinding {
-        enabled = true //可选 不用可以不写
-    }
-}
-
-AndroidStudio 4.0及以上版本 ------>
 android {
     ...
    buildFeatures {
@@ -64,13 +55,6 @@ android {
 ```
 
 
-## 混淆
+## 混淆(项目中自带混淆)
 
-``` kotlin 
--keepclassmembers class * implements androidx.viewbinding.ViewBinding {
-  public static * inflate(android.view.LayoutInflater);
-  public static * inflate(android.view.LayoutInflater, android.view.ViewGroup, boolean);
-  public static * bind(android.view.View);
-}
-```
 

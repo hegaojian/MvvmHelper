@@ -6,7 +6,7 @@ import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
 import com.mvvmhelper.demo.R
 import com.mvvmhelper.demo.app.widget.CustomToolBar
-import me.hgj.mvvmhelper.base.BaseVBActivity
+import me.hgj.mvvmhelper.base.BaseVbActivity
 import me.hgj.mvvmhelper.base.BaseViewModel
 
 /**
@@ -14,7 +14,7 @@ import me.hgj.mvvmhelper.base.BaseViewModel
  * 时间　: 2021/6/9
  * 描述　: 需要自定义修改什么就重写什么 具体方法可以 搜索 BaseIView 查看
  */
-abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVBActivity<VM, VB>() {
+abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVbActivity<VM, VB>() {
 
     lateinit var mToolbar: CustomToolBar
 

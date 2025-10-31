@@ -1,6 +1,6 @@
 #### :chicken::chicken::chicken: 这是一个快速开发的框架，使用Kotlin语言开发，MVVM+Jetpack架构，封装了公共头部、界面状态管理、ViewModel、LiveData、DataBinding、ViewBinding、头部刷新、加载更多、沉浸式、全局通知、丰富好用的拓展函数、RxHttp网络请求等等一系列工具
 
-# 本框架不再维护！！！ 推荐使用[JetpackMvvm](https://github.com/hegaojian/JetpackMvvm) ，它是本框架的升级版，升级改动比较小
+# 本框架不再维护！！！ 推荐使用[JetpackMvvm](https://github.com/hegaojian/JetpackMvvm) ，它是本框架的升级版，更加好用强大
 
 ### 更详细的文档介绍 请看 [Wiki](https://github.com/hegaojian/MvvmHelper/wiki)   [Wiki](https://github.com/hegaojian/MvvmHelper/wiki)   [Wiki](https://github.com/hegaojian/MvvmHelper/wiki)
 
